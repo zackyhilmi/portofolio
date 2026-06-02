@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oko — Senior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #ffffff; --black: #0a0a0a; --gray-50: #fafafa;
+    --gray-100: #f5f5f5; --gray-200: #e8e8e8; --gray-400: #a0a0a0;
+    --gray-600: #666666; --gray-800: #222222; --line: #ebebeb;
+    --hatch: #ebeef0; --font: 'Inter', -apple-system, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--line);
+  }
+  .nav-logo { font-size: 15px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); text-decoration: none; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--black); }
+  .nav-cta { font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none; border: 1px solid var(--black); padding: 7px 16px; border-radius: 20px; transition: background 0.2s, color 0.2s; }
+  .nav-cta:hover { background: var(--black); color: var(--white); }
+
+  .hatch-section {
+    background-image: repeating-linear-gradient(116deg, var(--hatch) 0px, var(--hatch) 0.5px, transparent 0.5px, transparent 14.7px);
+    background-color: var(--white);
+  }
+
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 40px 60px; position: relative; overflow: hidden; }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 5px 10px; border-radius: 20px; margin-bottom: 24px; background: var(--white); }
+  .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+  .hero h1 { font-size: 52px; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; color: var(--black); margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .hero-desc { font-size: 16px; color: var(--gray-600); line-height: 1.7; margin-bottom: 36px; max-width: 420px; }
+  .hero-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-primary { background: var(--black); color: var(--white); font-size: 14px; font-weight: 500; padding: 12px 24px; border-radius: 24px; text-decoration: none; transition: opacity 0.2s; }
+  .btn-primary:hover { opacity: 0.8; }
+  .btn-secondary { font-size: 14px; color: var(--gray-600); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: color 0.2s; }
+  .btn-secondary:hover { color: var(--black); }
+  .hero-image-card { width: 100%; aspect-ratio: 4/5; background: var(--gray-100); border-radius: 20px; overflow: hidden; border: 0.5px solid var(--line); position: relative; }
+  .hero-image-wrap { position: relative; }
+
+  .marquee-wrap { border-top: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); padding: 14px 0; overflow: hidden; background: var(--gray-50); }
+  .marquee-inner { display: flex; gap: 48px; animation: marquee 20s linear infinite; white-space: nowrap; width: max-content; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-item { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); display: flex; align-items: center; gap: 16px; }
+  .marquee-item::after { content: '✦'; font-size: 8px; color: var(--gray-400); }
+
+  section { padding: 100px 40px; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 48px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-heading { font-size: 38px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; color: var(--black); margin-bottom: 24px; }
+  .about-heading em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .about-body { font-size: 15px; color: var(--gray-600); line-height: 1.8; margin-bottom: 16px; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 40px; }
+  .stat-box { padding: 24px; background: var(--white); }
+  .stat-number { font-size: 32px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 13px; color: var(--gray-600); }
+  .about-skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 32px; }
+  .skill-pill { font-size: 12px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 6px 14px; border-radius: 20px; background: var(--gray-50); }
+
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .work-card { border-radius: 16px; overflow: hidden; border: 0.5px solid var(--line); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; background: var(--white); }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  .work-card-large { grid-column: span 2; }
+  .work-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+  .work-card-large .work-img { aspect-ratio: 21/9; }
+  .work-img-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+  .work-meta { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .work-title { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+  .work-type { font-size: 12px; color: var(--gray-400); }
+  .work-arrow { width: 32px; height: 32px; border-radius: 50%; border: 0.5px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gray-600); flex-shrink: 0; transition: background 0.2s, color 0.2s; }
+  .work-card:hover .work-arrow { background: var(--black); color: var(--white); }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .service-item { background: var(--white); padding: 36px 32px; transition: background 0.2s; }
+  .service-item:hover { background: var(--gray-50); }
+  .service-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--gray-100); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 18px; }
+  .service-title { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 10px; }
+  .service-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
+
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .testi-card { border: 0.5px solid var(--line); border-radius: 14px; padding: 28px; background: var(--white); }
+  .testi-stars { display: flex; gap: 3px; margin-bottom: 16px; color: var(--black); font-size: 12px; }
+  .testi-text { font-size: 14px; color: var(--gray-800); line-height: 1.7; margin-bottom: 20px; }
+  .testi-author { display: flex; align-items: center; gap: 10px; border-top: 0.5px solid var(--line); padding-top: 16px; }
+  .testi-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .testi-name { font-size: 13px; font-weight: 500; color: var(--black); }
+  .testi-role { font-size: 12px; color: var(--gray-400); }
+
+  .cta-section { text-align: center; padding: 120px 40px; position: relative; overflow: hidden; }
+  .cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
+  .cta-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; }
+  .cta-heading { font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; color: var(--black); margin-bottom: 20px; }
+  .cta-heading em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .cta-sub { font-size: 16px; color: var(--gray-600); margin-bottom: 36px; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; align-items: center; }
+
+  footer { border-top: 0.5px solid var(--line); padding: 32px 40px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-name { font-size: 14px; font-weight: 500; color: var(--black); }
+  .footer-copy { font-size: 13px; color: var(--gray-400); }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 13px; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--black); }
+
+  .mock-screen { width: 70%; height: 75%; background: var(--white); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; overflow: hidden; }
+  .mock-bar { height: 28px; background: #f8f8f8; border-bottom: 1px solid #eee; display: flex; align-items: center; padding: 0 10px; gap: 5px; }
+  .mock-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .mock-content { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .mock-line { height: 8px; background: #f0f0f0; border-radius: 4px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 80px 20px 40px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: 36px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .work-grid { grid-template-columns: 1fr; }
+    .work-card-large { grid-column: span 1; }
+    .services-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    section { padding: 60px 20px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
+    .cta-heading { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Oko ✦</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's talk →</a>
+</nav>
+
+<section class="hero hatch-section" style="padding-top: 100px;">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag"><span class="dot"></span>Available for work</div>
+      <h1>Senior <em>product</em><br>designer &<br>entrepreneur</h1>
+      <p class="hero-desc">Crafting interfaces, building design systems, and creating SaaS & B2B products that people actually love to use.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">View my work</a>
+        <a href="#about" class="btn-secondary">Learn more ↓</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-image-card">
+        <div style="width:100%;height:100%;background:#f2ede8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,0,0,0.04);"></div>
+          <div style="position:absolute;bottom:60px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,0.03);"></div>
+          <div style="text-align:center;z-index:1;">
+            <div style="width:120px;height:120px;border-radius:50%;background:#d4c9be;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:500;color:#8a7968;">O</div>
+            <p style="font-size:13px;color:#8a7968;font-weight:500;">Oko Slam</p>
+            <p style="font-size:12px;color:#aaa;margin-top:4px;">Senior Product Designer</p>
+          </div>
+          <div style="position:absolute;bottom:32px;left:24px;right:24px;background:white;border-radius:12px;padding:16px;border:0.5px solid #eee;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <span style="font-size:12px;font-weight:500;color:#222;">Currently designing</span>
+              <span style="font-size:11px;color:#aaa;">SaaS product</span>
+            </div>
+            <div style="height:4px;background:#f0f0f0;border-radius:4px;overflow:hidden;">
+              <div style="height:100%;width:72%;background:#222;border-radius:4px;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:6px;">
+              <span style="font-size:11px;color:#aaa;">Progress</span>
+              <span style="font-size:11px;color:#222;font-weight:500;">72%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;top:24px;right:-16px;background:white;border:0.5px solid #ebebeb;border-radius:12px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,0.06);">
+        <div style="font-size:11px;color:#aaa;margin-bottom:2px;">Experience</div>
+        <div style="font-size:16px;font-weight:500;color:#222;">6+ years</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="marquee-item">Product Design</span><span class="marquee-item">Design Systems</span><span class="marquee-item">SaaS Products</span><span class="marquee-item">B2B Design</span><span class="marquee-item">UX Research</span><span class="marquee-item">Prototyping</span><span class="marquee-item">Figma</span><span class="marquee-item">Framer</span>
+    <span class="marquee-item">Product Design</span><span class="marquee-item">Design Systems</span><span class="marquee-item">SaaS Products</span><span class="marquee-item">B2B Design</span><span class="marquee-item">UX Research</span><span class="marquee-item">Prototyping</span><span class="marquee-item">Figma</span><span class="marquee-item">Framer</span>
+  </div>
+</div>
+
+<section id="work">
+  <div class="section-inner">
+    <div class="section-label">Selected Work</div>
+    <div class="work-grid">
+      <div class="work-card work-card-large">
+        <div class="work-img">
+          <div class="work-img-inner" style="background:#f0ebe4;">
+            <div class="mock-screen">
+              <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div>
+              <div class="mock-content">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;"><div style="width:28px;height:28px;border-radius:6px;background:#e8e0d8;"></div><div><div class="mock-line" style="width:80px;margin-bottom:4px;"></div><div class="mock-line" style="width:50px;height:6px;background:#f5f5f5;"></div></div></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px;"><div style="height:50px;background:#f0ebe4;border-radius:6px;"></div><div style="height:50px;background:#e8e4de;border-radius:6px;"></div><div style="height:50px;background:#f5f1ec;border-radius:6px;"></div></div>
+                <div class="mock-line" style="width:100%;"></div><div class="mock-line" style="width:75%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-meta"><div><div class="work-title">Lumio — Dashboard Redesign</div><div class="work-type">Product Design · Design System</div></div><div class="work-arrow">→</div></div>
+      </div>
+      <div class="work-card">
+        <div class="work-img"><div class="work-img-inner" style="background:#edf0f5;"><div class="mock-screen" style="width:65%;height:70%;"><div class="mock-bar" style="background:#f0f2f8;"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div><div class="mock-content" style="background:#f8f9fc;"><div style="height:32px;background:#e8edf6;border-radius:6px;"></div><div class="mock-line" style="width:90%;"></div><div class="mock-line" style="width:60%;"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;"><div style="height:40px;background:#e4eaf5;border-radius:4px;"></div><div style="height:40px;background:#eef1f9;border-radius:4px;"></div></div></div></div></div></div>
+        <div class="work-meta"><div><div class="work-title">Vexel — SaaS Platform</div><div class="work-type">UX Design · Prototyping</div></div><div class="work-arrow">→</div></div>
+      </div>
+      <div class="work-card">
+        <div class="work-img"><div class="work-img-inner" style="background:#f0f5ed;"><div class="mock-screen" style="width:65%;height:70%;"><div class="mock-bar" style="background:#eef4eb;"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div><div class="mock-content" style="background:#f6faf4;"><div style="height:20px;background:#ddeedd;border-radius:4px;margin-bottom:4px;"></div><div class="mock-line" style="width:100%;background:#e8f0e5;"></div><div class="mock-line" style="width:80%;background:#e8f0e5;"></div><div style="height:48px;background:#e0eedb;border-radius:6px;margin-top:4px;"></div></div></div></div></div>
+        <div class="work-meta"><div><div class="work-title">Sprout — B2B Analytics</div><div class="work-type">Product Design · Research</div></div><div class="work-arrow">→</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="hatch-section">
+  <div class="section-inner">
+    <div class="section-label">About me</div>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-heading">Designer, <em>entrepreneur</em>,<br>and movie enjoyer</h2>
+        <p class="about-body">I'm Oko — a senior product designer with a passion for crafting interfaces that feel both beautiful and effortless. I've spent 6+ years helping startups and scale-ups shape their digital products.</p>
+        <p class="about-body">Beyond pushing pixels, I co-founded a SaaS studio and love the intersection of design and business strategy. When I'm not designing, you'll find me dissecting great films.</p>
+        <div class="about-skills"><span class="skill-pill">Product Design</span><span class="skill-pill">Design Systems</span><span class="skill-pill">Figma</span><span class="skill-pill">Framer</span><span class="skill-pill">UX Research</span><span class="skill-pill">Prototyping</span><span class="skill-pill">SaaS</span><span class="skill-pill">B2B</span></div>
+      </div>
+      <div>
+        <div class="about-stats">
+          <div class="stat-box"><div class="stat-number">6+</div><div class="stat-label">Years of experience</div></div>
+          <div class="stat-box"><div class="stat-number">40+</div><div class="stat-label">Projects delivered</div></div>
+          <div class="stat-box"><div class="stat-number">12+</div><div class="stat-label">Happy clients</div></div>
+          <div class="stat-box"><div class="stat-number">3</div><div class="stat-label">Products co-founded</div></div>
+        </div>
+        <div style="margin-top:24px;border:0.5px solid var(--line);border-radius:14px;padding:24px;background:var(--white);">
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;font-weight:500;">Currently working with</div>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;font-weight:500;color:var(--black);">Lumio</span><span style="font-size:12px;color:var(--gray-400);">Lead Designer</span></div>
+            <div style="height:0.5px;background:var(--line);"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;font-weight:500;color:var(--black);">Freelance</span><span style="font-size:12px;color:var(--gray-400);">Available · 2 slots</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label">What I do</div>
+    <div class="services-grid">
+      <div class="service-item"><div class="service-icon">✦</div><div class="service-title">Product Design</div><p class="service-desc">End-to-end product design from user research and wireframes through to polished high-fidelity interfaces.</p></div>
+      <div class="service-item"><div class="service-icon">⊞</div><div class="service-title">Design Systems</div><p class="service-desc">Scalable component libraries and design tokens that keep your product consistent across every touchpoint.</p></div>
+      <div class="service-item"><div class="service-icon">◈</div><div class="service-title">SaaS & B2B</div><p class="service-desc">Specialized experience designing complex, data-heavy software that remains intuitive and delightful.</p></div>
+      <div class="service-item"><div class="service-icon">◎</div><div class="service-title">UX Research</div><p class="service-desc">User interviews, usability testing, and synthesis to ground design decisions in real human behavior.</p></div>
+      <div class="service-item"><div class="service-icon">⌘</div><div class="service-title">Prototyping</div><p class="service-desc">High-fidelity interactive prototypes in Figma and Framer for stakeholder alignment and user testing.</p></div>
+      <div class="service-item"><div class="service-icon">◷</div><div class="service-title">Design Strategy</div><p class="service-desc">Strategic design direction for founders and product leads shaping the vision of a new product.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--gray-50);padding:80px 40px;" class="hatch-section">
+  <div class="section-inner">
+    <div class="section-label">What people say</div>
+    <div class="testimonials-grid">
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Oko completely transformed our product's UX. The attention to detail in the design system alone saved us months of engineering time."</p><div class="testi-author"><div class="testi-avatar" style="background:#e8edf6;color:#3a5a99;">MR</div><div><div class="testi-name">Marcus R.</div><div class="testi-role">CTO, Vexel</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Working with Oko was one of the best decisions we made. Thoughtful, fast, and the output was better than we ever imagined."</p><div class="testi-author"><div class="testi-avatar" style="background:#f0ebe4;color:#8a6a40;">SA</div><div><div class="testi-name">Sofia A.</div><div class="testi-role">Founder, Sprout</div></div></div></div>
+      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The redesign increased our trial-to-paid conversion by 34%. Oko understands the business side as much as the design side."</p><div class="testi-author"><div class="testi-avatar" style="background:#f0f5ed;color:#3a6e30;">JK</div><div><div class="testi-name">James K.</div><div class="testi-role">CEO, Lumio</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="cta-section hatch-section">
+  <div class="cta-inner">
+    <div class="cta-label">Let's work together</div>
+    <h2 class="cta-heading">Have a project <em>in mind?</em></h2>
+    <p class="cta-sub">I'm currently available for freelance projects. Let's build something great together.</p>
+    <div class="cta-btns">
+      <a href="mailto:hello@example.com" class="btn-primary">Get in touch →</a>
+      <a href="#work" class="btn-secondary">See my work</a>
+    </div>
+    <div style="margin-top:40px;display:flex;justify-content:center;gap:20px;">
+      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Twitter</a>
+      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">LinkedIn</a>
+      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Dribbble</a>
+      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Read.cv</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Oko ✦ 2025</div>
+  <ul class="footer-links"><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+  <div class="footer-copy">Made with care ✦</div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 10 ? '0 1px 24px rgba(0,0,0,0.06)' : 'none';
+  });
+</script>
+</body>
+</html>
