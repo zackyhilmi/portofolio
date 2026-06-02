@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oko — Senior Product Designer</title>
+<title>Zacky Hilmi — UI/UX Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -94,6 +94,17 @@
   .service-title { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 10px; }
   .service-desc { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
 
+  .exp-list { display: flex; flex-direction: column; gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; }
+  .exp-item { background: var(--white); padding: 28px 32px; display: grid; grid-template-columns: 1fr auto; gap: 16px; }
+  .exp-item:hover { background: var(--gray-50); }
+  .exp-role { font-size: 15px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+  .exp-company { font-size: 14px; color: var(--gray-600); margin-bottom: 4px; }
+  .exp-period { font-size: 12px; color: var(--gray-400); }
+  .exp-type { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; height: fit-content; margin-top: 4px; }
+  .type-fulltime { background: #e8f5e9; color: #2e7d32; }
+  .type-freelance { background: #fff8e1; color: #f57f17; }
+  .type-intern { background: #e3f2fd; color: #1565c0; }
+
   .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
   .testi-card { border: 0.5px solid var(--line); border-radius: 14px; padding: 28px; background: var(--white); }
   .testi-stars { display: flex; gap: 3px; margin-bottom: 16px; color: var(--black); font-size: 12px; }
@@ -135,6 +146,7 @@
     .work-card-large { grid-column: span 1; }
     .services-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; }
     section { padding: 60px 20px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
     .cta-heading { font-size: 32px; }
@@ -143,121 +155,250 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Oko ✦</a>
+  <a href="#" class="nav-logo">Zacky Hilmi ✦</a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-cta">Let's talk →</a>
+  <a href="mailto:zackyhilmi.zh@gmail.com" class="nav-cta">Let's talk →</a>
 </nav>
 
+<!-- HERO -->
 <section class="hero hatch-section" style="padding-top: 100px;">
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-tag"><span class="dot"></span>Available for work</div>
-      <h1>Senior <em>product</em><br>designer &<br>entrepreneur</h1>
-      <p class="hero-desc">Crafting interfaces, building design systems, and creating SaaS & B2B products that people actually love to use.</p>
+      <div class="hero-tag"><span class="dot"></span>Open to freelance work</div>
+      <h1>UI/UX <em>designer</em><br>& SaaS <em>specialist</em></h1>
+      <p class="hero-desc">
+        4+ years designing SaaS and enterprise systems for public sector and large-scale operational environments. Specialized in dashboards, complex workflows, and data-driven interfaces.
+      </p>
       <div class="hero-actions">
         <a href="#work" class="btn-primary">View my work</a>
         <a href="#about" class="btn-secondary">Learn more ↓</a>
       </div>
     </div>
+
     <div class="hero-image-wrap">
       <div class="hero-image-card">
-        <div style="width:100%;height:100%;background:#f2ede8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <div style="width:100%;height:100%;background:#f0ede8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
           <div style="position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(0,0,0,0.04);"></div>
           <div style="position:absolute;bottom:60px;left:-30px;width:120px;height:120px;border-radius:50%;background:rgba(0,0,0,0.03);"></div>
           <div style="text-align:center;z-index:1;">
-            <div style="width:120px;height:120px;border-radius:50%;background:#d4c9be;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:500;color:#8a7968;">O</div>
-            <p style="font-size:13px;color:#8a7968;font-weight:500;">Oko Slam</p>
-            <p style="font-size:12px;color:#aaa;margin-top:4px;">Senior Product Designer</p>
+            <div style="width:120px;height:120px;border-radius:50%;background:#d4c9be;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:500;color:#8a7968;letter-spacing:-2px;">ZH</div>
+            <p style="font-size:14px;color:#8a7968;font-weight:500;">Zacky Hilmi I A</p>
+            <p style="font-size:12px;color:#aaa;margin-top:4px;">UI/UX Designer · Jakarta</p>
           </div>
           <div style="position:absolute;bottom:32px;left:24px;right:24px;background:white;border-radius:12px;padding:16px;border:0.5px solid #eee;">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:500;color:#222;">Currently designing</span>
-              <span style="font-size:11px;color:#aaa;">SaaS product</span>
+              <span style="font-size:12px;font-weight:500;color:#222;">Currently at</span>
+              <span style="font-size:11px;color:#aaa;">Fulltime</span>
             </div>
+            <div style="font-size:13px;font-weight:500;color:#444;margin-bottom:4px;">PT. Datasintesa Teknologi</div>
             <div style="height:4px;background:#f0f0f0;border-radius:4px;overflow:hidden;">
-              <div style="height:100%;width:72%;background:#222;border-radius:4px;"></div>
+              <div style="height:100%;width:85%;background:#222;border-radius:4px;"></div>
             </div>
             <div style="display:flex;justify-content:space-between;margin-top:6px;">
-              <span style="font-size:11px;color:#aaa;">Progress</span>
-              <span style="font-size:11px;color:#222;font-weight:500;">72%</span>
+              <span style="font-size:11px;color:#aaa;">July 2021 – Present</span>
+              <span style="font-size:11px;color:#222;font-weight:500;">4+ yrs</span>
             </div>
           </div>
         </div>
       </div>
+
       <div style="position:absolute;top:24px;right:-16px;background:white;border:0.5px solid #ebebeb;border-radius:12px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,0.06);">
         <div style="font-size:11px;color:#aaa;margin-bottom:2px;">Experience</div>
-        <div style="font-size:16px;font-weight:500;color:#222;">6+ years</div>
+        <div style="font-size:16px;font-weight:500;color:#222;">4+ years</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-inner">
-    <span class="marquee-item">Product Design</span><span class="marquee-item">Design Systems</span><span class="marquee-item">SaaS Products</span><span class="marquee-item">B2B Design</span><span class="marquee-item">UX Research</span><span class="marquee-item">Prototyping</span><span class="marquee-item">Figma</span><span class="marquee-item">Framer</span>
-    <span class="marquee-item">Product Design</span><span class="marquee-item">Design Systems</span><span class="marquee-item">SaaS Products</span><span class="marquee-item">B2B Design</span><span class="marquee-item">UX Research</span><span class="marquee-item">Prototyping</span><span class="marquee-item">Figma</span><span class="marquee-item">Framer</span>
+    <span class="marquee-item">UI/UX Design</span>
+    <span class="marquee-item">Design Systems</span>
+    <span class="marquee-item">SaaS Products</span>
+    <span class="marquee-item">Enterprise Systems</span>
+    <span class="marquee-item">Dashboard Design</span>
+    <span class="marquee-item">Figma</span>
+    <span class="marquee-item">Prototyping</span>
+    <span class="marquee-item">User Research</span>
+    <span class="marquee-item">UI/UX Design</span>
+    <span class="marquee-item">Design Systems</span>
+    <span class="marquee-item">SaaS Products</span>
+    <span class="marquee-item">Enterprise Systems</span>
+    <span class="marquee-item">Dashboard Design</span>
+    <span class="marquee-item">Figma</span>
+    <span class="marquee-item">Prototyping</span>
+    <span class="marquee-item">User Research</span>
   </div>
 </div>
 
+<!-- WORK -->
 <section id="work">
   <div class="section-inner">
     <div class="section-label">Selected Work</div>
     <div class="work-grid">
+
       <div class="work-card work-card-large">
         <div class="work-img">
-          <div class="work-img-inner" style="background:#f0ebe4;">
+          <div class="work-img-inner" style="background:#edf2f8;">
             <div class="mock-screen">
-              <div class="mock-bar"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div>
-              <div class="mock-content">
-                <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;"><div style="width:28px;height:28px;border-radius:6px;background:#e8e0d8;"></div><div><div class="mock-line" style="width:80px;margin-bottom:4px;"></div><div class="mock-line" style="width:50px;height:6px;background:#f5f5f5;"></div></div></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px;"><div style="height:50px;background:#f0ebe4;border-radius:6px;"></div><div style="height:50px;background:#e8e4de;border-radius:6px;"></div><div style="height:50px;background:#f5f1ec;border-radius:6px;"></div></div>
-                <div class="mock-line" style="width:100%;"></div><div class="mock-line" style="width:75%;"></div>
+              <div class="mock-bar">
+                <div class="mock-dot" style="background:#ff5f57;"></div>
+                <div class="mock-dot" style="background:#ffbd2e;"></div>
+                <div class="mock-dot" style="background:#28ca42;"></div>
+              </div>
+              <div class="mock-content" style="background:#f8fafc;">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;">
+                  <div style="width:28px;height:28px;border-radius:6px;background:#dde8f5;"></div>
+                  <div>
+                    <div class="mock-line" style="width:120px;margin-bottom:4px;background:#e2ecf8;"></div>
+                    <div class="mock-line" style="width:70px;height:6px;background:#edf3fb;"></div>
+                  </div>
+                  <div style="margin-left:auto;display:flex;gap:4px;">
+                    <div style="width:50px;height:20px;background:#dde8f5;border-radius:4px;"></div>
+                    <div style="width:50px;height:20px;background:#e8f0fa;border-radius:4px;"></div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:6px;">
+                  <div style="height:48px;background:#dde8f5;border-radius:6px;display:flex;align-items:flex-end;padding:6px;"><div style="height:60%;width:100%;background:#c5d8f0;border-radius:3px;"></div></div>
+                  <div style="height:48px;background:#e8f0fa;border-radius:6px;display:flex;align-items:flex-end;padding:6px;"><div style="height:80%;width:100%;background:#c5d8f0;border-radius:3px;"></div></div>
+                  <div style="height:48px;background:#dde8f5;border-radius:6px;display:flex;align-items:flex-end;padding:6px;"><div style="height:45%;width:100%;background:#c5d8f0;border-radius:3px;"></div></div>
+                  <div style="height:48px;background:#e8f0fa;border-radius:6px;display:flex;align-items:flex-end;padding:6px;"><div style="height:70%;width:100%;background:#c5d8f0;border-radius:3px;"></div></div>
+                </div>
+                <div class="mock-line" style="width:100%;background:#e2ecf8;"></div>
+                <div class="mock-line" style="width:75%;background:#edf3fb;"></div>
               </div>
             </div>
           </div>
         </div>
-        <div class="work-meta"><div><div class="work-title">Lumio — Dashboard Redesign</div><div class="work-type">Product Design · Design System</div></div><div class="work-arrow">→</div></div>
+        <div class="work-meta">
+          <div>
+            <div class="work-title">SaaS Operational Dashboard — PT. Datasintesa</div>
+            <div class="work-type">UI/UX Design · Design System · Enterprise</div>
+          </div>
+          <div class="work-arrow">→</div>
+        </div>
       </div>
+
       <div class="work-card">
-        <div class="work-img"><div class="work-img-inner" style="background:#edf0f5;"><div class="mock-screen" style="width:65%;height:70%;"><div class="mock-bar" style="background:#f0f2f8;"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div><div class="mock-content" style="background:#f8f9fc;"><div style="height:32px;background:#e8edf6;border-radius:6px;"></div><div class="mock-line" style="width:90%;"></div><div class="mock-line" style="width:60%;"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;"><div style="height:40px;background:#e4eaf5;border-radius:4px;"></div><div style="height:40px;background:#eef1f9;border-radius:4px;"></div></div></div></div></div></div>
-        <div class="work-meta"><div><div class="work-title">Vexel — SaaS Platform</div><div class="work-type">UX Design · Prototyping</div></div><div class="work-arrow">→</div></div>
+        <div class="work-img">
+          <div class="work-img-inner" style="background:#f0f5ed;">
+            <div class="mock-screen" style="width:65%;height:70%;">
+              <div class="mock-bar" style="background:#eef4eb;">
+                <div class="mock-dot" style="background:#ff5f57;"></div>
+                <div class="mock-dot" style="background:#ffbd2e;"></div>
+                <div class="mock-dot" style="background:#28ca42;"></div>
+              </div>
+              <div class="mock-content" style="background:#f6faf4;">
+                <div style="height:24px;background:#d8ecda;border-radius:6px;margin-bottom:4px;"></div>
+                <div class="mock-line" style="width:100%;background:#deeede;"></div>
+                <div class="mock-line" style="width:70%;background:#e8f4e8;"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;">
+                  <div style="height:36px;background:#d8ecda;border-radius:4px;"></div>
+                  <div style="height:36px;background:#e4f0e4;border-radius:4px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div>
+            <div class="work-title">MIS — E-Learning Platform</div>
+            <div class="work-type">UI/UX Design · Web & Mobile App</div>
+          </div>
+          <div class="work-arrow">→</div>
+        </div>
       </div>
+
       <div class="work-card">
-        <div class="work-img"><div class="work-img-inner" style="background:#f0f5ed;"><div class="mock-screen" style="width:65%;height:70%;"><div class="mock-bar" style="background:#eef4eb;"><div class="mock-dot" style="background:#ff5f57;"></div><div class="mock-dot" style="background:#ffbd2e;"></div><div class="mock-dot" style="background:#28ca42;"></div></div><div class="mock-content" style="background:#f6faf4;"><div style="height:20px;background:#ddeedd;border-radius:4px;margin-bottom:4px;"></div><div class="mock-line" style="width:100%;background:#e8f0e5;"></div><div class="mock-line" style="width:80%;background:#e8f0e5;"></div><div style="height:48px;background:#e0eedb;border-radius:6px;margin-top:4px;"></div></div></div></div></div>
-        <div class="work-meta"><div><div class="work-title">Sprout — B2B Analytics</div><div class="work-type">Product Design · Research</div></div><div class="work-arrow">→</div></div>
+        <div class="work-img">
+          <div class="work-img-inner" style="background:#fdf4ec;">
+            <div class="mock-screen" style="width:65%;height:70%;">
+              <div class="mock-bar" style="background:#faeee0;">
+                <div class="mock-dot" style="background:#ff5f57;"></div>
+                <div class="mock-dot" style="background:#ffbd2e;"></div>
+                <div class="mock-dot" style="background:#28ca42;"></div>
+              </div>
+              <div class="mock-content" style="background:#fdf8f2;">
+                <div style="height:20px;background:#f5dfc0;border-radius:4px;margin-bottom:4px;"></div>
+                <div class="mock-line" style="width:100%;background:#f5e5cc;"></div>
+                <div class="mock-line" style="width:80%;background:#faecd8;"></div>
+                <div style="height:44px;background:#f5dfc0;border-radius:6px;margin-top:4px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-meta">
+          <div>
+            <div class="work-title">Marketplace Content — Sirclo Commerce</div>
+            <div class="work-type">Graphic Design · Brand · Campaign</div>
+          </div>
+          <div class="work-arrow">→</div>
+        </div>
       </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://bit.ly/ZackyHilmi" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">View full portfolio ↗</a>
     </div>
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about" class="hatch-section">
   <div class="section-inner">
     <div class="section-label">About me</div>
     <div class="about-grid">
       <div>
-        <h2 class="about-heading">Designer, <em>entrepreneur</em>,<br>and movie enjoyer</h2>
-        <p class="about-body">I'm Oko — a senior product designer with a passion for crafting interfaces that feel both beautiful and effortless. I've spent 6+ years helping startups and scale-ups shape their digital products.</p>
-        <p class="about-body">Beyond pushing pixels, I co-founded a SaaS studio and love the intersection of design and business strategy. When I'm not designing, you'll find me dissecting great films.</p>
-        <div class="about-skills"><span class="skill-pill">Product Design</span><span class="skill-pill">Design Systems</span><span class="skill-pill">Figma</span><span class="skill-pill">Framer</span><span class="skill-pill">UX Research</span><span class="skill-pill">Prototyping</span><span class="skill-pill">SaaS</span><span class="skill-pill">B2B</span></div>
+        <h2 class="about-heading">Designer, <em>problem solver</em>,<br>& SaaS enthusiast</h2>
+        <p class="about-body">
+          I'm Zacky — a UI/UX designer based in Jakarta with 4+ years of experience designing SaaS and enterprise systems. I specialize in dashboard design, complex system workflows, and data-driven interfaces for public sector and large-scale operational environments.
+        </p>
+        <p class="about-body">
+          I own the full UX process — from requirement analysis and user flows through to high-fidelity design and developer handoff. I also build and maintain design systems that keep products consistent and scalable.
+        </p>
+        <div class="about-skills">
+          <span class="skill-pill">UI/UX Design</span>
+          <span class="skill-pill">Design Systems</span>
+          <span class="skill-pill">Figma</span>
+          <span class="skill-pill">Dashboard Design</span>
+          <span class="skill-pill">SaaS</span>
+          <span class="skill-pill">Enterprise Systems</span>
+          <span class="skill-pill">Prototyping</span>
+          <span class="skill-pill">Graphic Design</span>
+          <span class="skill-pill">User Research</span>
+          <span class="skill-pill">Dev Handoff</span>
+        </div>
       </div>
+
       <div>
         <div class="about-stats">
-          <div class="stat-box"><div class="stat-number">6+</div><div class="stat-label">Years of experience</div></div>
-          <div class="stat-box"><div class="stat-number">40+</div><div class="stat-label">Projects delivered</div></div>
-          <div class="stat-box"><div class="stat-number">12+</div><div class="stat-label">Happy clients</div></div>
-          <div class="stat-box"><div class="stat-number">3</div><div class="stat-label">Products co-founded</div></div>
+          <div class="stat-box"><div class="stat-number">4+</div><div class="stat-label">Years of experience</div></div>
+          <div class="stat-box"><div class="stat-number">10+</div><div class="stat-label">Projects delivered</div></div>
+          <div class="stat-box"><div class="stat-number">3</div><div class="stat-label">Companies worked with</div></div>
+          <div class="stat-box"><div class="stat-number">3.52</div><div class="stat-label">GPA — Polimedia</div></div>
         </div>
+
         <div style="margin-top:24px;border:0.5px solid var(--line);border-radius:14px;padding:24px;background:var(--white);">
-          <div style="font-size:12px;color:var(--gray-400);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;font-weight:500;">Currently working with</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;font-weight:500;color:var(--black);">Lumio</span><span style="font-size:12px;color:var(--gray-400);">Lead Designer</span></div>
+          <div style="font-size:12px;color:var(--gray-400);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.06em;font-weight:500;">Education</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <div style="font-size:14px;font-weight:500;color:var(--black);">Universitas Indraprasta PGRI</div>
+              <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Visual Communication Design · 2022–2023</div>
+            </div>
             <div style="height:0.5px;background:var(--line);"></div>
-            <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:14px;font-weight:500;color:var(--black);">Freelance</span><span style="font-size:12px;color:var(--gray-400);">Available · 2 slots</span></div>
+            <div>
+              <div style="font-size:14px;font-weight:500;color:var(--black);">Politeknik Negeri Media Kreatif</div>
+              <div style="font-size:12px;color:var(--gray-400);margin-top:2px;">Assosiate Degree, VCD · 2018–2021 · GPA 3.52</div>
+            </div>
           </div>
         </div>
       </div>
@@ -265,53 +406,134 @@
   </div>
 </section>
 
-<section id="services">
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">UI/UX Designer</div>
+          <div class="exp-company">PT. Datasintesa Teknologi Nusantara</div>
+          <div class="exp-period">July 2021 – Present · Jakarta</div>
+          <p style="font-size:13px;color:var(--gray-600);margin-top:10px;line-height:1.7;">Designing and improving SaaS-based internal platforms supporting public sector and enterprise operations. Contributed to government digital ecosystem covering service requests, monitoring dashboards, SLA tracking, and recovery performance systems.</p>
+        </div>
+        <div><span class="exp-type type-fulltime">Fulltime</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">UI/UX Designer</div>
+          <div class="exp-company">PT. Mahitala Bramanta Digital</div>
+          <div class="exp-period">June 2022 – November 2022</div>
+          <p style="font-size:13px;color:var(--gray-600);margin-top:10px;line-height:1.7;">Designed user flows, wireframes, and interactive prototypes for web-based digital products. Produced high-fidelity UI designs and prepared assets for developer handoff.</p>
+        </div>
+        <div><span class="exp-type type-freelance">Freelance</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Graphic Designer</div>
+          <div class="exp-company">PT Mid Solusi Nusantara (Mekari)</div>
+          <div class="exp-period">July 2024 – August 2024</div>
+          <p style="font-size:13px;color:var(--gray-600);margin-top:10px;line-height:1.7;">Designed social media graphics and infographics for Mekari's products — Talenta, Klikpajak, Expense, and Qontak. Collaborated with product teams to align visuals with branding guidelines.</p>
+        </div>
+        <div><span class="exp-type type-freelance">Freelance</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Creative Designer</div>
+          <div class="exp-company">PT. Kreatif Media Karya</div>
+          <div class="exp-period">January 2020 – December 2024</div>
+          <p style="font-size:13px;color:var(--gray-600);margin-top:10px;line-height:1.7;">Created visual concepts and animated graphic quizzes for TV soap operas (Sinetron), including Love Story The Series, Buku Harian Seorang Istri, Jendela SMP, Dewi Rindu, Saleha, and Samudra Cinta.</p>
+        </div>
+        <div><span class="exp-type type-freelance">Seasonal</span></div>
+      </div>
+
+      <div class="exp-item">
+        <div>
+          <div class="exp-role">Creative Designer</div>
+          <div class="exp-company">PT. Koneksi Niaga Solusindo — Sirclo Commerce</div>
+          <div class="exp-period">January 2021 – July 2021</div>
+          <p style="font-size:13px;color:var(--gray-600);margin-top:10px;line-height:1.7;">Handled promotional designs, campaigns, and content layouts for official marketplace stores. Collaborated with the creative production team and produced brand-friendly promotional content.</p>
+        </div>
+        <div><span class="exp-type type-intern">Intern</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="hatch-section">
   <div class="section-inner">
     <div class="section-label">What I do</div>
     <div class="services-grid">
-      <div class="service-item"><div class="service-icon">✦</div><div class="service-title">Product Design</div><p class="service-desc">End-to-end product design from user research and wireframes through to polished high-fidelity interfaces.</p></div>
-      <div class="service-item"><div class="service-icon">⊞</div><div class="service-title">Design Systems</div><p class="service-desc">Scalable component libraries and design tokens that keep your product consistent across every touchpoint.</p></div>
-      <div class="service-item"><div class="service-icon">◈</div><div class="service-title">SaaS & B2B</div><p class="service-desc">Specialized experience designing complex, data-heavy software that remains intuitive and delightful.</p></div>
-      <div class="service-item"><div class="service-icon">◎</div><div class="service-title">UX Research</div><p class="service-desc">User interviews, usability testing, and synthesis to ground design decisions in real human behavior.</p></div>
-      <div class="service-item"><div class="service-icon">⌘</div><div class="service-title">Prototyping</div><p class="service-desc">High-fidelity interactive prototypes in Figma and Framer for stakeholder alignment and user testing.</p></div>
-      <div class="service-item"><div class="service-icon">◷</div><div class="service-title">Design Strategy</div><p class="service-desc">Strategic design direction for founders and product leads shaping the vision of a new product.</p></div>
+      <div class="service-item">
+        <div class="service-icon">◈</div>
+        <div class="service-title">UI/UX Design</div>
+        <p class="service-desc">End-to-end product design from requirement analysis and wireframes to polished, developer-ready high-fidelity interfaces.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">⊞</div>
+        <div class="service-title">Design Systems</div>
+        <p class="service-desc">Scalable component libraries and design tokens that keep your product visually consistent and easy to maintain across teams.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">▦</div>
+        <div class="service-title">Dashboard Design</div>
+        <p class="service-desc">Complex, data-heavy dashboards and operational interfaces for enterprise and government systems — clear, intuitive, and role-based.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">◎</div>
+        <div class="service-title">UX Research</div>
+        <p class="service-desc">Requirement intake, user flows, and usability analysis to ensure design decisions are grounded in real user and business needs.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">⌘</div>
+        <div class="service-title">Prototyping</div>
+        <p class="service-desc">High-fidelity interactive prototypes in Figma for stakeholder alignment, user testing, and smooth developer handoff.</p>
+      </div>
+      <div class="service-item">
+        <div class="service-icon">✦</div>
+        <div class="service-title">Graphic Design</div>
+        <p class="service-desc">Brand-aligned visual content, social media graphics, infographics, and campaign materials for digital platforms.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section style="background:var(--gray-50);padding:80px 40px;" class="hatch-section">
-  <div class="section-inner">
-    <div class="section-label">What people say</div>
-    <div class="testimonials-grid">
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Oko completely transformed our product's UX. The attention to detail in the design system alone saved us months of engineering time."</p><div class="testi-author"><div class="testi-avatar" style="background:#e8edf6;color:#3a5a99;">MR</div><div><div class="testi-name">Marcus R.</div><div class="testi-role">CTO, Vexel</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Working with Oko was one of the best decisions we made. Thoughtful, fast, and the output was better than we ever imagined."</p><div class="testi-author"><div class="testi-avatar" style="background:#f0ebe4;color:#8a6a40;">SA</div><div><div class="testi-name">Sofia A.</div><div class="testi-role">Founder, Sprout</div></div></div></div>
-      <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The redesign increased our trial-to-paid conversion by 34%. Oko understands the business side as much as the design side."</p><div class="testi-author"><div class="testi-avatar" style="background:#f0f5ed;color:#3a6e30;">JK</div><div><div class="testi-name">James K.</div><div class="testi-role">CEO, Lumio</div></div></div></div>
-    </div>
-  </div>
-</section>
-
+<!-- CTA -->
 <section id="contact" class="cta-section hatch-section">
   <div class="cta-inner">
     <div class="cta-label">Let's work together</div>
     <h2 class="cta-heading">Have a project <em>in mind?</em></h2>
-    <p class="cta-sub">I'm currently available for freelance projects. Let's build something great together.</p>
+    <p class="cta-sub">I'm open to freelance projects and collaborations. Let's build something great together.</p>
     <div class="cta-btns">
-      <a href="mailto:hello@example.com" class="btn-primary">Get in touch →</a>
-      <a href="#work" class="btn-secondary">See my work</a>
+      <a href="mailto:zackyhilmi.zh@gmail.com" class="btn-primary">Get in touch →</a>
+      <a href="https://bit.ly/ZackyHilmi" target="_blank" class="btn-secondary">See portfolio ↗</a>
     </div>
     <div style="margin-top:40px;display:flex;justify-content:center;gap:20px;">
-      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Twitter</a>
-      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">LinkedIn</a>
-      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Dribbble</a>
-      <a href="#" style="font-size:13px;color:var(--gray-400);text-decoration:none;">Read.cv</a>
+      <a href="https://linkedin.com/in/zackyhilmi" target="_blank" style="font-size:13px;color:var(--gray-400);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#222'" onmouseout="this.style.color='#aaa'">LinkedIn ↗</a>
+      <a href="https://bit.ly/ZackyHilmi" target="_blank" style="font-size:13px;color:var(--gray-400);text-decoration:none;" onmouseover="this.style.color='#222'" onmouseout="this.style.color='#aaa'">Portfolio ↗</a>
+      <a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:13px;color:var(--gray-400);text-decoration:none;" onmouseover="this.style.color='#222'" onmouseout="this.style.color='#aaa'">Email</a>
+      <a href="tel:08780875042" style="font-size:13px;color:var(--gray-400);text-decoration:none;" onmouseover="this.style.color='#222'" onmouseout="this.style.color='#aaa'">WhatsApp</a>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-name">Oko ✦ 2025</div>
-  <ul class="footer-links"><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
-  <div class="footer-copy">Made with care ✦</div>
+  <div class="footer-name">Zacky Hilmi ✦ 2025</div>
+  <ul class="footer-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">Jakarta, Indonesia ✦</div>
 </footer>
 
 <script>
