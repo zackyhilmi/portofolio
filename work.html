@@ -244,7 +244,7 @@
 
     <!-- GRID -->
     <div class="work-divider">More Projects</div>
-    <div class="work-grid">
+    <div class="work-grid" id="work-dynamic-grid">
 
       <a href="case-study.html?id=sirclo" class="work-card" data-cat="graphic">
         <div class="work-card-img" style="background:#fdf4ec;">
@@ -343,30 +343,120 @@
   <div class="footer-copy">Jakarta, Indonesia ✦</div>
 </footer>
 
-<script>
+<script type="module">
+  import { initDB, fetchCollection } from './portfolio-data.js';
+
+  // Nav scroll shadow
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     nav.style.boxShadow = window.scrollY > 10 ? '0 1px 24px rgba(0,0,0,0.06)' : 'none';
   });
 
-  // Filter
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('[data-cat]');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      items.forEach(item => {
-        if (filter === 'all' || item.dataset.cat.includes(filter)) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+  // Filter logic (works for both static + dynamic cards)
+  function bindFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('[data-cat]').forEach(item => {
+          if (filter === 'all' || item.dataset.cat.includes(filter)) item.classList.remove('hidden');
+          else item.classList.add('hidden');
+        });
       });
     });
-  });
+  }
+  bindFilter();
+
+  // ── Dynamic project injection from Firebase ──
+  function mockBg(color) {
+    return `<div style="width:60%;height:65%;background:white;border-radius:8px;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="height:24px;background:${color}20;border-bottom:1px solid ${color}30;display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;">
+        <div style="width:6px;height:6px;border-radius:50%;background:#ff5f57;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#ffbd2e;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#28ca42;"></div>
+      </div>
+      <div style="flex:1;padding:10px;display:flex;flex-direction:column;gap:5px;background:#fafafa;">
+        <div style="height:12px;background:${color}40;border-radius:4px;"></div>
+        <div style="height:8px;background:${color}25;border-radius:4px;width:80%;"></div>
+        <div style="height:8px;background:${color}15;border-radius:4px;width:60%;"></div>
+      </div>
+    </div>`;
+  }
+
+  function renderFeaturedCard(p) {
+    const imgContent = p.imgUrl
+      ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : mockBg(p.bg || '#a0a0a0');
+    const tags = (p.tags || '').split(',').filter(Boolean).map(t =>
+      `<span class="work-pill">${t.trim()}</span>`).join('');
+    return `
+      <a href="case-study.html?id=${p.csSlug || p.id}" class="work-featured" data-cat="${p.cat || 'uiux'}" style="text-decoration:none;color:inherit;">
+        <div class="work-featured-img" style="background:${p.bg || '#edf2f8'};">${imgContent}</div>
+        <div class="work-featured-info">
+          <div>
+            <div class="work-tag">${p.type || 'UI/UX Design'}</div>
+            <div class="work-featured-title">${p.title}</div>
+            <p class="work-featured-desc">${p.desc || ''}</p>
+            <div class="work-pills">${tags}</div>
+          </div>
+          <div class="work-link-arrow">View case study <div class="arrow-circle">→</div></div>
+        </div>
+      </a>`;
+  }
+
+  function renderGridCard(p) {
+    const imgContent = p.imgUrl
+      ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : mockBg(p.bg || '#ccc');
+    return `
+      <a href="case-study.html?id=${p.csSlug || p.id}" class="work-card" data-cat="${p.cat || 'uiux'}" style="text-decoration:none;color:inherit;">
+        <div class="work-card-img" style="background:${p.bg || '#f5f5f5'};">${imgContent}</div>
+        <div class="work-card-meta">
+          <div>
+            <div class="work-card-title">${p.title}</div>
+            <div class="work-card-type">${p.type || ''}</div>
+          </div>
+          <div class="mini-arrow">→</div>
+        </div>
+      </a>`;
+  }
+
+  async function loadDynamicProjects() {
+    const db = await initDB();
+    if (!db) return; // no Firebase config — keep static cards
+
+    const projects = await fetchCollection('projects');
+    if (!projects || !projects.length) return;
+
+    // Sort: featured first
+    const featured = projects.filter(p => p.featured === 'yes');
+    const grid = projects.filter(p => p.featured !== 'yes');
+
+    if (featured.length) {
+      const featuredSection = document.querySelector('.work-section-inner');
+      const existingFeatured = featuredSection.querySelectorAll('.work-featured');
+      existingFeatured.forEach(el => el.remove());
+      const divider = featuredSection.querySelector('.work-divider');
+      featured.forEach(p => {
+        featuredSection.insertBefore(
+          Object.assign(document.createElement('div'), { innerHTML: renderFeaturedCard(p) }).firstElementChild,
+          divider
+        );
+      });
+    }
+
+    if (grid.length) {
+      const gridEl = document.getElementById('work-dynamic-grid');
+      if (gridEl) gridEl.innerHTML = grid.map(renderGridCard).join('');
+    }
+
+    // Re-bind filter after injection
+    bindFilter();
+  }
+
+  loadDynamicProjects();
 </script>
 </body>
 </html>
