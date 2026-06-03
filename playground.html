@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Playground — Zacky Hilmi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,16 +18,12 @@
   --line: #e8e8e8;
   --font: 'Inter', -apple-system, sans-serif;
   --serif: 'Lora', Georgia, serif;
-
-  /* sticky note palette */
   --note-yellow:  #fef08a;
   --note-yellow2: #fde68a;
   --note-pink:    #fecdd3;
   --note-pink2:   #fbcfe8;
   --note-blue:    #bfdbfe;
-  --note-blue2:   #bae6fd;
   --note-green:   #bbf7d0;
-  --note-green2:  #a7f3d0;
   --note-purple:  #ddd6fe;
   --note-peach:   #fed7aa;
   --note-mint:    #ccfbf1;
@@ -36,43 +32,23 @@
 
 html, body {
   width: 100%; height: 100%;
-  overflow: hidden;
   font-family: var(--font);
   background: var(--white);
   color: var(--black);
 }
 
-/* ── VIEWPORT ── */
-#viewport {
-  position: fixed; inset: 0;
-  cursor: grab;
-  background: #f0ede8;
-  background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
-  background-size: 28px 28px;
-  overflow: hidden;
-  touch-action: none;
-}
-#viewport.panning { cursor: grabbing; }
-
-/* ── WORLD ── */
-#world {
-  position: absolute;
-  width: 4200px; height: 2600px;
-  top: 0; left: 0;
-  transform-origin: 0 0;
-  will-change: transform;
-}
-
-/* ── NAV ── */
+/* ─────────────────────────────────────────
+   NAV
+───────────────────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: 56px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 32px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(14px);
   border-bottom: 0.5px solid var(--line);
-  z-index: 9999; pointer-events: all;
+  z-index: 9999;
 }
 .nav-logo { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); text-decoration: none; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
@@ -81,202 +57,282 @@ nav {
 .nav-cta { font-size: 12px; font-weight: 500; color: var(--black); text-decoration: none; border: 0.5px solid var(--black); padding: 7px 16px; border-radius: 20px; transition: background 0.2s, color 0.2s; }
 .nav-cta:hover { background: var(--black); color: var(--white); }
 
-/* ── HINT ── */
-.hint {
-  position: fixed; bottom: 24px; left: 50%;
-  transform: translateX(-50%);
-  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400);
-  background: rgba(255,255,255,0.88); backdrop-filter: blur(8px);
-  padding: 7px 16px; border-radius: 20px; border: 0.5px solid var(--line);
-  z-index: 9998; pointer-events: none;
-  display: flex; align-items: center; gap: 8px;
-  animation: fadeup 1s ease 0.5s both; transition: opacity 0.6s;
-}
-@keyframes fadeup {
-  from { opacity:0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity:1; transform: translateX(-50%) translateY(0); }
+/* mobile nav */
+.nav-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
+.nav-menu-btn span { display: block; width: 20px; height: 1.5px; background: var(--black); border-radius: 2px; transition: all 0.2s; }
+.mobile-nav { display: none; }
+
+@media (max-width: 680px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-menu-btn { display: flex; }
+  .mobile-nav {
+    display: block;
+    position: fixed; top: 56px; left: 0; right: 0;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(14px);
+    border-bottom: 0.5px solid var(--line);
+    padding: 16px 20px 20px;
+    z-index: 9998;
+    transform: translateY(-110%);
+    transition: transform 0.3s ease;
+  }
+  .mobile-nav.open { transform: translateY(0); }
+  .mobile-nav a {
+    display: block; padding: 11px 0;
+    font-size: 15px; color: var(--gray-600);
+    text-decoration: none; border-bottom: 0.5px solid var(--line);
+    transition: color 0.2s;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a.active, .mobile-nav a:hover { color: var(--black); }
 }
 
-/* ── MINIMAP ── */
-#minimap {
-  position: fixed; bottom: 24px; right: 24px;
-  width: 120px; height: 72px;
-  background: rgba(255,255,255,0.88); backdrop-filter: blur(8px);
-  border: 0.5px solid var(--line); border-radius: 10px;
-  overflow: hidden; z-index: 9998;
-}
-#mm-vp { position: absolute; background: rgba(10,10,10,0.07); border: 0.5px solid rgba(10,10,10,0.2); border-radius: 2px; pointer-events: none; }
-.mm-cards { position: absolute; inset: 0; }
-.mm-dot { position: absolute; border-radius: 2px; }
-
-/* ── STICKY NOTE BASE ── */
+/* ─────────────────────────────────────────
+   STICKY NOTE BASE
+───────────────────────────────────────── */
 .note {
-  position: absolute;
-  border-radius: 2px 12px 12px 2px;
-  padding: 18px 20px 22px;
-  box-shadow: 3px 4px 14px rgba(0,0,0,0.13), 0 1px 3px rgba(0,0,0,0.08);
-  transition: box-shadow 0.2s, transform 0.2s;
+  border-radius: 3px 14px 14px 3px;
+  padding: 18px 20px 22px 24px;
+  box-shadow: 3px 4px 16px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.07);
+  transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
   overflow: hidden;
 }
 .note::before {
   content: '';
-  position: absolute;
-  top: 0; left: 0;
+  position: absolute; top: 0; left: 0;
   width: 6px; height: 100%;
-  background: rgba(0,0,0,0.07);
-  border-radius: 2px 0 0 2px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3px 0 0 3px;
 }
 .note:hover {
-  box-shadow: 5px 8px 24px rgba(0,0,0,0.18), 0 2px 6px rgba(0,0,0,0.1);
-  transform: scale(1.02) rotate(0deg) !important;
-  z-index: 100;
+  box-shadow: 6px 10px 28px rgba(0,0,0,0.17), 0 2px 6px rgba(0,0,0,0.09);
 }
-
-/* tape effect for some notes */
+/* tape */
 .note.taped::after {
   content: '';
-  position: absolute;
-  top: -8px; left: 50%; transform: translateX(-50%);
-  width: 48px; height: 18px;
-  background: rgba(255,255,255,0.55);
+  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+  width: 52px; height: 20px;
+  background: rgba(255,255,255,0.52);
   border-radius: 2px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
 }
 
-/* Note label / heading */
 .note-label {
   font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(0,0,0,0.35); margin-bottom: 10px;
+  color: rgba(0,0,0,0.32); margin-bottom: 10px;
   display: flex; align-items: center; gap: 6px;
 }
-.note-label::before { content: ''; display: inline-block; width: 14px; height: 1px; background: rgba(0,0,0,0.2); }
+.note-label::before { content:''; display:inline-block; width:12px; height:1px; background:rgba(0,0,0,0.18); }
 .note-title {
   font-family: var(--serif); font-size: 22px; font-weight: 400;
   line-height: 1.2; color: rgba(0,0,0,0.82); margin-bottom: 10px;
   letter-spacing: -0.01em;
 }
-.note-title em { font-style: italic; font-weight: 300; color: rgba(0,0,0,0.45); }
-.note-body { font-size: 12px; color: rgba(0,0,0,0.6); line-height: 1.75; }
+.note-title em { font-style: italic; font-weight: 300; color: rgba(0,0,0,0.42); }
+.note-body { font-size: 12px; color: rgba(0,0,0,0.58); line-height: 1.75; }
 
-/* ── WORK ITEM inside notes ── */
-.work-list { display: flex; flex-direction: column; gap: 0; }
-.work-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 9px 0; border-bottom: 0.5px solid rgba(0,0,0,0.1);
-}
-.work-item:last-child { border-bottom: none; padding-bottom: 0; }
-.w-num { font-size: 9px; color: rgba(0,0,0,0.25); font-weight: 600; min-width: 18px; margin-top: 2px; }
-.w-name { font-size: 12px; font-weight: 500; color: rgba(0,0,0,0.78); margin-bottom: 2px; }
-.w-sub  { font-size: 10px; color: rgba(0,0,0,0.45); }
-.w-tag  {
-  font-size: 9px; font-weight: 600; letter-spacing: 0.04em;
-  padding: 2px 7px; border-radius: 20px;
-  white-space: nowrap; margin-left: auto; flex-shrink: 0; margin-top: 2px;
-}
-.tag-gfx  { background: rgba(0,0,0,0.1); color: rgba(0,0,0,0.6); }
-.tag-mot  { background: rgba(0,0,0,0.12); color: rgba(0,0,0,0.65); }
-.tag-brd  { background: rgba(0,0,0,0.08); color: rgba(0,0,0,0.55); }
+/* pills */
+.pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill { font-size: 10px; color: rgba(0,0,0,0.55); background: rgba(0,0,0,0.08); padding: 4px 10px; border-radius: 20px; }
 
-/* ── THUMB GRID inside notes ── */
+/* ticker */
+.ticker-wrap { overflow: hidden; margin: 0 -20px; }
+.ticker-track { display: flex; gap: 32px; width: max-content; animation: ticker 16s linear infinite; padding: 2px 0; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-i { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(0,0,0,.32); white-space:nowrap; display:flex; align-items:center; gap:14px; }
+.ticker-i::after { content:'✦'; font-size:6px; }
+
+/* quote */
+.quote-text { font-family:var(--serif); font-size:14px; font-style:italic; font-weight:300; color:rgba(0,0,0,.7); line-height:1.8; margin-bottom:10px; }
+.quote-attr { font-size:10px; color:rgba(0,0,0,.32); letter-spacing:.04em; }
+
+/* filter tags */
+.f-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.f-tag {
+  font-size: 10px; color: rgba(0,0,0,.5);
+  border: 1px solid rgba(0,0,0,.18);
+  padding: 4px 11px; border-radius: 20px;
+  background: rgba(255,255,255,.4); cursor: pointer;
+  transition: all 0.2s; user-select: none;
+}
+.f-tag:hover { background: rgba(0,0,0,.08); color: rgba(0,0,0,.8); }
+.f-tag.active { background: rgba(0,0,0,.75); color: white; border-color: transparent; }
+
+/* thumb grid */
 .thumb-grid { display: grid; gap: 8px; }
 .thumb-grid-2 { grid-template-columns: 1fr 1fr; }
 .thumb-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
 .thumb {
-  border-radius: 8px; overflow: hidden;
-  aspect-ratio: 4/3;
+  border-radius: 8px; overflow: hidden; aspect-ratio: 4/3;
   display: flex; align-items: center; justify-content: center;
-  position: relative;
-  border: 0.5px solid rgba(0,0,0,0.1);
+  position: relative; border: 0.5px solid rgba(0,0,0,.1);
   cursor: pointer; transition: opacity 0.15s;
 }
-.thumb:hover { opacity: 0.88; }
+.thumb:hover { opacity: .88; }
 .thumb-label {
-  position: absolute; bottom: 0; left: 0; right: 0;
+  position: absolute; bottom:0; left:0; right:0;
   padding: 6px 8px;
-  background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
-  font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+  font-size: 9px; font-weight: 500; color: rgba(255,255,255,.9);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .thumb-empty {
-  border: 1.5px dashed rgba(0,0,0,0.15);
-  border-radius: 8px; aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 4px;
+  border: 1.5px dashed rgba(0,0,0,.14); border-radius: 8px; aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
 }
-.thumb-empty span { font-size: 9px; color: rgba(0,0,0,0.25); }
+.thumb-empty span { font-size: 9px; color: rgba(0,0,0,.25); }
 .play-badge {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  width: 30px; height: 30px; border-radius: 50%;
-  background: rgba(0,0,0,0.6); color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; opacity: 0; transition: opacity 0.2s;
+  position: absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:30px; height:30px; border-radius:50%;
+  background:rgba(0,0,0,.6); color:white;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; opacity:0; transition:opacity 0.2s;
 }
 .thumb:hover .play-badge { opacity: 1; }
 
-/* ── TAG PILLS ── */
-.pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
-.pill {
-  font-size: 10px; color: rgba(0,0,0,0.55);
-  background: rgba(0,0,0,0.08);
-  padding: 4px 10px; border-radius: 20px;
+/* pulse */
+.pulse-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.pulse { width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 3px rgba(34,197,94,.25); animation:pa 2s ease-in-out infinite; display:inline-block; }
+@keyframes pa { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.15)}50%{box-shadow:0 0 0 7px rgba(34,197,94,.05)} }
+
+
+/* ─────────────────────────────────────────
+   DESKTOP: drag canvas
+───────────────────────────────────────── */
+@media (min-width: 769px) {
+  html, body { overflow: hidden; }
+
+  #viewport {
+    position: fixed; inset: 0; top: 56px;
+    cursor: grab;
+    background: #f0ede8;
+    background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
+    background-size: 28px 28px;
+    overflow: hidden;
+    touch-action: none;
+  }
+  #viewport.panning { cursor: grabbing; }
+
+  #world {
+    position: absolute;
+    width: 3600px; height: 2400px;
+    top: 0; left: 0;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  /* positions & rotations */
+  .note { position: absolute; }
+
+  #n-intro    { background:var(--note-yellow);  width:280px; top:80px;  left:80px;   transform:rotate(-1.5deg); }
+  #n-filter   { background:var(--note-pink);    width:240px; top:68px;  left:420px;  transform:rotate(1.3deg); }
+  #n-graphic  { background:var(--note-blue);    width:480px; top:80px;  left:720px;  transform:rotate(-0.6deg); }
+  #n-motion   { background:var(--note-green);   width:420px; top:68px;  left:1260px; transform:rotate(1.2deg); }
+  #n-branding { background:var(--note-peach);   width:380px; top:460px; left:80px;   transform:rotate(0.9deg); }
+  #n-illus    { background:var(--note-purple);  width:340px; top:480px; left:520px;  transform:rotate(-1.7deg); }
+  #n-quote    { background:var(--note-mint);    width:260px; top:480px; left:920px;  transform:rotate(2deg); }
+  #n-ticker   { background:var(--note-lilac);   width:500px; top:460px; left:1260px; transform:rotate(-0.8deg); }
+  #n-note     { background:var(--note-yellow2); width:280px; top:840px; left:80px;   transform:rotate(1.5deg); }
+  #n-status   { background:var(--note-pink2);   width:220px; top:840px; left:420px;  transform:rotate(-1.2deg); }
+
+  .note:hover { transform: scale(1.025) rotate(0deg) !important; z-index: 100; }
+
+  /* hint */
+  .hint {
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400);
+    background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
+    padding: 7px 16px; border-radius: 20px; border: 0.5px solid var(--line);
+    z-index: 9998; pointer-events: none;
+    display: flex; align-items: center; gap: 8px;
+    animation: fadeup 1s ease .5s both; transition: opacity .6s;
+  }
+  @keyframes fadeup {
+    from{opacity:0;transform:translateX(-50%) translateY(8px)}
+    to{opacity:1;transform:translateX(-50%) translateY(0)}
+  }
+
+  /* minimap */
+  #minimap {
+    position: fixed; bottom: 20px; right: 20px;
+    width: 120px; height: 72px;
+    background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
+    border: 0.5px solid var(--line); border-radius: 10px;
+    overflow: hidden; z-index: 9998;
+  }
+  #mm-vp { position: absolute; pointer-events: none; }
+  .mm-dot { position: absolute; border-radius: 2px; }
+
+  /* hide mobile-only elements */
+  .mobile-scroll { display: none; }
 }
 
-/* ── TICKER ── */
-.ticker-wrap { overflow: hidden; margin: 0 -20px; }
-.ticker-track {
-  display: flex; gap: 32px; width: max-content;
-  animation: ticker 16s linear infinite;
-}
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.ticker-i {
-  font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(0,0,0,0.35); white-space: nowrap;
-  display: flex; align-items: center; gap: 14px;
-}
-.ticker-i::after { content: '✦'; font-size: 6px; }
 
-/* ── QUOTE ── */
-.quote-text {
-  font-family: var(--serif); font-size: 14px; font-style: italic; font-weight: 300;
-  color: rgba(0,0,0,0.7); line-height: 1.8; margin-bottom: 10px;
+/* ─────────────────────────────────────────
+   MOBILE: scroll layout
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  html, body { overflow: auto; background: #f0ede8; }
+
+  #viewport, #world, .hint, #minimap { display: none !important; }
+
+  .mobile-scroll {
+    display: block;
+    padding: 72px 16px 48px;
+    background: #f0ede8;
+    background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+
+  /* staggered masonry-like column layout */
+  .mobile-board {
+    column-count: 2;
+    column-gap: 12px;
+  }
+
+  .note {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 12px;
+    break-inside: avoid;
+  }
+
+  /* slight rotations on mobile too */
+  #n-intro    { background:var(--note-yellow);  transform:rotate(-1.2deg); }
+  #n-filter   { background:var(--note-pink);    transform:rotate(1deg); }
+  #n-graphic  { background:var(--note-blue);    transform:rotate(-0.5deg); }
+  #n-motion   { background:var(--note-green);   transform:rotate(0.8deg); }
+  #n-branding { background:var(--note-peach);   transform:rotate(1.2deg); }
+  #n-illus    { background:var(--note-purple);  transform:rotate(-1.5deg); }
+  #n-quote    { background:var(--note-mint);    transform:rotate(1.8deg); }
+  #n-ticker   { background:var(--note-lilac);   transform:rotate(-0.7deg); }
+  #n-note     { background:var(--note-yellow2); transform:rotate(1.3deg); }
+  #n-status   { background:var(--note-pink2);   transform:rotate(-0.9deg); }
+
+  /* smaller type on mobile */
+  .note-title { font-size: 18px; }
+  .thumb-grid-3 { grid-template-columns: 1fr 1fr; }
+
+  /* filter scrollable row */
+  .f-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .f-tags::-webkit-scrollbar { display: none; }
+
+  /* section hidden when filtered */
+  .pg-section.filtered-out { opacity: 0.18; pointer-events: none; }
 }
-.quote-attr { font-size: 10px; color: rgba(0,0,0,0.35); letter-spacing: 0.04em; }
 
-/* ── FILTER NOTE ── */
-.f-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.f-tag {
-  font-size: 10px; color: rgba(0,0,0,0.5);
-  border: 1px solid rgba(0,0,0,0.18);
-  padding: 4px 11px; border-radius: 20px;
-  background: rgba(255,255,255,0.4); cursor: pointer;
-  transition: all 0.2s;
+/* single column on very small screens */
+@media (max-width: 420px) {
+  .mobile-board { column-count: 1; }
 }
-.f-tag:hover { background: rgba(0,0,0,0.1); color: rgba(0,0,0,0.8); }
-.f-tag.active { background: rgba(0,0,0,0.75); color: white; border-color: transparent; }
-
-/* ── PULSE ── */
-.pulse-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.pulse { width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,0.25);animation:pa 2s ease-in-out infinite;display:inline-block; }
-@keyframes pa { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,0.15);}50%{box-shadow:0 0 0 7px rgba(34,197,94,0.05);} }
-
-/* ── INDIVIDUAL NOTE POSITIONS & COLORS ── */
-#n-intro   { background: var(--note-yellow);  width: 280px; top: 100px; left: 100px; transform: rotate(-1.5deg); }
-#n-filter  { background: var(--note-pink);    width: 240px; top: 88px;  left: 440px; transform: rotate(1.2deg); }
-#n-graphic { background: var(--note-blue);    width: 460px; top: 120px; left: 740px; transform: rotate(-0.7deg); }
-#n-motion  { background: var(--note-green);   width: 400px; top: 96px;  left: 1260px; transform: rotate(1.4deg); }
-#n-branding { background: var(--note-peach);  width: 380px; top: 480px; left: 100px; transform: rotate(0.8deg); }
-#n-illus   { background: var(--note-purple);  width: 340px; top: 500px; left: 540px; transform: rotate(-1.8deg); }
-#n-quote   { background: var(--note-mint);    width: 260px; top: 500px; left: 940px; transform: rotate(2.1deg); }
-#n-ticker  { background: var(--note-lilac);   width: 500px; top: 500px; left: 1260px; transform: rotate(-0.9deg); }
-#n-note    { background: var(--note-yellow2); width: 280px; top: 860px; left: 100px; transform: rotate(1.6deg); }
-#n-status  { background: var(--note-pink2);   width: 220px; top: 860px; left: 440px; transform: rotate(-1.1deg); }
 </style>
 </head>
 <body>
 
+<!-- ── NAV ── -->
 <nav>
   <a href="index.html" class="nav-logo">Zacky Hilmi ✦</a>
   <ul class="nav-links">
@@ -286,23 +342,34 @@ nav {
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
   <a href="mailto:zackyhilmi.zh@gmail.com" class="nav-cta">Let's talk →</a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="work.html">Work</a>
+  <a href="about.html">About</a>
+  <a href="playground.html" class="active">Playground</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="mailto:zackyhilmi.zh@gmail.com">Let's talk →</a>
 </nav>
 
+<!-- ═══════════════════════════════════════
+     DESKTOP: drag canvas
+════════════════════════════════════════ -->
 <div id="viewport">
 <div id="world">
 
-  <!-- ── INTRO ── -->
   <div class="note taped" id="n-intro">
     <div class="note-label">Playground</div>
     <div class="note-title">Creative<br><em>explorations</em></div>
-    <div class="note-body">Graphic design, motion, branding, and visual experiments — the work that doesn't fit neatly into a case study.</div>
+    <div class="note-body">Graphic design, motion, branding, and visual experiments — work that doesn't fit neatly into a case study.</div>
   </div>
 
-  <!-- ── FILTER ── -->
   <div class="note taped" id="n-filter">
     <div class="note-label">Filter</div>
-    <div style="margin-bottom:12px;font-size:11px;font-weight:500;color:rgba(0,0,0,0.6);">Browse by category</div>
-    <div class="f-tags">
+    <div style="margin-bottom:10px;font-size:11px;font-weight:500;color:rgba(0,0,0,.6);">Browse by category</div>
+    <div class="f-tags" id="filterTags">
       <span class="f-tag active" data-filter="all">All</span>
       <span class="f-tag" data-filter="graphic">Graphic</span>
       <span class="f-tag" data-filter="motion">Motion</span>
@@ -311,302 +378,371 @@ nav {
     </div>
   </div>
 
-  <!-- ── GRAPHIC DESIGN ── -->
   <div class="note pg-section" id="n-graphic" data-category="graphic">
     <div class="note-label">Graphic Design</div>
     <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
       <div class="thumb" style="background:linear-gradient(135deg,#f5dfc0,#fdf4ec);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;margin-bottom:4px;">✦</div>
-          <div style="font-size:8px;color:rgba(0,0,0,.35);letter-spacing:.08em;text-transform:uppercase;">Social Media</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">✦</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Social Media</div></div>
         <div class="thumb-label">Mekari — Campaign</div>
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#e8f4e8,#f0f5ed);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;margin-bottom:4px;">◈</div>
-          <div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Infographic</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">◈</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Infographic</div></div>
         <div class="thumb-label">Data Infographic Series</div>
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#dde8f5,#edf2f8);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;margin-bottom:4px;">⊞</div>
-          <div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Banner</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">⊞</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Banner</div></div>
         <div class="thumb-label">Sirclo Banners</div>
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#f8f0ff,#ede4ff);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;margin-bottom:4px;">▦</div>
-          <div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Print</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">▦</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Print</div></div>
         <div class="thumb-label">Srupa Labs — Frame Catalog</div>
       </div>
     </div>
-    <div class="thumb-empty">
-      <div style="font-size:18px;color:rgba(0,0,0,.15);">+</div>
-      <span>Add work here</span>
-    </div>
+    <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add work</span></div>
   </div>
 
-  <!-- ── MOTION GRAPHICS ── -->
   <div class="note pg-section" id="n-motion" data-category="motion">
     <div class="note-label">Motion Graphics</div>
     <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
       <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
-        <div style="text-align:center;">
-          <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,.6);">▶</div>
-          <div style="font-size:8px;color:rgba(255,255,255,.35);letter-spacing:.08em;text-transform:uppercase;">TV Quiz</div>
-        </div>
+        <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.6);">▶</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;">TV Quiz</div></div>
         <div class="thumb-label">Love Story The Series</div>
         <div class="play-badge">▶</div>
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;color:rgba(255,255,255,.4);">◎</div>
-          <div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Motion</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;color:rgba(255,255,255,.4);">◎</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Motion</div></div>
         <div class="thumb-label">Buku Harian Seorang Istri</div>
         <div class="play-badge">▶</div>
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
-        <div style="text-align:center;">
-          <div style="font-size:22px;color:rgba(255,255,255,.4);">✦</div>
-          <div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Broadcast</div>
-        </div>
+        <div style="text-align:center;"><div style="font-size:22px;color:rgba(255,255,255,.4);">✦</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Broadcast</div></div>
         <div class="thumb-label">Samudra Cinta & Jendela SMP</div>
         <div class="play-badge">▶</div>
       </div>
-      <div class="thumb-empty">
-        <div style="font-size:18px;color:rgba(0,0,0,.15);">+</div>
-        <span>Add motion work</span>
-      </div>
+      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add motion work</span></div>
     </div>
-    <div style="font-size:10px;color:rgba(0,0,0,.45);line-height:1.6;">▶ Video files available on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.65);font-weight:500;">email me</a></div>
+    <div style="font-size:10px;color:rgba(0,0,0,.45);line-height:1.6;">▶ Video files on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.65);font-weight:500;">email me</a></div>
   </div>
 
-  <!-- ── BRANDING ── -->
   <div class="note pg-section" id="n-branding" data-category="branding">
     <div class="note-label">Branding</div>
     <div class="thumb-grid thumb-grid-3">
       <div class="thumb" style="background:linear-gradient(135deg,#f5f0e8,#ede4d4);">
-        <div style="text-align:center;">
-          <div style="font-size:24px;font-weight:600;letter-spacing:-2px;color:#8a7968;">SL</div>
-          <div style="font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:#b0a090;margin-top:4px;">Srupa Labs</div>
-        </div>
-        <div class="thumb-label">Srupa Labs — Brand Identity</div>
+        <div style="text-align:center;"><div style="font-size:22px;font-weight:600;letter-spacing:-2px;color:#8a7968;">SL</div><div style="font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:#b0a090;margin-top:3px;">Srupa Labs</div></div>
+        <div class="thumb-label">Srupa Labs Identity</div>
       </div>
-      <div class="thumb-empty">
-        <div style="font-size:18px;color:rgba(0,0,0,.15);">+</div>
-        <span>Add project</span>
-      </div>
-      <div class="thumb-empty">
-        <div style="font-size:18px;color:rgba(0,0,0,.15);">+</div>
-        <span>Add project</span>
-      </div>
+      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add project</span></div>
+      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add project</span></div>
     </div>
   </div>
 
-  <!-- ── ILLUSTRATION ── -->
   <div class="note pg-section" id="n-illus" data-category="illustration">
     <div class="note-label">Illustration</div>
-    <div style="font-size:28px;color:rgba(0,0,0,0.12);margin-bottom:12px;text-align:center;">✦ ✦ ✦</div>
-    <div style="font-size:12px;color:rgba(0,0,0,0.45);line-height:1.7;text-align:center;">Illustration work<br>coming soon.</div>
-    <div class="thumb-grid thumb-grid-3" style="margin-top:14px;">
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:16px;color:rgba(0,0,0,.12);">✦</div></div>
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:16px;color:rgba(0,0,0,.12);">✦</div></div>
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:16px;color:rgba(0,0,0,.12);">✦</div></div>
+    <div style="font-size:26px;color:rgba(0,0,0,.1);margin-bottom:10px;text-align:center;">✦ ✦ ✦</div>
+    <div style="font-size:12px;color:rgba(0,0,0,.42);line-height:1.7;text-align:center;margin-bottom:14px;">Illustration work<br>coming soon.</div>
+    <div class="thumb-grid thumb-grid-3">
+      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
+      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
+      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
     </div>
   </div>
 
-  <!-- ── QUOTE ── -->
   <div class="note taped" id="n-quote">
     <div class="note-label">Mantra</div>
     <div class="quote-text">"Design is not just what it looks like. Design is how it works."</div>
     <div class="quote-attr">— Steve Jobs</div>
   </div>
 
-  <!-- ── TICKER ── -->
   <div class="note" id="n-ticker">
     <div class="note-label">Skills &amp; Tools</div>
     <div class="pill-row" style="margin-bottom:14px;">
-      <span class="pill">Graphic Design</span>
-      <span class="pill">Motion Graphics</span>
-      <span class="pill">Brand Identity</span>
-      <span class="pill">TV Broadcast</span>
-      <span class="pill">After Effects</span>
-      <span class="pill">Illustrator</span>
-      <span class="pill">Social Media</span>
-      <span class="pill">Print Design</span>
-      <span class="pill">Photoshop</span>
+      <span class="pill">Graphic Design</span><span class="pill">Motion Graphics</span><span class="pill">Brand Identity</span>
+      <span class="pill">TV Broadcast</span><span class="pill">After Effects</span><span class="pill">Illustrator</span>
+      <span class="pill">Social Media</span><span class="pill">Print Design</span><span class="pill">Photoshop</span>
     </div>
     <div class="ticker-wrap">
       <div class="ticker-track">
-        <span class="ticker-i">Graphic Design</span>
-        <span class="ticker-i">Motion</span>
-        <span class="ticker-i">Branding</span>
-        <span class="ticker-i">Broadcast</span>
-        <span class="ticker-i">After Effects</span>
-        <span class="ticker-i">Illustrator</span>
-        <span class="ticker-i">Social Media</span>
-        <span class="ticker-i">Print</span>
-        <span class="ticker-i">Graphic Design</span>
-        <span class="ticker-i">Motion</span>
-        <span class="ticker-i">Branding</span>
-        <span class="ticker-i">Broadcast</span>
-        <span class="ticker-i">After Effects</span>
-        <span class="ticker-i">Illustrator</span>
-        <span class="ticker-i">Social Media</span>
-        <span class="ticker-i">Print</span>
+        <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
+        <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
+        <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
+        <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
+        <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
+        <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
       </div>
     </div>
   </div>
 
-  <!-- ── MOTION NOTE ── -->
   <div class="note taped" id="n-note">
     <div class="note-label">Motion Work</div>
-    <div style="font-size:28px;margin-bottom:10px;">▶</div>
+    <div style="font-size:26px;margin-bottom:10px;">▶</div>
     <div style="font-size:12px;font-weight:500;color:rgba(0,0,0,.7);margin-bottom:6px;">Video files on request</div>
-    <div style="font-size:11px;color:rgba(0,0,0,.5);line-height:1.65;">TV broadcast animation projects shared directly. <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.7);font-weight:500;">Email me →</a></div>
+    <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.65;">TV broadcast animations shared directly. <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.68);font-weight:500;">Email me →</a></div>
   </div>
 
-  <!-- ── STATUS ── -->
   <div class="note taped" id="n-status">
     <div class="note-label">Status</div>
     <div class="pulse-row"><div class="pulse"></div><span style="font-size:12px;font-weight:500;color:rgba(0,0,0,.75);">Open to work</span></div>
-    <div style="font-size:11px;color:rgba(0,0,0,.5);line-height:1.65;">Available for freelance projects &amp; collaborations</div>
+    <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.65;">Available for freelance projects &amp; collaborations</div>
   </div>
 
 </div><!-- /world -->
 </div><!-- /viewport -->
 
-<!-- HINT -->
+<!-- hint & minimap (desktop only) -->
 <div class="hint">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9l7-7 7 7M5 15l7 7 7-7"/></svg>
-  Drag canvas to explore
+  Drag to explore
 </div>
+<div id="minimap"><div class="mm-cards" id="mm-cards"></div><div id="mm-vp"></div></div>
 
-<!-- MINIMAP -->
-<div id="minimap">
-  <div class="mm-cards" id="mm-cards"></div>
-  <div id="mm-vp"></div>
-</div>
+
+<!-- ═══════════════════════════════════════
+     MOBILE: scroll board
+════════════════════════════════════════ -->
+<div class="mobile-scroll">
+
+  <!-- mobile filter bar (sticky) -->
+  <div style="position:sticky;top:0;z-index:100;background:rgba(240,237,232,.95);backdrop-filter:blur(10px);padding:10px 0 12px;margin:-72px -16px 20px;padding-left:16px;padding-right:16px;padding-top:10px;border-bottom:0.5px solid rgba(0,0,0,.08);">
+    <div class="f-tags" id="mFilterTags">
+      <span class="f-tag active" data-filter="all">All</span>
+      <span class="f-tag" data-filter="graphic">Graphic</span>
+      <span class="f-tag" data-filter="motion">Motion</span>
+      <span class="f-tag" data-filter="branding">Branding</span>
+      <span class="f-tag" data-filter="illustration">Illustration</span>
+    </div>
+  </div>
+
+  <div class="mobile-board">
+
+    <div class="note taped" id="mn-intro">
+      <div class="note-label">Playground</div>
+      <div class="note-title">Creative<br><em>explorations</em></div>
+      <div class="note-body">Graphic design, motion, branding &amp; visual experiments.</div>
+    </div>
+
+    <div class="note taped" id="mn-status">
+      <div class="note-label">Status</div>
+      <div class="pulse-row"><div class="pulse"></div><span style="font-size:12px;font-weight:500;color:rgba(0,0,0,.75);">Open to work</span></div>
+      <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.6;">Freelance &amp; collaborations welcome</div>
+    </div>
+
+    <div class="note mpg-section" id="mn-graphic" data-category="graphic">
+      <div class="note-label">Graphic Design</div>
+      <div class="thumb-grid thumb-grid-2">
+        <div class="thumb" style="background:linear-gradient(135deg,#f5dfc0,#fdf4ec);">
+          <div style="text-align:center;"><div style="font-size:18px;">✦</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Social</div></div>
+          <div class="thumb-label">Mekari Campaign</div>
+        </div>
+        <div class="thumb" style="background:linear-gradient(135deg,#e8f4e8,#f0f5ed);">
+          <div style="text-align:center;"><div style="font-size:18px;">◈</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Info</div></div>
+          <div class="thumb-label">Data Infographic</div>
+        </div>
+        <div class="thumb" style="background:linear-gradient(135deg,#dde8f5,#edf2f8);">
+          <div style="text-align:center;"><div style="font-size:18px;">⊞</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Banner</div></div>
+          <div class="thumb-label">Sirclo Banners</div>
+        </div>
+        <div class="thumb" style="background:linear-gradient(135deg,#f8f0ff,#ede4ff);">
+          <div style="text-align:center;"><div style="font-size:18px;">▦</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Print</div></div>
+          <div class="thumb-label">Srupa Labs Catalog</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note mpg-section" id="mn-motion" data-category="motion">
+      <div class="note-label">Motion Graphics</div>
+      <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
+        <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.5);">▶</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">TV Quiz</div></div>
+          <div class="thumb-label">Love Story The Series</div>
+        </div>
+        <div class="thumb" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
+          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.4);">◎</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Motion</div></div>
+          <div class="thumb-label">Buku Harian Seorang Istri</div>
+        </div>
+        <div class="thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
+          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.4);">✦</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Broadcast</div></div>
+          <div class="thumb-label">Samudra Cinta</div>
+        </div>
+        <div class="thumb-empty"><div style="font-size:16px;color:rgba(0,0,0,.12);">+</div></div>
+      </div>
+      <div style="font-size:10px;color:rgba(0,0,0,.42);">▶ Video on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.62);font-weight:500;">email me</a></div>
+    </div>
+
+    <div class="note mpg-section" id="mn-branding" data-category="branding">
+      <div class="note-label">Branding</div>
+      <div class="thumb-grid thumb-grid-2">
+        <div class="thumb" style="background:linear-gradient(135deg,#f5f0e8,#ede4d4);">
+          <div style="text-align:center;"><div style="font-size:18px;font-weight:600;letter-spacing:-1.5px;color:#8a7968;">SL</div><div style="font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:#b0a090;margin-top:3px;">Srupa Labs</div></div>
+          <div class="thumb-label">Srupa Labs Identity</div>
+        </div>
+        <div class="thumb-empty"><div style="font-size:16px;color:rgba(0,0,0,.12);">+</div><span>Add project</span></div>
+      </div>
+    </div>
+
+    <div class="note mpg-section" id="mn-illus" data-category="illustration">
+      <div class="note-label">Illustration</div>
+      <div style="font-size:22px;color:rgba(0,0,0,.1);text-align:center;margin:8px 0;">✦ ✦ ✦</div>
+      <div style="font-size:11px;color:rgba(0,0,0,.4);text-align:center;line-height:1.6;">Coming soon</div>
+    </div>
+
+    <div class="note taped" id="mn-quote">
+      <div class="note-label">Mantra</div>
+      <div class="quote-text">"Design is not just what it looks like. Design is how it works."</div>
+      <div class="quote-attr">— Steve Jobs</div>
+    </div>
+
+    <div class="note" id="mn-ticker">
+      <div class="note-label">Skills</div>
+      <div class="pill-row">
+        <span class="pill">Graphic Design</span><span class="pill">Motion</span><span class="pill">Branding</span>
+        <span class="pill">TV Broadcast</span><span class="pill">After Effects</span><span class="pill">Illustrator</span>
+        <span class="pill">Social Media</span><span class="pill">Print</span><span class="pill">Photoshop</span>
+      </div>
+    </div>
+
+    <div class="note taped" id="mn-note">
+      <div class="note-label">Motion Work</div>
+      <div style="font-size:22px;margin-bottom:8px;">▶</div>
+      <div style="font-size:11px;font-weight:500;color:rgba(0,0,0,.7);margin-bottom:5px;">Video files on request</div>
+      <div style="font-size:11px;color:rgba(0,0,0,.45);line-height:1.6;"><a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.65);font-weight:500;">Email me →</a></div>
+    </div>
+
+  </div><!-- /mobile-board -->
+</div><!-- /mobile-scroll -->
+
 
 <script>
-const vp     = document.getElementById('viewport');
-const world  = document.getElementById('world');
-const mmvp   = document.getElementById('mm-vp');
-const mmCards= document.getElementById('mm-cards');
+const IS_MOBILE = () => window.innerWidth <= 768;
 
-const WORLD_W = 4200, WORLD_H = 2600;
-const MM_W = 120, MM_H = 72;
-
-let tx = -60, ty = -56;
-let isPanning = false, startX, startY, startTX, startTY;
-let velX = 0, velY = 0, lastMX, lastMY, lastTime, rafId;
-
-function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-function applyTransform() {
-  const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
-  tx = clamp(tx, -(WORLD_W - vpW), 0);
-  ty = clamp(ty, -(WORLD_H - vpH + 56), 0);
-  world.style.transform = `translate(${tx}px,${ty}px)`;
-  const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
-  mmvp.style.cssText = `left:${-tx*sx}px;top:${-ty*sy}px;width:${vpW*sx}px;height:${vpH*sy}px;position:absolute;background:rgba(10,10,10,0.07);border:0.5px solid rgba(10,10,10,0.2);border-radius:2px;pointer-events:none;`;
-}
-
-function buildMinimap() {
-  const notes = world.querySelectorAll('.note');
-  const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
-  notes.forEach(n => {
-    const d = document.createElement('div');
-    d.className = 'mm-dot';
-    const l = parseInt(getComputedStyle(n).left);
-    const t = parseInt(getComputedStyle(n).top);
-    const bg = getComputedStyle(n).backgroundColor;
-    d.style.cssText = `left:${l*sx}px;top:${t*sy}px;width:${n.offsetWidth*sx}px;height:${n.offsetHeight*sy}px;background:${bg};opacity:0.7;`;
-    mmCards.appendChild(d);
-  });
-}
-
-// MOUSE
-vp.addEventListener('mousedown', e => {
-  if (e.button !== 0) return;
-  cancelAnimationFrame(rafId);
-  isPanning = true;
-  startX = e.clientX; startY = e.clientY;
-  startTX = tx; startTY = ty;
-  lastMX = e.clientX; lastMY = e.clientY;
-  lastTime = performance.now(); velX = 0; velY = 0;
-  vp.classList.add('panning'); e.preventDefault();
+/* ── MOBILE NAV TOGGLE ── */
+const menuBtn   = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (!menuBtn.contains(e.target) && !mobileNav.contains(e.target)) mobileNav.classList.remove('open');
 });
-document.addEventListener('mousemove', e => {
-  if (!isPanning) return;
-  const now = performance.now(), dt = now - lastTime;
-  if (dt > 0) { velX = (e.clientX - lastMX) / dt * 16; velY = (e.clientY - lastMY) / dt * 16; }
-  lastMX = e.clientX; lastMY = e.clientY; lastTime = now;
-  tx = startTX + (e.clientX - startX); ty = startTY + (e.clientY - startY);
-  applyTransform();
-});
-document.addEventListener('mouseup', () => { if (!isPanning) return; isPanning = false; vp.classList.remove('panning'); startMomentum(); });
 
-// TOUCH
-vp.addEventListener('touchstart', e => {
-  if (e.touches.length !== 1) return;
-  cancelAnimationFrame(rafId); isPanning = true;
-  startX = e.touches[0].clientX; startY = e.touches[0].clientY;
-  startTX = tx; startTY = ty; lastMX = startX; lastMY = startY;
-  lastTime = performance.now(); velX = 0; velY = 0;
-  e.preventDefault();
-}, { passive: false });
-vp.addEventListener('touchmove', e => {
-  if (!isPanning || e.touches.length !== 1) return;
-  const now = performance.now(), dt = now - lastTime;
-  const cx = e.touches[0].clientX, cy = e.touches[0].clientY;
-  if (dt > 0) { velX = (cx - lastMX) / dt * 16; velY = (cy - lastMY) / dt * 16; }
-  lastMX = cx; lastMY = cy; lastTime = now;
-  tx = startTX + (cx - startX); ty = startTY + (cy - startY);
-  applyTransform(); e.preventDefault();
-}, { passive: false });
-vp.addEventListener('touchend', () => { isPanning = false; startMomentum(); });
-
-// MOMENTUM
-function startMomentum() {
-  const friction = 0.92;
-  function tick() {
-    velX *= friction; velY *= friction;
-    if (Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) return;
-    tx += velX; ty += velY; applyTransform();
-    rafId = requestAnimationFrame(tick);
-  }
-  rafId = requestAnimationFrame(tick);
-}
-
-// FILTER
-document.querySelectorAll('.f-tag').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    document.querySelectorAll('.f-tag').forEach(b => b.classList.remove('active'));
+/* ── MOBILE FILTER ── */
+document.querySelectorAll('#mFilterTags .f-tag').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#mFilterTags .f-tag').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('.pg-section').forEach(sec => {
-      const show = filter === 'all' || sec.dataset.category === filter;
-      sec.style.opacity = show ? '1' : '0.2';
-      sec.style.pointerEvents = show ? 'all' : 'none';
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.mpg-section').forEach(sec => {
+      const show = f === 'all' || sec.dataset.category === f;
+      sec.classList.toggle('filtered-out', !show);
     });
   });
 });
 
-// INIT
-window.addEventListener('load', () => {
-  applyTransform();
-  setTimeout(buildMinimap, 150);
-  const hint = document.querySelector('.hint');
-  setTimeout(() => { if(hint) hint.style.opacity = '0'; }, 3500);
-});
-window.addEventListener('resize', applyTransform);
+/* ── DESKTOP CANVAS ── */
+if (!IS_MOBILE()) {
+  const vp      = document.getElementById('viewport');
+  const world   = document.getElementById('world');
+  const mmvp    = document.getElementById('mm-vp');
+  const mmCards = document.getElementById('mm-cards');
+
+  const WORLD_W = 3600, WORLD_H = 2400, MM_W = 120, MM_H = 72;
+  let tx = -60, ty = -56;
+  let isPanning = false, startX, startY, startTX, startTY;
+  let velX = 0, velY = 0, lastMX, lastMY, lastTime, rafId;
+
+  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+
+  function applyTransform() {
+    const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
+    tx = clamp(tx, -(WORLD_W - vpW), 0);
+    ty = clamp(ty, -(WORLD_H - vpH), 0);
+    world.style.transform = `translate(${tx}px,${ty}px)`;
+    const sx = MM_W/WORLD_W, sy = MM_H/WORLD_H;
+    mmvp.style.cssText = `left:${-tx*sx}px;top:${-ty*sy}px;width:${vpW*sx}px;height:${vpH*sy}px;position:absolute;background:rgba(10,10,10,.07);border:.5px solid rgba(10,10,10,.2);border-radius:2px;pointer-events:none;`;
+  }
+
+  function buildMinimap() {
+    const sx = MM_W/WORLD_W, sy = MM_H/WORLD_H;
+    world.querySelectorAll('.note').forEach(n => {
+      const d = document.createElement('div');
+      d.className = 'mm-dot';
+      const l = parseInt(getComputedStyle(n).left), t = parseInt(getComputedStyle(n).top);
+      const bg = getComputedStyle(n).backgroundColor;
+      d.style.cssText = `left:${l*sx}px;top:${t*sy}px;width:${n.offsetWidth*sx}px;height:${n.offsetHeight*sy}px;background:${bg};opacity:.7;`;
+      mmCards.appendChild(d);
+    });
+  }
+
+  vp.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    cancelAnimationFrame(rafId); isPanning = true;
+    startX = e.clientX; startY = e.clientY; startTX = tx; startTY = ty;
+    lastMX = e.clientX; lastMY = e.clientY; lastTime = performance.now(); velX = 0; velY = 0;
+    vp.classList.add('panning'); e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!isPanning) return;
+    const now = performance.now(), dt = now - lastTime;
+    if (dt > 0){ velX = (e.clientX - lastMX)/dt*16; velY = (e.clientY - lastMY)/dt*16; }
+    lastMX = e.clientX; lastMY = e.clientY; lastTime = now;
+    tx = startTX + (e.clientX - startX); ty = startTY + (e.clientY - startY);
+    applyTransform();
+  });
+  document.addEventListener('mouseup', () => {
+    if (!isPanning) return; isPanning = false;
+    vp.classList.remove('panning'); startMomentum();
+  });
+
+  vp.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1) return;
+    cancelAnimationFrame(rafId); isPanning = true;
+    startX = e.touches[0].clientX; startY = e.touches[0].clientY;
+    startTX = tx; startTY = ty; lastMX = startX; lastMY = startY;
+    lastTime = performance.now(); velX = 0; velY = 0;
+    e.preventDefault();
+  }, { passive: false });
+  vp.addEventListener('touchmove', e => {
+    if (!isPanning || e.touches.length !== 1) return;
+    const now = performance.now(), dt = now - lastTime;
+    const cx = e.touches[0].clientX, cy = e.touches[0].clientY;
+    if (dt > 0){ velX = (cx - lastMX)/dt*16; velY = (cy - lastMY)/dt*16; }
+    lastMX = cx; lastMY = cy; lastTime = now;
+    tx = startTX + (cx - startX); ty = startTY + (cy - startY);
+    applyTransform(); e.preventDefault();
+  }, { passive: false });
+  vp.addEventListener('touchend', () => { isPanning = false; startMomentum(); });
+
+  function startMomentum() {
+    const friction = 0.92;
+    function tick(){
+      velX *= friction; velY *= friction;
+      if (Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) return;
+      tx += velX; ty += velY; applyTransform();
+      rafId = requestAnimationFrame(tick);
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  /* desktop filter */
+  document.querySelectorAll('#filterTags .f-tag').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('#filterTags .f-tag').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('#world .pg-section').forEach(sec => {
+        const show = f === 'all' || sec.dataset.category === f;
+        sec.style.opacity = show ? '1' : '0.18';
+        sec.style.pointerEvents = show ? 'all' : 'none';
+      });
+    });
+  });
+
+  window.addEventListener('load', () => {
+    applyTransform();
+    setTimeout(buildMinimap, 150);
+    const hint = document.querySelector('.hint');
+    setTimeout(() => { if(hint) hint.style.opacity = '0'; }, 3500);
+  });
+  window.addEventListener('resize', applyTransform);
+}
 </script>
 </body>
 </html>
