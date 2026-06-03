@@ -198,135 +198,112 @@ nav {
 
 
 /* ─────────────────────────────────────────
-   DESKTOP: drag canvas
+   DRAG CANVAS — shared (desktop + mobile)
 ───────────────────────────────────────── */
-@media (min-width: 769px) {
-  html, body { overflow: hidden; }
+html, body { overflow: hidden; }
 
-  #viewport {
-    position: fixed; inset: 0; top: 56px;
-    cursor: grab;
-    background: #f0ede8;
-    background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
-    background-size: 28px 28px;
-    overflow: hidden;
-    touch-action: none;
-  }
-  #viewport.panning { cursor: grabbing; }
+#viewport {
+  position: fixed; inset: 0; top: 56px;
+  cursor: grab;
+  background: #f0ede8;
+  background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none; user-select: none;
+}
+#viewport.panning { cursor: grabbing; }
 
-  #world {
-    position: absolute;
-    width: 3600px; height: 2400px;
-    top: 0; left: 0;
-    transform-origin: 0 0;
-    will-change: transform;
-  }
-
-  /* positions & rotations */
-  .note { position: absolute; }
-
-  #n-intro    { background:var(--note-yellow);  width:280px; top:80px;  left:80px;   transform:rotate(-1.5deg); }
-  #n-filter   { background:var(--note-pink);    width:240px; top:68px;  left:420px;  transform:rotate(1.3deg); }
-  #n-graphic  { background:var(--note-blue);    width:480px; top:80px;  left:720px;  transform:rotate(-0.6deg); }
-  #n-motion   { background:var(--note-green);   width:420px; top:68px;  left:1260px; transform:rotate(1.2deg); }
-  #n-branding { background:var(--note-peach);   width:380px; top:460px; left:80px;   transform:rotate(0.9deg); }
-  #n-illus    { background:var(--note-purple);  width:340px; top:480px; left:520px;  transform:rotate(-1.7deg); }
-  #n-quote    { background:var(--note-mint);    width:260px; top:480px; left:920px;  transform:rotate(2deg); }
-  #n-ticker   { background:var(--note-lilac);   width:500px; top:460px; left:1260px; transform:rotate(-0.8deg); }
-  #n-note     { background:var(--note-yellow2); width:280px; top:840px; left:80px;   transform:rotate(1.5deg); }
-  #n-status   { background:var(--note-pink2);   width:220px; top:840px; left:420px;  transform:rotate(-1.2deg); }
-
-  .note:hover { transform: scale(1.025) rotate(0deg) !important; z-index: 100; }
-
-  /* hint */
-  .hint {
-    position: fixed; bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400);
-    background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
-    padding: 7px 16px; border-radius: 20px; border: 0.5px solid var(--line);
-    z-index: 9998; pointer-events: none;
-    display: flex; align-items: center; gap: 8px;
-    animation: fadeup 1s ease .5s both; transition: opacity .6s;
-  }
-  @keyframes fadeup {
-    from{opacity:0;transform:translateX(-50%) translateY(8px)}
-    to{opacity:1;transform:translateX(-50%) translateY(0)}
-  }
-
-  /* minimap */
-  #minimap {
-    position: fixed; bottom: 20px; right: 20px;
-    width: 120px; height: 72px;
-    background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
-    border: 0.5px solid var(--line); border-radius: 10px;
-    overflow: hidden; z-index: 9998;
-  }
-  #mm-vp { position: absolute; pointer-events: none; }
-  .mm-dot { position: absolute; border-radius: 2px; }
-
-  /* hide mobile-only elements */
-  .mobile-scroll { display: none; }
+#world {
+  position: absolute;
+  width: 3600px; height: 2400px;
+  top: 0; left: 0;
+  transform-origin: 0 0;
+  will-change: transform;
 }
 
+/* positions & rotations */
+.note { position: absolute; }
+
+#n-intro    { background:var(--note-yellow);  width:280px; top:80px;  left:80px;   transform:rotate(-1.5deg); }
+#n-filter   { background:var(--note-pink);    width:240px; top:68px;  left:420px;  transform:rotate(1.3deg); }
+#n-graphic  { background:var(--note-blue);    width:480px; top:80px;  left:720px;  transform:rotate(-0.6deg); }
+#n-motion   { background:var(--note-green);   width:420px; top:68px;  left:1260px; transform:rotate(1.2deg); }
+#n-branding { background:var(--note-peach);   width:380px; top:460px; left:80px;   transform:rotate(0.9deg); }
+#n-illus    { background:var(--note-purple);  width:340px; top:480px; left:520px;  transform:rotate(-1.7deg); }
+#n-quote    { background:var(--note-mint);    width:260px; top:480px; left:920px;  transform:rotate(2deg); }
+#n-ticker   { background:var(--note-lilac);   width:500px; top:460px; left:1260px; transform:rotate(-0.8deg); }
+#n-note     { background:var(--note-yellow2); width:280px; top:840px; left:80px;   transform:rotate(1.5deg); }
+#n-status   { background:var(--note-pink2);   width:220px; top:840px; left:420px;  transform:rotate(-1.2deg); }
+
+.note:hover { transform: scale(1.025) rotate(0deg) !important; z-index: 100; }
+
+/* hint */
+.hint {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400);
+  background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
+  padding: 7px 16px; border-radius: 20px; border: 0.5px solid var(--line);
+  z-index: 9998; pointer-events: none;
+  display: flex; align-items: center; gap: 8px;
+  animation: fadeup 1s ease .5s both; transition: opacity .6s;
+}
+@keyframes fadeup {
+  from{opacity:0;transform:translateX(-50%) translateY(8px)}
+  to{opacity:1;transform:translateX(-50%) translateY(0)}
+}
+
+/* minimap — desktop only */
+#minimap {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 120px; height: 72px;
+  background: rgba(255,255,255,.88); backdrop-filter: blur(8px);
+  border: 0.5px solid var(--line); border-radius: 10px;
+  overflow: hidden; z-index: 9998;
+}
+#mm-vp { position: absolute; pointer-events: none; }
+.mm-dot { position: absolute; border-radius: 2px; }
+
+/* hide mobile-only scroll fallback */
+.mobile-scroll { display: none !important; }
+
+/* filter tags */
+.f-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.f-tags::-webkit-scrollbar { display: none; }
+.pg-section.filtered-out { opacity: 0.18; pointer-events: none; }
 
 /* ─────────────────────────────────────────
-   MOBILE: scroll layout
+   MOBILE TWEAKS (canvas is still draggable)
 ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  html, body { overflow: auto; background: #f0ede8; }
-
-  #viewport, #world, .hint, #minimap { display: none !important; }
-
-  .mobile-scroll {
-    display: block;
-    padding: 72px 16px 48px;
-    background: #f0ede8;
-    background-image: radial-gradient(circle, #ccc9c4 1px, transparent 1px);
-    background-size: 24px 24px;
-    min-height: 100vh;
-  }
-
-  /* staggered masonry-like column layout */
-  .mobile-board {
-    column-count: 2;
-    column-gap: 12px;
-  }
-
-  .note {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 12px;
-    break-inside: avoid;
-  }
-
-  /* slight rotations on mobile too */
-  #n-intro    { background:var(--note-yellow);  transform:rotate(-1.2deg); }
-  #n-filter   { background:var(--note-pink);    transform:rotate(1deg); }
-  #n-graphic  { background:var(--note-blue);    transform:rotate(-0.5deg); }
-  #n-motion   { background:var(--note-green);   transform:rotate(0.8deg); }
-  #n-branding { background:var(--note-peach);   transform:rotate(1.2deg); }
-  #n-illus    { background:var(--note-purple);  transform:rotate(-1.5deg); }
-  #n-quote    { background:var(--note-mint);    transform:rotate(1.8deg); }
-  #n-ticker   { background:var(--note-lilac);   transform:rotate(-0.7deg); }
-  #n-note     { background:var(--note-yellow2); transform:rotate(1.3deg); }
-  #n-status   { background:var(--note-pink2);   transform:rotate(-0.9deg); }
+  /* note sizes smaller on mobile */
+  #n-intro    { width: 200px; top: 70px;  left: 60px; }
+  #n-filter   { width: 180px; top: 58px;  left: 278px; }
+  #n-graphic  { width: 340px; top: 68px;  left: 476px; }
+  #n-motion   { width: 300px; top: 58px;  left: 832px; }
+  #n-branding { width: 270px; top: 360px; left: 60px; }
+  #n-illus    { width: 240px; top: 378px; left: 346px; }
+  #n-quote    { width: 200px; top: 378px; left: 602px; }
+  #n-ticker   { width: 360px; top: 358px; left: 820px; }
+  #n-note     { width: 200px; top: 640px; left: 60px; }
+  #n-status   { width: 180px; top: 640px; left: 276px; }
 
   /* smaller type on mobile */
   .note-title { font-size: 18px; }
   .thumb-grid-3 { grid-template-columns: 1fr 1fr; }
 
-  /* filter scrollable row */
-  .f-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
-  .f-tags::-webkit-scrollbar { display: none; }
+  /* hide minimap on small screens */
+  #minimap { display: none; }
 
-  /* section hidden when filtered */
-  .pg-section.filtered-out { opacity: 0.18; pointer-events: none; }
+  /* mobile hint text */
+  .hint-text-mobile { display: inline; }
+  .hint-text-desktop { display: none; }
 }
 
-/* single column on very small screens */
-@media (max-width: 420px) {
-  .mobile-board { column-count: 1; }
+@media (min-width: 769px) {
+  .hint-text-mobile { display: none; }
+  .hint-text-desktop { display: inline; }
 }
 </style>
 </head>
@@ -491,7 +468,8 @@ nav {
 <!-- hint & minimap (desktop only) -->
 <div class="hint">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9l7-7 7 7M5 15l7 7 7-7"/></svg>
-  Drag to explore
+  <span class="hint-text-desktop">Drag to explore</span>
+  <span class="hint-text-mobile">Swipe to explore</span>
 </div>
 <div id="minimap"><div class="mm-cards" id="mm-cards"></div><div id="mm-vp"></div></div>
 
@@ -612,8 +590,6 @@ nav {
 
 
 <script>
-const IS_MOBILE = () => window.innerWidth <= 768;
-
 /* ── MOBILE NAV TOGGLE ── */
 const menuBtn   = document.getElementById('menuBtn');
 const mobileNav = document.getElementById('mobileNav');
@@ -622,44 +598,45 @@ document.addEventListener('click', e => {
   if (!menuBtn.contains(e.target) && !mobileNav.contains(e.target)) mobileNav.classList.remove('open');
 });
 
-/* ── MOBILE FILTER ── */
-document.querySelectorAll('#mFilterTags .f-tag').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#mFilterTags .f-tag').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter;
-    document.querySelectorAll('.mpg-section').forEach(sec => {
-      const show = f === 'all' || sec.dataset.category === f;
-      sec.classList.toggle('filtered-out', !show);
-    });
-  });
-});
-
-/* ── DESKTOP CANVAS ── */
-if (!IS_MOBILE()) {
+/* ── UNIFIED DRAG CANVAS (desktop + mobile) ── */
+(function() {
   const vp      = document.getElementById('viewport');
   const world   = document.getElementById('world');
   const mmvp    = document.getElementById('mm-vp');
   const mmCards = document.getElementById('mm-cards');
 
   const WORLD_W = 3600, WORLD_H = 2400, MM_W = 120, MM_H = 72;
-  let tx = -60, ty = -56;
+  const isMobile = () => window.innerWidth <= 768;
+
+  /* start position — center the view on the notes cluster */
+  let tx = -40, ty = -40;
   let isPanning = false, startX, startY, startTX, startTY;
   let velX = 0, velY = 0, lastMX, lastMY, lastTime, rafId;
 
-  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+  /* pinch-to-zoom state */
+  let scale = 1, lastPinchDist = null;
+  const MIN_SCALE = 0.4, MAX_SCALE = 2.0;
+
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
   function applyTransform() {
     const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
-    tx = clamp(tx, -(WORLD_W - vpW), 0);
-    ty = clamp(ty, -(WORLD_H - vpH), 0);
-    world.style.transform = `translate(${tx}px,${ty}px)`;
-    const sx = MM_W/WORLD_W, sy = MM_H/WORLD_H;
-    mmvp.style.cssText = `left:${-tx*sx}px;top:${-ty*sy}px;width:${vpW*sx}px;height:${vpH*sy}px;position:absolute;background:rgba(10,10,10,.07);border:.5px solid rgba(10,10,10,.2);border-radius:2px;pointer-events:none;`;
+    const minTX = -(WORLD_W * scale - vpW);
+    const minTY = -(WORLD_H * scale - vpH);
+    tx = clamp(tx, Math.min(minTX, 0), 0);
+    ty = clamp(ty, Math.min(minTY, 0), 0);
+    world.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
+
+    /* minimap (desktop only) */
+    if (!isMobile() && mmvp) {
+      const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
+      mmvp.style.cssText = `left:${(-tx/scale)*sx}px;top:${(-ty/scale)*sy}px;width:${(vpW/scale)*sx}px;height:${(vpH/scale)*sy}px;position:absolute;background:rgba(10,10,10,.07);border:.5px solid rgba(10,10,10,.2);border-radius:2px;pointer-events:none;`;
+    }
   }
 
   function buildMinimap() {
-    const sx = MM_W/WORLD_W, sy = MM_H/WORLD_H;
+    if (isMobile() || !mmCards) return;
+    const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
     world.querySelectorAll('.note').forEach(n => {
       const d = document.createElement('div');
       d.className = 'mm-dot';
@@ -670,17 +647,25 @@ if (!IS_MOBILE()) {
     });
   }
 
+  function pinchDist(touches) {
+    const dx = touches[0].clientX - touches[1].clientX;
+    const dy = touches[0].clientY - touches[1].clientY;
+    return Math.hypot(dx, dy);
+  }
+
+  /* ── MOUSE events ── */
   vp.addEventListener('mousedown', e => {
     if (e.button !== 0) return;
     cancelAnimationFrame(rafId); isPanning = true;
     startX = e.clientX; startY = e.clientY; startTX = tx; startTY = ty;
-    lastMX = e.clientX; lastMY = e.clientY; lastTime = performance.now(); velX = 0; velY = 0;
+    lastMX = e.clientX; lastMY = e.clientY; lastTime = performance.now();
+    velX = 0; velY = 0;
     vp.classList.add('panning'); e.preventDefault();
   });
   document.addEventListener('mousemove', e => {
     if (!isPanning) return;
     const now = performance.now(), dt = now - lastTime;
-    if (dt > 0){ velX = (e.clientX - lastMX)/dt*16; velY = (e.clientY - lastMY)/dt*16; }
+    if (dt > 0) { velX = (e.clientX - lastMX) / dt * 16; velY = (e.clientY - lastMY) / dt * 16; }
     lastMX = e.clientX; lastMY = e.clientY; lastTime = now;
     tx = startTX + (e.clientX - startX); ty = startTY + (e.clientY - startY);
     applyTransform();
@@ -690,28 +675,66 @@ if (!IS_MOBILE()) {
     vp.classList.remove('panning'); startMomentum();
   });
 
+  /* ── TOUCH events ── */
   vp.addEventListener('touchstart', e => {
+    cancelAnimationFrame(rafId);
+
+    if (e.touches.length === 2) {
+      /* pinch start */
+      isPanning = false;
+      lastPinchDist = pinchDist(e.touches);
+      e.preventDefault();
+      return;
+    }
+
     if (e.touches.length !== 1) return;
-    cancelAnimationFrame(rafId); isPanning = true;
+    isPanning = true;
     startX = e.touches[0].clientX; startY = e.touches[0].clientY;
-    startTX = tx; startTY = ty; lastMX = startX; lastMY = startY;
+    startTX = tx; startTY = ty;
+    lastMX = startX; lastMY = startY;
     lastTime = performance.now(); velX = 0; velY = 0;
     e.preventDefault();
   }, { passive: false });
+
   vp.addEventListener('touchmove', e => {
+    if (e.touches.length === 2 && lastPinchDist !== null) {
+      /* pinch zoom */
+      const newDist = pinchDist(e.touches);
+      const ratio = newDist / lastPinchDist;
+      const prevScale = scale;
+      scale = clamp(scale * ratio, MIN_SCALE, MAX_SCALE);
+
+      /* zoom toward pinch midpoint */
+      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      tx = midX - (midX - tx) * (scale / prevScale);
+      ty = midY - (midY - ty) * (scale / prevScale);
+
+      lastPinchDist = newDist;
+      applyTransform();
+      e.preventDefault();
+      return;
+    }
+
     if (!isPanning || e.touches.length !== 1) return;
     const now = performance.now(), dt = now - lastTime;
     const cx = e.touches[0].clientX, cy = e.touches[0].clientY;
-    if (dt > 0){ velX = (cx - lastMX)/dt*16; velY = (cy - lastMY)/dt*16; }
+    if (dt > 0) { velX = (cx - lastMX) / dt * 16; velY = (cy - lastMY) / dt * 16; }
     lastMX = cx; lastMY = cy; lastTime = now;
     tx = startTX + (cx - startX); ty = startTY + (cy - startY);
-    applyTransform(); e.preventDefault();
+    applyTransform();
+    e.preventDefault();
   }, { passive: false });
-  vp.addEventListener('touchend', () => { isPanning = false; startMomentum(); });
 
+  vp.addEventListener('touchend', e => {
+    lastPinchDist = null;
+    if (isPanning) { isPanning = false; startMomentum(); }
+  });
+
+  /* ── MOMENTUM ── */
   function startMomentum() {
     const friction = 0.92;
-    function tick(){
+    function tick() {
       velX *= friction; velY *= friction;
       if (Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) return;
       tx += velX; ty += velY; applyTransform();
@@ -720,7 +743,18 @@ if (!IS_MOBILE()) {
     rafId = requestAnimationFrame(tick);
   }
 
-  /* desktop filter */
+  /* ── WHEEL zoom (desktop) ── */
+  vp.addEventListener('wheel', e => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.08 : 0.93;
+    const prevScale = scale;
+    scale = clamp(scale * zoomFactor, MIN_SCALE, MAX_SCALE);
+    tx = e.clientX - (e.clientX - tx) * (scale / prevScale);
+    ty = e.clientY - (e.clientY - ty) * (scale / prevScale);
+    applyTransform();
+  }, { passive: false });
+
+  /* ── FILTER (desktop canvas) ── */
   document.querySelectorAll('#filterTags .f-tag').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -735,14 +769,21 @@ if (!IS_MOBILE()) {
     });
   });
 
+  /* ── INIT ── */
   window.addEventListener('load', () => {
+    /* on mobile, start zoomed out so user can see the canvas layout */
+    if (isMobile()) {
+      scale = 0.55;
+      tx = -20; ty = -20;
+    }
     applyTransform();
     setTimeout(buildMinimap, 150);
     const hint = document.querySelector('.hint');
-    setTimeout(() => { if(hint) hint.style.opacity = '0'; }, 3500);
+    setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
   });
+
   window.addEventListener('resize', applyTransform);
-}
+})();
 </script>
 </body>
 </html>
