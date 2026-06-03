@@ -160,22 +160,28 @@
   .nav-menu-btn {
     display: none; background: none; border: none; cursor: pointer;
     padding: 4px; flex-direction: column; gap: 5px; z-index: 200;
+    align-items: center; justify-content: center;
   }
   .nav-menu-btn span { display: block; width: 20px; height: 1.5px; background: var(--black); border-radius: 2px; transition: all 0.25s; }
   .nav-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .nav-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
   .mobile-nav-drawer {
-    position: fixed; top: 60px; left: 0; right: 0; bottom: 0;
+    position: fixed; top: 60px; left: 0; right: 0;
+    height: calc(100dvh - 60px);
     background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
-    z-index: 150; transform: translateX(100%); transition: transform 0.32s cubic-bezier(.4,0,.2,1);
-    display: flex; flex-direction: column; padding: 32px 28px 40px; overflow-y: auto;
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 150; transform: translateX(100%);
+    transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column; padding: 32px 28px 40px;
+    overflow-y: auto; box-sizing: border-box;
   }
   .mobile-nav-drawer.open { transform: translateX(0); }
   .mobile-nav-drawer a {
     font-size: 22px; font-weight: 500; letter-spacing: -0.02em;
     color: var(--black); text-decoration: none; padding: 18px 0;
     border-bottom: 0.5px solid var(--line); transition: opacity 0.15s;
+    display: block;
   }
   .mobile-nav-drawer a:last-child { border-bottom: none; }
   .mobile-nav-drawer a:active { opacity: 0.5; }
@@ -231,13 +237,13 @@
   <button class="nav-menu-btn" id="mMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div id="mOverlay" class="mobile-nav-overlay"></div>
-<nav id="mDrawer" class="mobile-nav-drawer">
+<div id="mDrawer" class="mobile-nav-drawer" role="navigation" aria-label="Mobile menu">
     <a href="work.html">Work</a>
     <a href="about.html">About</a>
     <a href="playground.html">Playground</a>
     <a href="index.html#contact" class="active">Contact</a>
     <a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:14px;color:var(--gray-400);border-bottom:none;padding-top:24px;margin-top:auto;">zackyhilmi.zh@gmail.com</a>
-</nav>
+</div>
 
 <!-- HERO -->
 <section class="hero hatch-section" style="padding-top: 100px;">
