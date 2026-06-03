@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -200,7 +200,7 @@ nav {
 /* ─────────────────────────────────────────
    DRAG CANVAS — shared (desktop + mobile)
 ───────────────────────────────────────── */
-html, body { overflow: hidden; }
+html, body { overflow: hidden; background: #f0ede8; }
 
 #viewport {
   position: fixed; inset: 0; top: 56px;
@@ -216,7 +216,7 @@ html, body { overflow: hidden; }
 
 #world {
   position: absolute;
-  width: 3600px; height: 2400px;
+  width: 5200px; height: 3200px;
   top: 0; left: 0;
   transform-origin: 0 0;
   will-change: transform;
@@ -225,16 +225,16 @@ html, body { overflow: hidden; }
 /* positions & rotations */
 .note { position: absolute; }
 
-#n-intro    { background:var(--note-yellow);  width:280px; top:80px;  left:80px;   transform:rotate(-1.5deg); }
-#n-filter   { background:var(--note-pink);    width:240px; top:68px;  left:420px;  transform:rotate(1.3deg); }
-#n-graphic  { background:var(--note-blue);    width:480px; top:80px;  left:720px;  transform:rotate(-0.6deg); }
-#n-motion   { background:var(--note-green);   width:420px; top:68px;  left:1260px; transform:rotate(1.2deg); }
-#n-branding { background:var(--note-peach);   width:380px; top:460px; left:80px;   transform:rotate(0.9deg); }
-#n-illus    { background:var(--note-purple);  width:340px; top:480px; left:520px;  transform:rotate(-1.7deg); }
-#n-quote    { background:var(--note-mint);    width:260px; top:480px; left:920px;  transform:rotate(2deg); }
-#n-ticker   { background:var(--note-lilac);   width:500px; top:460px; left:1260px; transform:rotate(-0.8deg); }
-#n-note     { background:var(--note-yellow2); width:280px; top:840px; left:80px;   transform:rotate(1.5deg); }
-#n-status   { background:var(--note-pink2);   width:220px; top:840px; left:420px;  transform:rotate(-1.2deg); }
+#n-intro    { background:var(--note-yellow);  width:280px; top:1121px; left:1760px; transform:rotate(-1.5deg); }
+#n-filter   { background:var(--note-pink);    width:240px; top:1109px; left:2100px; transform:rotate(1.3deg); }
+#n-graphic  { background:var(--note-blue);    width:480px; top:1121px; left:2400px; transform:rotate(-0.6deg); }
+#n-motion   { background:var(--note-green);   width:420px; top:1109px; left:2940px; transform:rotate(1.2deg); }
+#n-branding { background:var(--note-peach);   width:380px; top:1501px; left:1760px; transform:rotate(0.9deg); }
+#n-illus    { background:var(--note-purple);  width:340px; top:1521px; left:2200px; transform:rotate(-1.7deg); }
+#n-quote    { background:var(--note-mint);    width:260px; top:1521px; left:2600px; transform:rotate(2deg); }
+#n-ticker   { background:var(--note-lilac);   width:500px; top:1501px; left:2940px; transform:rotate(-0.8deg); }
+#n-note     { background:var(--note-yellow2); width:280px; top:1881px; left:1760px; transform:rotate(1.5deg); }
+#n-status   { background:var(--note-pink2);   width:220px; top:1881px; left:2100px; transform:rotate(-1.2deg); }
 
 .note:hover { transform: scale(1.025) rotate(0deg) !important; z-index: 100; }
 
@@ -278,16 +278,16 @@ html, body { overflow: hidden; }
 ───────────────────────────────────────── */
 @media (max-width: 768px) {
   /* note sizes smaller on mobile */
-  #n-intro    { width: 200px; top: 70px;  left: 60px; }
-  #n-filter   { width: 180px; top: 58px;  left: 278px; }
-  #n-graphic  { width: 340px; top: 68px;  left: 476px; }
-  #n-motion   { width: 300px; top: 58px;  left: 832px; }
-  #n-branding { width: 270px; top: 360px; left: 60px; }
-  #n-illus    { width: 240px; top: 378px; left: 346px; }
-  #n-quote    { width: 200px; top: 378px; left: 602px; }
-  #n-ticker   { width: 360px; top: 358px; left: 820px; }
-  #n-note     { width: 200px; top: 640px; left: 60px; }
-  #n-status   { width: 180px; top: 640px; left: 276px; }
+  #n-intro    { width: 200px; top: 1231px; left: 2040px; }
+  #n-filter   { width: 180px; top: 1219px; left: 2258px; }
+  #n-graphic  { width: 340px; top: 1229px; left: 2456px; }
+  #n-motion   { width: 300px; top: 1219px; left: 2812px; }
+  #n-branding { width: 270px; top: 1521px; left: 2040px; }
+  #n-illus    { width: 240px; top: 1539px; left: 2326px; }
+  #n-quote    { width: 200px; top: 1539px; left: 2582px; }
+  #n-ticker   { width: 360px; top: 1519px; left: 2800px; }
+  #n-note     { width: 200px; top: 1801px; left: 2040px; }
+  #n-status   { width: 180px; top: 1801px; left: 2256px; }
 
   /* smaller type on mobile */
   .note-title { font-size: 18px; }
@@ -605,7 +605,7 @@ document.addEventListener('click', e => {
   const mmvp    = document.getElementById('mm-vp');
   const mmCards = document.getElementById('mm-cards');
 
-  const WORLD_W = 3600, WORLD_H = 2400, MM_W = 120, MM_H = 72;
+  const WORLD_W = 5200, WORLD_H = 3200, MM_W = 120, MM_H = 72;
   const isMobile = () => window.innerWidth <= 768;
 
   /* start position — center the view on the notes cluster */
@@ -621,10 +621,14 @@ document.addEventListener('click', e => {
 
   function applyTransform() {
     const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
-    const minTX = -(WORLD_W * scale - vpW);
-    const minTY = -(WORLD_H * scale - vpH);
-    tx = clamp(tx, Math.min(minTX, 0), 0);
-    ty = clamp(ty, Math.min(minTY, 0), 0);
+    const scaledW = WORLD_W * scale, scaledH = WORLD_H * scale;
+    /* allow panning so any part of world can be reached, but don't go beyond world edges */
+    const maxTX = Math.max(0, (vpW - scaledW) / 2 + vpW * 0.5);
+    const minTX = Math.min(0, vpW - scaledW) - maxTX;
+    const maxTY = Math.max(0, (vpH - scaledH) / 2 + vpH * 0.5);
+    const minTY = Math.min(0, vpH - scaledH) - maxTY;
+    tx = clamp(tx, minTX, maxTX);
+    ty = clamp(ty, minTY, maxTY);
     world.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
 
     /* minimap (desktop only) */
@@ -771,11 +775,15 @@ document.addEventListener('click', e => {
 
   /* ── INIT ── */
   window.addEventListener('load', () => {
-    /* on mobile, start zoomed out so user can see the canvas layout */
+    const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
+
     if (isMobile()) {
-      scale = 0.55;
-      tx = -20; ty = -20;
+      scale = 0.52;
     }
+    /* center viewport on world center (where notes cluster is) */
+    tx = (vpW / 2) - (WORLD_W / 2) * scale;
+    ty = (vpH / 2) - (WORLD_H / 2) * scale;
+
     applyTransform();
     setTimeout(buildMinimap, 150);
     const hint = document.querySelector('.hint');
