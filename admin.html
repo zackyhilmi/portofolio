@@ -1127,20 +1127,28 @@ window.handleImageUpload = async function(input, previewId, urlId) {
   );
 };
 
-// Try loading saved config on startup
+// Hardcoded Firebase config
+const HARDCODED_CONFIG = {
+  apiKey: "AIzaSyAcU0GLGcYFlY6IrevyJK58ID2FJGw52x4",
+  authDomain: "portfolio-85843.firebaseapp.com",
+  projectId: "portfolio-85843",
+  storageBucket: "portfolio-85843.firebasestorage.app",
+  messagingSenderId: "567826730075",
+  appId: "1:567826730075:web:da4cc2009433434022c37e",
+  measurementId: "G-JGX2N41E2D"
+};
+
+// Try loading saved config on startup (fallback to hardcoded)
 const savedCfg = localStorage.getItem('fb_config');
-if (savedCfg) {
-  try {
-    const cfg = JSON.parse(savedCfg);
-    document.getElementById('fb-api-key').value = cfg.apiKey||'';
-    document.getElementById('fb-auth-domain').value = cfg.authDomain||'';
-    document.getElementById('fb-project-id').value = cfg.projectId||'';
-    document.getElementById('fb-storage-bucket').value = cfg.storageBucket||'';
-    document.getElementById('fb-sender-id').value = cfg.messagingSenderId||'';
-    document.getElementById('fb-app-id').value = cfg.appId||'';
-    initFirebase(cfg);
-  } catch(e) {}
-}
+const cfgToLoad = savedCfg ? (() => { try { return JSON.parse(savedCfg); } catch(e) { return HARDCODED_CONFIG; } })() : HARDCODED_CONFIG;
+
+document.getElementById('fb-api-key').value = cfgToLoad.apiKey||'';
+document.getElementById('fb-auth-domain').value = cfgToLoad.authDomain||'';
+document.getElementById('fb-project-id').value = cfgToLoad.projectId||'';
+document.getElementById('fb-storage-bucket').value = cfgToLoad.storageBucket||'';
+document.getElementById('fb-sender-id').value = cfgToLoad.messagingSenderId||'';
+document.getElementById('fb-app-id').value = cfgToLoad.appId||'';
+initFirebase(cfgToLoad);
 
 window.exportData = function() {
   const blob = new Blob([JSON.stringify(DATA, null, 2)], {type:'application/json'});
