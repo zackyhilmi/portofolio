@@ -58,14 +58,14 @@ nav {
 .nav-cta:hover { background: var(--black); color: var(--white); }
 
 /* mobile nav */
-.nav-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; }
+.nav-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; flex-direction: column; gap: 5px; align-items: center; justify-content: center; z-index: 200; }
 .nav-menu-btn span { display: block; width: 20px; height: 1.5px; background: var(--black); border-radius: 2px; transition: all 0.2s; }
 .mobile-nav { display: none; }
 
 @media (max-width: 680px) {
   nav { padding: 0 20px; }
   .nav-links, .nav-cta { display: none; }
-  .nav-menu-btn { display: flex; }
+  .nav-menu-btn { display: flex !important; }
   .mobile-nav {
     display: block;
     position: fixed; top: 56px; left: 0; right: 0;
