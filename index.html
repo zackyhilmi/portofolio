@@ -9,15 +9,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Only load weights actually used: 300, 400, 500 -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --white: #ffffff; --black: #0a0a0a; --gray-50: #fafafa;
-    --gray-100: #f5f5f5; --gray-200: #e8e8e8; --gray-400: #a0a0a0;
-    --gray-600: #666666; --gray-800: #222222; --line: #ebebeb;
-    --hatch: #ebeef0; --font: 'Inter', -apple-system, sans-serif;
+    --white: #ffffff; --black: #0d0d0d; --gray-50: #fafafa;
+    --gray-100: #f5f5f5; --gray-200: #e8e8e8; --gray-400: #9a9a9a;
+    --gray-600: #555555; --gray-800: #1e1e1e; --line: #e8e8e8;
+    --hatch: #e9ecee; 
+    --accent: #E8A020; --accent-dim: rgba(232,160,32,0.12); --accent-glow: rgba(232,160,32,0.25);
+    --font: 'DM Sans', -apple-system, sans-serif;
+    --display: 'Syne', sans-serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
@@ -51,7 +54,10 @@
     transition: box-shadow 0.3s;
   }
   nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.06); }
-  .nav-logo { font-size: 15px; font-weight: 500; letter-spacing: -0.02em; color: var(--black); text-decoration: none; }
+  
+  .nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--black); transition: opacity 0.2s; }
+  .nav-logo:hover { opacity: 0.65; }
+  .nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
   .nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--black); }
@@ -295,6 +301,26 @@
     .exp-list .exp-item { grid-template-columns: 1fr; gap: 6px; padding: 20px; }
     #cursor-dot, #cursor-ring { display: none; }
   }
+
+  /* ACCENT OVERRIDES */
+  .nav-cta { border-color: var(--black); }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--black); }
+  a.active, .nav-links a.active { color: var(--accent) !important; }
+  .section-label::before, .page-label::before { background: var(--accent); }
+  .tag, .skill-tag, .tool-tag { background: var(--accent-dim); color: var(--black); border: 1px solid rgba(232,160,32,0.3); }
+  .btn-primary, .cta-btn, [class*="btn-"]:not(.btn-ghost) { background: var(--accent); color: var(--black); border-color: var(--accent); }
+  .btn-primary:hover, .cta-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  .project-num, .work-num, .case-num { color: var(--accent); }
+  ::selection { background: var(--accent); color: var(--black); }
+  ::-moz-selection { background: var(--accent); color: var(--black); }
+  .marquee-item strong, .ticker strong { color: var(--accent); }
+  .highlight, em.highlight { color: var(--accent); font-style: normal; }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent) !important; outline-color: var(--accent); }
+
+  /* SYNE DISPLAY FONT ON HEADINGS */
+  h1, h2, h3 { font-family: var(--display); }
+  .hero-title, .page-hero h1, .cta-heading, .about-name { font-family: var(--display); }
+  .hero h1 em, .page-hero h1 em { font-family: var(--display); font-style: italic; font-weight: 400; }
 </style>
 </head>
 <body>
@@ -305,7 +331,7 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="#" class="nav-logo">Zacky Hilmi ✦</a>
+  <a href="index.html" class="nav-logo"><svg class="nav-logo-svg" width="80" height="78" viewBox="0 0 150 146" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.589 55.7563L104.589 93.1074L97.6854 99.0081H94.1745L94.1745 55.7563C94.1745 31.18 74.2008 11.2358 49.654 11.2358C34.2828 11.2358 20.9768 20.1163 14.5451 33.0388L14.5156 33.0683C11.9193 38.2903 10.4442 44.191 10.4442 50.4162L10.4442 80.6866C10.4442 92.1043 19.7377 101.427 31.1555 101.427C33.1027 101.427 35.0204 101.191 36.8496 100.749C36.8791 100.749 36.8791 100.719 36.8791 100.719C44.6385 98.8606 50.9522 93.196 53.7255 85.8201V85.7906C54.7581 83.1353 55.3187 80.244 55.3187 77.2347C55.3187 69.2688 48.8279 62.7781 40.8621 62.7781H36.4366V52.3634H40.8621C54.5811 52.3634 65.7333 63.5157 65.7333 77.2347C65.7333 93.314 54.6991 106.885 39.7704 110.75C39.7409 110.75 39.7114 110.78 39.6524 110.78C39.6229 110.78 39.6229 110.78 39.6229 110.78C36.9086 111.458 34.0763 111.842 31.126 111.842C13.9846 111.842 0 97.887 0 80.7161L0 50.4162C0 23.0666 22.2455 0.821167 49.595 0.821167C79.9539 0.821167 104.589 25.4564 104.589 55.7563Z" fill="currentColor"/><path d="M85.8356 64.4648L85.8356 109.103L79.3744 114.62H75.4504L75.4504 64.4648C75.4504 46.7924 61.0823 32.3948 43.4099 32.3948C25.2653 32.3948 10.4842 47.1759 10.4842 65.3499L10.4842 80.6621C10.4842 92.0799 19.7777 101.403 31.1955 101.403H33.2017C34.4999 101.403 35.7685 101.167 36.9191 100.695C40.7841 99.1902 43.5279 95.4433 43.5279 91.0473V88.097C43.5279 84.2025 40.371 81.0457 36.4766 81.0457V70.631C45.3276 70.631 52.6444 77.2398 53.7655 85.7957C53.8835 86.5333 53.9425 87.3299 53.9425 88.097V91.0473C53.9425 100.193 48.0419 107.953 39.8105 110.726C39.781 110.726 39.7515 110.756 39.6925 110.756C37.6567 111.434 35.444 111.818 33.1722 111.818H31.166C14.0246 111.818 0.0400391 97.8626 0.0400391 80.6916L0.0400391 65.3794C0.0400391 52.5455 5.64566 41.0392 14.4966 33.0733C22.1675 26.1696 32.2871 22.0096 43.3804 22.0096C66.7765 22.0096 85.8356 41.0392 85.8356 64.4648Z" fill="currentColor"/><path d="M127.111 73.8666L118.526 81.1834L104.571 93.1027L97.6668 99.0034L85.8359 109.093L85.4524 109.418L73.2676 119.833L42.8792 145.766H26.8589L57.2473 119.833L69.4616 109.418L75.4213 104.314L85.8359 95.4335L94.1559 88.3232L104.571 79.4427L118.526 67.5234L120.355 65.9597L127.111 73.8666Z" fill="currentColor"/><path d="M102.687 119.835L72.2986 145.769H56.2783L86.6667 119.835H102.687Z" fill="currentColor"/><path d="M128.959 0L118.544 0L118.544 119.547H128.959V0Z" fill="currentColor"/><path d="M149.565 0.00222778L139.15 0.00222778V119.55H149.565V0.00222778Z" fill="currentColor"/></svg></a>
   <ul class="nav-links">
     <li><a href="work.html">Work</a></li>
     <li><a href="about.html">About</a></li>
