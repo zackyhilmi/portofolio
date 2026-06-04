@@ -600,20 +600,7 @@
 
   loadAboutData();
 </script>
-<script>
-  // Mobile nav
-  (function() {
-    const btn = document.getElementById('mMenuBtn');
-    const drawer = document.getElementById('mDrawer');
-    const overlay = document.getElementById('mOverlay');
-    if (!btn || !drawer) return;
-    function close() { btn.classList.remove('open'); drawer.classList.remove('open'); if(overlay) overlay.classList.remove('open'); document.body.style.overflow=''; }
-    function open() { btn.classList.add('open'); drawer.classList.add('open'); if(overlay) overlay.classList.add('open'); document.body.style.overflow='hidden'; }
-    btn.addEventListener('click', () => btn.classList.contains('open') ? close() : open());
-    if(overlay) overlay.addEventListener('click', close);
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
-  })();
-</script>
+
 <script src="interactions.js" defer></script>
 </body>
 </html>
