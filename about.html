@@ -39,17 +39,21 @@
   .nav-cta:hover { background: var(--black); color: var(--white); }
 
   .hatch-section {
-    background-image: repeating-linear-gradient(116deg, var(--hatch) 0px, var(--hatch) 0.5px, transparent 0.5px, transparent 14.7px);
+    background-image: radial-gradient(circle, #d0d0d0 1px, transparent 1px);
+    background-size: 20px 20px;
     background-color: var(--white);
   }
 
   /* ── SECTION DIVIDER ── */
   .section-divider {
-    line-height: 0;
-    overflow: hidden;
-    background: var(--white);
+    width: 100%;
+    height: 48px;
+    background-image: radial-gradient(circle, #d0d0d0 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: var(--white);
+    border-top: 0.5px solid var(--line);
+    border-bottom: 0.5px solid var(--line);
   }
-  .section-divider svg { display: block; width: 100%; }
 
   /* PAGE HERO */
   .page-hero {
@@ -298,18 +302,7 @@
 </section>
 
 <!-- STATS -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section style="padding-top: 0;">
   <div class="section-inner">
     <div class="stats-row">
@@ -334,18 +327,7 @@
 </section>
 
 <!-- HOW I WORK -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section>
   <div class="section-inner">
     <div class="section-label">How I work</div>
@@ -385,18 +367,7 @@
 </section>
 
 <!-- SKILLS -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section>
   <div class="section-inner">
     <div class="section-label">Skills</div>
@@ -453,18 +424,7 @@
 </section>
 
 <!-- TOOLS -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section style="padding-top:0;">
   <div class="section-inner">
     <div class="section-label">Tools & Stack</div>
@@ -502,18 +462,7 @@
 </section>
 
 <!-- EXPERIENCE TIMELINE -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section>
   <div class="section-inner">
     <div class="section-label">Experience</div>
@@ -568,18 +517,7 @@
 </section>
 
 <!-- EDUCATION -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <section>
   <div class="section-inner">
     <div class="section-label">Education</div>
@@ -607,18 +545,7 @@
 </section>
 
 <!-- CTA -->
-<div class="section-divider">
-  <svg viewBox="0 0 1440 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hatch-div-a" patternUnits="userSpaceOnUse" width="14.7" height="14.7" patternTransform="rotate(116)">
-        <line x1="0" y1="0" x2="0" y2="14.7" stroke="#e9ecee" stroke-width="0.5"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="32" fill="url(#hatch-div-a)"/>
-    <line x1="0" y1="0" x2="1440" y2="0" stroke="#e8e8e8" stroke-width="0.5"/>
-    <line x1="0" y1="31.5" x2="1440" y2="31.5" stroke="#e8e8e8" stroke-width="0.5"/>
-  </svg>
-</div>
+<div class="section-divider"></div>
 <div class="cta-band">
   <div class="cta-band-inner">
     <h2>Let's build something <em>great</em></h2>
