@@ -124,6 +124,9 @@
 
   /* ── SECTION ── */
   section { padding: 100px 40px; }
+  section + .section-divider { margin-top: -40px; }
+  .section-divider + section { padding-top: 60px; }
+  .section-divider + section[style*="padding-top: 0"] { padding-top: 0; }
   .section-inner { max-width: 1100px; margin: 0 auto; }
   .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 48px; display: flex; align-items: center; gap: 10px; }
   .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
@@ -296,6 +299,8 @@
     .hero-image-card { aspect-ratio: 3/2; max-width: 100%; }
     .hero-actions { flex-wrap: wrap; }
     section { padding: 64px 20px; }
+    section + .section-divider { margin-top: -24px; }
+    .section-divider + section { padding-top: 40px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .about-heading { font-size: 28px; }
     .about-stats { grid-template-columns: 1fr 1fr; }
