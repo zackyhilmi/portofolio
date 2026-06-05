@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,29 +6,28 @@
 <title>Playground — Zacky Hilmi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --white: #ffffff; --black: #0d0d0d; --gray-50: #fafafa;
-    --gray-100: #f5f5f5; --gray-200: #e8e8e8; --gray-400: #9a9a9a;
-    --gray-600: #555555; --gray-800: #1e1e1e; --line: #e8e8e8;
-    --hatch: #e9ecee; 
-    --font: 'DM Sans', -apple-system, sans-serif;
-    --display: 'Syne', sans-serif;
-  }
+  --white: #ffffff; --black: #0d0d0d;
+  --gray-50: #fafafa; --gray-100: #f5f5f5; --gray-200: #e8e8e8;
+  --gray-400: #9a9a9a; --gray-600: #555555; --gray-800: #1e1e1e;
+  --line: #e8e8e8;
+  --font: 'DM Sans', -apple-system, sans-serif;
+  --display: 'Playfair Display', Georgia, serif;
+}
 
 html, body {
   width: 100%; height: 100%;
   font-family: var(--font);
   background: var(--white);
   color: var(--black);
+  overflow: hidden;
 }
 
-/* ─────────────────────────────────────────
-   NAV
-───────────────────────────────────────── */
+/* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: 60px;
@@ -38,13 +37,10 @@ nav {
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   border-bottom: 0.5px solid var(--line);
   z-index: 9999;
-  transition: box-shadow 0.3s;
 }
-nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.06); }
-
-  .nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--black); transition: opacity 0.2s; }
-  .nav-logo:hover { opacity: 0.65; }
-  .nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
+.nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--black); transition: opacity 0.2s; }
+.nav-logo:hover { opacity: 0.65; }
+.nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
 .nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--black); }
@@ -58,159 +54,37 @@ nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.06); }
   align-items: center; justify-content: center;
   min-width: 44px; min-height: 44px; border-radius: 8px;
 }
-.nav-menu-btn:hover { background: rgba(0,0,0,0.04); }
 .nav-menu-btn span { display: block; width: 20px; height: 1.5px; background: var(--black); border-radius: 2px; transition: all 0.25s; }
 .nav-menu-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav-menu-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .nav-menu-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
 .mobile-nav-drawer {
   position: fixed; top: 60px; left: 0; right: 0;
   height: calc(100dvh - 60px);
-  background: rgba(255,255,255,0.98); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  background: rgba(255,255,255,0.98); backdrop-filter: blur(16px);
   z-index: 150; transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(.4,0,.2,1);
   display: flex; flex-direction: column; padding: 32px 28px 40px;
-  overflow-y: auto; box-sizing: border-box;
+  overflow-y: auto;
 }
 .mobile-nav-drawer.open { transform: translateX(0); }
 .mobile-nav-drawer a {
   font-size: 22px; font-weight: 500; letter-spacing: -0.02em;
   color: var(--black); text-decoration: none; padding: 18px 0;
-  border-bottom: 0.5px solid var(--line); transition: opacity 0.15s;
-  display: block;
+  border-bottom: 0.5px solid var(--line); transition: opacity 0.15s; display: block;
 }
 .mobile-nav-drawer a:last-child { border-bottom: none; }
-.mobile-nav-drawer a:active { opacity: 0.5; }
-.mobile-nav-overlay {
-  display: none; position: fixed; inset: 0; top: 60px;
-  background: rgba(0,0,0,0.18); z-index: 140;
-}
+.mobile-nav-overlay { display: none; position: fixed; inset: 0; top: 60px; background: rgba(0,0,0,0.18); z-index: 140; }
 .mobile-nav-overlay.open { display: block; }
-
 @media (max-width: 680px) {
   nav { padding: 0 20px; }
   .nav-links, .nav-cta { display: none !important; }
   .nav-menu-btn { display: flex !important; }
 }
 
-/* ─────────────────────────────────────────
-   STICKY NOTE BASE
-───────────────────────────────────────── */
-.note {
-  border-radius: 3px 14px 14px 3px;
-  padding: 18px 20px 22px 24px;
-  box-shadow: 3px 4px 16px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.07);
-  transition: box-shadow 0.25s, transform 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-.note::before {
-  content: '';
-  position: absolute; top: 0; left: 0;
-  width: 6px; height: 100%;
-  background: rgba(0,0,0,0.08);
-  border-radius: 3px 0 0 3px;
-}
-.note:hover {
-  box-shadow: 6px 10px 28px rgba(0,0,0,0.17), 0 2px 6px rgba(0,0,0,0.09);
-}
-/* tape */
-.note.taped::after {
-  content: '';
-  position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
-  width: 52px; height: 20px;
-  background: rgba(255,255,255,0.52);
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.09);
-}
-
-.note-label {
-  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(0,0,0,0.32); margin-bottom: 10px;
-  display: flex; align-items: center; gap: 6px;
-}
-.note-label::before { content:''; display:inline-block; width:12px; height:1px; background:rgba(0,0,0,0.18); }
-.note-title {
-  font-family: var(--serif); font-size: 22px; font-weight: 400;
-  line-height: 1.2; color: rgba(0,0,0,0.82); margin-bottom: 10px;
-  letter-spacing: -0.01em;
-}
-.note-title em { font-style: italic; font-weight: 300; color: rgba(0,0,0,0.42); }
-.note-body { font-size: 12px; color: rgba(0,0,0,0.58); line-height: 1.75; }
-
-/* pills */
-.pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
-.pill { font-size: 10px; color: rgba(0,0,0,0.55); background: rgba(0,0,0,0.08); padding: 4px 10px; border-radius: 20px; }
-
-/* ticker */
-.ticker-wrap { overflow: hidden; margin: 0 -20px; }
-.ticker-track { display: flex; gap: 32px; width: max-content; animation: ticker 16s linear infinite; padding: 2px 0; }
-@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.ticker-i { font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(0,0,0,.32); white-space:nowrap; display:flex; align-items:center; gap:14px; }
-.ticker-i::after { content:'✦'; font-size:6px; }
-
-/* quote */
-.quote-text { font-family:var(--serif); font-size:14px; font-style:italic; font-weight:300; color:rgba(0,0,0,.7); line-height:1.8; margin-bottom:10px; }
-.quote-attr { font-size:10px; color:rgba(0,0,0,.32); letter-spacing:.04em; }
-
-/* filter tags */
-.f-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.f-tag {
-  font-size: 10px; color: rgba(0,0,0,.5);
-  border: 1px solid rgba(0,0,0,.18);
-  padding: 4px 11px; border-radius: 20px;
-  background: rgba(255,255,255,.4); cursor: pointer;
-  transition: all 0.2s; user-select: none;
-}
-.f-tag:hover { background: rgba(0,0,0,.08); color: rgba(0,0,0,.8); }
-.f-tag.active { background: rgba(0,0,0,.75); color: white; border-color: transparent; }
-
-/* thumb grid */
-.thumb-grid { display: grid; gap: 8px; }
-.thumb-grid-2 { grid-template-columns: 1fr 1fr; }
-.thumb-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-.thumb {
-  border-radius: 8px; overflow: hidden; aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; border: 0.5px solid rgba(0,0,0,.1);
-  cursor: pointer; transition: opacity 0.15s;
-}
-.thumb:hover { opacity: .88; }
-.thumb-label {
-  position: absolute; bottom:0; left:0; right:0;
-  padding: 6px 8px;
-  background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
-  font-size: 9px; font-weight: 500; color: rgba(255,255,255,.9);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.thumb-empty {
-  border: 1.5px dashed rgba(0,0,0,.14); border-radius: 8px; aspect-ratio: 4/3;
-  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px;
-}
-.thumb-empty span { font-size: 9px; color: rgba(0,0,0,.25); }
-.play-badge {
-  position: absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:30px; height:30px; border-radius:50%;
-  background:rgba(0,0,0,.6); color:white;
-  display:flex; align-items:center; justify-content:center;
-  font-size:10px; opacity:0; transition:opacity 0.2s;
-}
-.thumb:hover .play-badge { opacity: 1; }
-
-/* pulse */
-.pulse-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
-.pulse { width:8px; height:8px; border-radius:50%; background:#22c55e; box-shadow:0 0 0 3px rgba(34,197,94,.25); animation:pa 2s ease-in-out infinite; display:inline-block; }
-@keyframes pa { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.15)}50%{box-shadow:0 0 0 7px rgba(34,197,94,.05)} }
-
-
-/* ─────────────────────────────────────────
-   DRAG CANVAS — shared (desktop + mobile)
-───────────────────────────────────────── */
-html, body { overflow: hidden; background: #f0ede8; }
-
+/* ── DRAG CANVAS ── */
 #viewport {
-  position: fixed; inset: 0; top: 56px;
+  position: fixed; inset: 0; top: 60px;
   cursor: grab;
   background: #ffffff;
   background-image: radial-gradient(circle, #d4d4d4 1px, transparent 1px);
@@ -220,7 +94,6 @@ html, body { overflow: hidden; background: #f0ede8; }
   -webkit-user-select: none; user-select: none;
 }
 #viewport.panning { cursor: grabbing; }
-
 #world {
   position: absolute;
   width: 5200px; height: 3200px;
@@ -229,21 +102,33 @@ html, body { overflow: hidden; background: #f0ede8; }
   will-change: transform;
 }
 
-/* positions & rotations */
-.note { position: absolute; }
+/* ── STICKER BASE ── */
+.sticker {
+  position: absolute;
+  cursor: default;
+  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), filter 0.25s;
+  transform-origin: center center;
+  filter: drop-shadow(3px 5px 14px rgba(0,0,0,0.13)) drop-shadow(0 1px 3px rgba(0,0,0,0.07));
+}
+.sticker:hover {
+  filter: drop-shadow(6px 10px 24px rgba(0,0,0,0.18)) drop-shadow(0 2px 6px rgba(0,0,0,0.09));
+  z-index: 100;
+}
+.sticker svg { display: block; overflow: visible; }
 
-#n-intro    { background:var(--note-yellow);  width:280px; top:1121px; left:1760px; transform:rotate(-1.5deg); }
-#n-filter   { background:var(--note-pink);    width:240px; top:1109px; left:2100px; transform:rotate(1.3deg); }
-#n-graphic  { background:var(--note-blue);    width:480px; top:1121px; left:2400px; transform:rotate(-0.6deg); }
-#n-motion   { background:var(--note-green);   width:420px; top:1109px; left:2940px; transform:rotate(1.2deg); }
-#n-branding { background:var(--note-peach);   width:380px; top:1501px; left:1760px; transform:rotate(0.9deg); }
-#n-illus    { background:var(--note-purple);  width:340px; top:1521px; left:2200px; transform:rotate(-1.7deg); }
-#n-quote    { background:var(--note-mint);    width:260px; top:1521px; left:2600px; transform:rotate(2deg); }
-#n-ticker   { background:var(--note-lilac);   width:500px; top:1501px; left:2940px; transform:rotate(-0.8deg); }
-#n-note     { background:var(--note-yellow2); width:280px; top:1881px; left:1760px; transform:rotate(1.5deg); }
-#n-status   { background:var(--note-pink2);   width:220px; top:1881px; left:2100px; transform:rotate(-1.2deg); }
+/* sticker positions */
+#s-intro    { top:1060px; left:1700px; transform:rotate(-2deg); }
+#s-filter   { top:1050px; left:2080px; transform:rotate(1.5deg); }
+#s-graphic  { top:1040px; left:2380px; transform:rotate(-0.8deg); }
+#s-motion   { top:1050px; left:2960px; transform:rotate(1.4deg); }
+#s-branding { top:1440px; left:1700px; transform:rotate(1deg); }
+#s-illus    { top:1460px; left:2220px; transform:rotate(-2deg); }
+#s-quote    { top:1460px; left:2640px; transform:rotate(2.2deg); }
+#s-ticker   { top:1440px; left:3000px; transform:rotate(-1deg); }
+#s-note     { top:1840px; left:1700px; transform:rotate(1.8deg); }
+#s-status   { top:1840px; left:2060px; transform:rotate(-1.4deg); }
 
-.note:hover { transform: scale(1.025) rotate(0deg) !important; z-index: 100; }
+.sticker:hover { transform: scale(1.04) rotate(0deg) !important; }
 
 /* hint */
 .hint {
@@ -261,7 +146,7 @@ html, body { overflow: hidden; background: #f0ede8; }
   to{opacity:1;transform:translateX(-50%) translateY(0)}
 }
 
-/* minimap — desktop only */
+/* minimap */
 #minimap {
   position: fixed; bottom: 20px; right: 20px;
   width: 120px; height: 72px;
@@ -271,53 +156,77 @@ html, body { overflow: hidden; background: #f0ede8; }
 }
 #mm-vp { position: absolute; pointer-events: none; }
 .mm-dot { position: absolute; border-radius: 2px; }
+@media (max-width: 768px) { #minimap { display: none; } }
 
-/* hide mobile-only scroll fallback */
-.mobile-scroll { display: none !important; }
-
-/* filter tags */
-.f-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
-.f-tags::-webkit-scrollbar { display: none; }
-.pg-section.filtered-out { opacity: 0.18; pointer-events: none; }
-
-/* ─────────────────────────────────────────
-   MOBILE TWEAKS (canvas is still draggable)
-───────────────────────────────────────── */
+.hint-text-mobile { display: none; }
+.hint-text-desktop { display: inline; }
 @media (max-width: 768px) {
-  /* note sizes smaller on mobile */
-  #n-intro    { width: 200px; top: 1231px; left: 2040px; }
-  #n-filter   { width: 180px; top: 1219px; left: 2258px; }
-  #n-graphic  { width: 340px; top: 1229px; left: 2456px; }
-  #n-motion   { width: 300px; top: 1219px; left: 2812px; }
-  #n-branding { width: 270px; top: 1521px; left: 2040px; }
-  #n-illus    { width: 240px; top: 1539px; left: 2326px; }
-  #n-quote    { width: 200px; top: 1539px; left: 2582px; }
-  #n-ticker   { width: 360px; top: 1519px; left: 2800px; }
-  #n-note     { width: 200px; top: 1801px; left: 2040px; }
-  #n-status   { width: 180px; top: 1801px; left: 2256px; }
-
-  /* smaller type on mobile */
-  .note-title { font-size: 18px; }
-  .thumb-grid-3 { grid-template-columns: 1fr 1fr; }
-
-  /* hide minimap on small screens */
-  #minimap { display: none; }
-
-  /* mobile hint text */
   .hint-text-mobile { display: inline; }
   .hint-text-desktop { display: none; }
 }
 
-@media (min-width: 769px) {
-  .hint-text-mobile { display: none; }
-  .hint-text-desktop { display: inline; }
+/* sticker inner text styles */
+.sk-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(0,0,0,0.32); margin-bottom: 8px;
 }
-
+.sk-title {
+  font-family: var(--display);
+  font-size: 20px; font-weight: 700; line-height: 1.2;
+  color: rgba(0,0,0,0.82); margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.sk-title em { font-style: italic; font-weight: 400; color: rgba(0,0,0,0.42); }
+.sk-body { font-size: 11px; color: rgba(0,0,0,0.55); line-height: 1.7; }
+.pill-row { display: flex; flex-wrap: wrap; gap: 5px; }
+.pill { font-size: 9px; color: rgba(0,0,0,0.55); background: rgba(0,0,0,0.08); padding: 3px 9px; border-radius: 20px; }
+.ticker-wrap { overflow: hidden; margin: 0 -4px; }
+.ticker-track { display: flex; gap: 28px; width: max-content; animation: ticker 18s linear infinite; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-i { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(0,0,0,.32); white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+.ticker-i::after { content: '✦'; font-size: 5px; }
+.quote-text { font-family: var(--display); font-size: 13px; font-style: italic; font-weight: 400; color: rgba(0,0,0,.7); line-height: 1.8; margin-bottom: 8px; }
+.quote-attr { font-size: 9px; color: rgba(0,0,0,.32); letter-spacing: .04em; }
+.thumb-grid { display: grid; gap: 6px; }
+.thumb-grid-2 { grid-template-columns: 1fr 1fr; }
+.thumb-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.thumb {
+  border-radius: 8px; overflow: hidden; aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; border: 0.5px solid rgba(0,0,0,.08);
+  cursor: pointer; transition: opacity 0.15s;
+}
+.thumb:hover { opacity: .85; }
+.thumb-label {
+  position: absolute; bottom:0; left:0; right:0;
+  padding: 4px 6px;
+  background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  font-size: 8px; font-weight: 500; color: rgba(255,255,255,.9);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.thumb-empty {
+  border: 1.5px dashed rgba(0,0,0,.12); border-radius: 8px; aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 3px;
+}
+.thumb-empty span { font-size: 8px; color: rgba(0,0,0,.22); }
+.pulse { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,.2); animation: pa 2s ease-in-out infinite; display: inline-block; }
+@keyframes pa { 0%,100%{box-shadow:0 0 0 3px rgba(34,197,94,.15)}50%{box-shadow:0 0 0 7px rgba(34,197,94,.04)} }
+.f-tag {
+  font-size: 9px; color: rgba(0,0,0,.5);
+  border: 1px solid rgba(0,0,0,.15);
+  padding: 3px 10px; border-radius: 20px;
+  background: rgba(255,255,255,.5); cursor: pointer;
+  transition: all 0.2s; user-select: none; display: inline-block;
+}
+.f-tag:hover { background: rgba(0,0,0,.07); color: rgba(0,0,0,.8); }
+.f-tag.active { background: rgba(0,0,0,.75); color: white; border-color: transparent; }
+.f-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.pg-section.filtered-out { opacity: 0.15; pointer-events: none; }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo"><svg class="nav-logo-svg" width="80" height="78" viewBox="0 0 150 146" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.589 55.7563L104.589 93.1074L97.6854 99.0081H94.1745L94.1745 55.7563C94.1745 31.18 74.2008 11.2358 49.654 11.2358C34.2828 11.2358 20.9768 20.1163 14.5451 33.0388L14.5156 33.0683C11.9193 38.2903 10.4442 44.191 10.4442 50.4162L10.4442 80.6866C10.4442 92.1043 19.7377 101.427 31.1555 101.427C33.1027 101.427 35.0204 101.191 36.8496 100.749C36.8791 100.749 36.8791 100.719 36.8791 100.719C44.6385 98.8606 50.9522 93.196 53.7255 85.8201V85.7906C54.7581 83.1353 55.3187 80.244 55.3187 77.2347C55.3187 69.2688 48.8279 62.7781 40.8621 62.7781H36.4366V52.3634H40.8621C54.5811 52.3634 65.7333 63.5157 65.7333 77.2347C65.7333 93.314 54.6991 106.885 39.7704 110.75C39.7409 110.75 39.7114 110.78 39.6524 110.78C39.6229 110.78 39.6229 110.78 39.6229 110.78C36.9086 111.458 34.0763 111.842 31.126 111.842C13.9846 111.842 0 97.887 0 80.7161L0 50.4162C0 23.0666 22.2455 0.821167 49.595 0.821167C79.9539 0.821167 104.589 25.4564 104.589 55.7563Z" fill="currentColor"/><path d="M85.8356 64.4648L85.8356 109.103L79.3744 114.62H75.4504L75.4504 64.4648C75.4504 46.7924 61.0823 32.3948 43.4099 32.3948C25.2653 32.3948 10.4842 47.1759 10.4842 65.3499L10.4842 80.6621C10.4842 92.0799 19.7777 101.403 31.1955 101.403H33.2017C34.4999 101.403 35.7685 101.167 36.9191 100.695C40.7841 99.1902 43.5279 95.4433 43.5279 91.0473V88.097C43.5279 84.2025 40.371 81.0457 36.4766 81.0457V70.631C45.3276 70.631 52.6444 77.2398 53.7655 85.7957C53.8835 86.5333 53.9425 87.3299 53.9425 88.097V91.0473C53.9425 100.193 48.0419 107.953 39.8105 110.726C39.781 110.726 39.7515 110.756 39.6925 110.756C37.6567 111.434 35.444 111.818 33.1722 111.818H31.166C14.0246 111.818 0.0400391 97.8626 0.0400391 80.6916L0.0400391 65.3794C0.0400391 52.5455 5.64566 41.0392 14.4966 33.0733C22.1675 26.1696 32.2871 22.0096 43.3804 22.0096C66.7765 22.0096 85.8356 41.0392 85.8356 64.4648Z" fill="currentColor"/><path d="M127.111 73.8666L118.526 81.1834L104.571 93.1027L97.6668 99.0034L85.8359 109.093L85.4524 109.418L73.2676 119.833L42.8792 145.766H26.8589L57.2473 119.833L69.4616 109.418L75.4213 104.314L85.8359 95.4335L94.1559 88.3232L104.571 79.4427L118.526 67.5234L120.355 65.9597L127.111 73.8666Z" fill="currentColor"/><path d="M102.687 119.835L72.2986 145.769H56.2783L86.6667 119.835H102.687Z" fill="currentColor"/><path d="M128.959 0L118.544 0L118.544 119.547H128.959V0Z" fill="currentColor"/><path d="M149.565 0.00222778L139.15 0.00222778V119.55H149.565V0.00222778Z" fill="currentColor"/></svg></a>
   <ul class="nav-links">
@@ -330,7 +239,7 @@ html, body { overflow: hidden; background: #f0ede8; }
   <button class="nav-menu-btn" id="mMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div id="mOverlay" class="mobile-nav-overlay"></div>
-<div id="mDrawer" class="mobile-nav-drawer" role="navigation" aria-label="Mobile menu">
+<div id="mDrawer" class="mobile-nav-drawer">
   <a href="work.html">Work</a>
   <a href="about.html">About</a>
   <a href="playground.html" class="active">Playground</a>
@@ -338,461 +247,382 @@ html, body { overflow: hidden; background: #f0ede8; }
   <a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:14px;color:var(--gray-400);border-bottom:none;padding-top:24px;margin-top:auto;">zackyhilmi.zh@gmail.com</a>
 </div>
 
-<!-- ═══════════════════════════════════════
-     DESKTOP: drag canvas
-════════════════════════════════════════ -->
+<!-- CANVAS -->
 <div id="viewport">
 <div id="world">
 
-  <div class="note taped" id="n-intro">
-    <div class="note-label">Playground</div>
-    <div class="note-title">Creative<br><em>explorations</em></div>
-    <div class="note-body">Graphic design, motion, branding, and visual experiments — work that doesn't fit neatly into a case study.</div>
-  </div>
-
-  <div class="note taped" id="n-filter">
-    <div class="note-label">Filter</div>
-    <div style="margin-bottom:10px;font-size:11px;font-weight:500;color:rgba(0,0,0,.6);">Browse by category</div>
-    <div class="f-tags" id="filterTags">
-      <span class="f-tag active" data-filter="all">All</span>
-      <span class="f-tag" data-filter="graphic">Graphic</span>
-      <span class="f-tag" data-filter="motion">Motion</span>
-      <span class="f-tag" data-filter="branding">Branding</span>
-      <span class="f-tag" data-filter="illustration">Illustration</span>
-    </div>
-  </div>
-
-  <div class="note pg-section" id="n-graphic" data-category="graphic">
-    <div class="note-label">Graphic Design</div>
-    <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
-      <div class="thumb" style="background:linear-gradient(135deg,#f5dfc0,#fdf4ec);">
-        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">✦</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Social Media</div></div>
-        <div class="thumb-label">Mekari — Campaign</div>
+<!-- ── STICKER: INTRO (rounded blob, yellow) ── -->
+<div class="sticker" id="s-intro">
+  <svg width="300" height="220" viewBox="0 0 300 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18,40 C10,15 40,2 70,4 C110,6 180,0 230,8 C265,14 292,30 294,65 C296,100 298,140 290,170 C280,200 255,218 220,218 C175,218 90,220 55,214 C22,208 4,188 6,158 C8,128 26,65 18,40Z" fill="#FFE566"/>
+    <foreignObject x="28" y="24" width="248" height="172">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 8px;">
+        <div class="sk-label">Playground</div>
+        <div class="sk-title">Creative<br><em>explorations</em></div>
+        <div class="sk-body">Graphic design, motion, branding — work that doesn't fit into a case study.</div>
       </div>
-      <div class="thumb" style="background:linear-gradient(135deg,#e8f4e8,#f0f5ed);">
-        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">◈</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Infographic</div></div>
-        <div class="thumb-label">Data Infographic Series</div>
-      </div>
-      <div class="thumb" style="background:linear-gradient(135deg,#dde8f5,#edf2f8);">
-        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">⊞</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Banner</div></div>
-        <div class="thumb-label">Sirclo Banners</div>
-      </div>
-      <div class="thumb" style="background:linear-gradient(135deg,#f8f0ff,#ede4ff);">
-        <div style="text-align:center;"><div style="font-size:22px;margin-bottom:4px;">▦</div><div style="font-size:8px;color:rgba(0,0,0,.3);letter-spacing:.08em;text-transform:uppercase;">Print</div></div>
-        <div class="thumb-label">Srupa Labs — Frame Catalog</div>
-      </div>
-    </div>
-    <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add work</span></div>
-  </div>
+    </foreignObject>
+    <!-- decorative doodle star -->
+    <path d="M268,24 L271,18 L274,24 L280,27 L274,30 L271,36 L268,30 L262,27Z" fill="rgba(0,0,0,0.12)"/>
+    <circle cx="40" cy="188" r="5" fill="rgba(0,0,0,0.07)"/>
+    <circle cx="52" cy="192" r="3" fill="rgba(0,0,0,0.05)"/>
+  </svg>
+</div>
 
-  <div class="note pg-section" id="n-motion" data-category="motion">
-    <div class="note-label">Motion Graphics</div>
-    <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
-      <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
-        <div style="text-align:center;"><div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);margin:0 auto 6px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.6);">▶</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;">TV Quiz</div></div>
-        <div class="thumb-label">Love Story The Series</div>
-        <div class="play-badge">▶</div>
+<!-- ── STICKER: FILTER (wavy square, coral/pink) ── -->
+<div class="sticker" id="s-filter">
+  <svg width="260" height="200" viewBox="0 0 260 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22,28 C14,10 38,2 65,4 C100,6 170,0 210,6 C242,10 258,26 256,58 C254,88 256,130 250,158 C242,186 222,198 192,198 C155,198 75,200 44,194 C16,188 2,170 4,144 C6,118 30,46 22,28Z" fill="#FF8FAB"/>
+    <foreignObject x="24" y="20" width="214" height="164">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 8px;">
+        <div class="sk-label" style="margin-bottom:10px;">Filter</div>
+        <div style="font-size:10px;font-weight:500;color:rgba(0,0,0,.6);margin-bottom:8px;">Browse by category</div>
+        <div class="f-tags" id="filterTags">
+          <span class="f-tag active" data-filter="all">All</span>
+          <span class="f-tag" data-filter="graphic">Graphic</span>
+          <span class="f-tag" data-filter="motion">Motion</span>
+          <span class="f-tag" data-filter="branding">Branding</span>
+          <span class="f-tag" data-filter="illustration">Illus</span>
+        </div>
       </div>
-      <div class="thumb" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
-        <div style="text-align:center;"><div style="font-size:22px;color:rgba(255,255,255,.4);">◎</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Motion</div></div>
-        <div class="thumb-label">Buku Harian Seorang Istri</div>
-        <div class="play-badge">▶</div>
+    </foreignObject>
+    <circle cx="234" cy="170" r="8" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="28" cy="32" r="5" fill="rgba(255,255,255,0.3)"/>
+  </svg>
+</div>
+
+<!-- ── STICKER: GRAPHIC DESIGN (wide bean, sky blue) ── -->
+<div class="sticker pg-section" id="s-graphic" data-category="graphic">
+  <svg width="500" height="300" viewBox="0 0 500 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M28,42 C14,16 44,2 82,4 C150,8 330,0 400,6 C452,10 494,30 496,72 C498,114 498,180 490,228 C480,268 452,296 408,298 C340,300 140,300 82,296 C36,292 6,270 4,234 C2,198 42,68 28,42Z" fill="#A8D8F0"/>
+    <foreignObject x="28" y="22" width="448" height="258">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:6px 10px;">
+        <div class="sk-label">Graphic Design</div>
+        <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
+          <div class="thumb" style="background:linear-gradient(135deg,#f5dfc0,#fdf4ec);">
+            <div style="text-align:center;font-size:20px;">✦</div>
+            <div class="thumb-label">Mekari — Campaign</div>
+          </div>
+          <div class="thumb" style="background:linear-gradient(135deg,#e8f4e8,#f0f5ed);">
+            <div style="text-align:center;font-size:20px;">◈</div>
+            <div class="thumb-label">Data Infographic</div>
+          </div>
+          <div class="thumb" style="background:linear-gradient(135deg,#dde8f5,#edf2f8);">
+            <div style="text-align:center;font-size:20px;">⊞</div>
+            <div class="thumb-label">Sirclo Banners</div>
+          </div>
+          <div class="thumb" style="background:linear-gradient(135deg,#f8f0ff,#ede4ff);">
+            <div style="text-align:center;font-size:20px;">▦</div>
+            <div class="thumb-label">Srupa Labs Catalog</div>
+          </div>
+        </div>
+        <div class="thumb-empty" style="aspect-ratio:8/1;flex-direction:row;gap:6px;">
+          <div style="font-size:14px;color:rgba(0,0,0,.14);">+</div><span>Add work</span>
+        </div>
       </div>
-      <div class="thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
-        <div style="text-align:center;"><div style="font-size:22px;color:rgba(255,255,255,.4);">✦</div><div style="font-size:8px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;margin-top:6px;">Broadcast</div></div>
-        <div class="thumb-label">Samudra Cinta & Jendela SMP</div>
-        <div class="play-badge">▶</div>
+    </foreignObject>
+    <path d="M460,22 L464,14 L468,22 L476,26 L468,30 L464,38 L460,30 L452,26Z" fill="rgba(0,0,0,0.1)"/>
+    <circle cx="36" cy="268" r="9" fill="rgba(255,255,255,0.3)"/>
+  </svg>
+</div>
+
+<!-- ── STICKER: MOTION (tall rounded, deep teal/dark) ── -->
+<div class="sticker pg-section" id="s-motion" data-category="motion">
+  <svg width="440" height="310" viewBox="0 0 440 310" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24,44 C12,18 42,2 76,4 C136,8 304,0 364,6 C408,10 436,32 438,76 C440,118 438,196 432,242 C424,278 398,306 360,308 C296,310 120,310 72,306 C30,302 2,278 2,242 C2,206 36,70 24,44Z" fill="#2D2D3A"/>
+    <foreignObject x="24" y="20" width="396" height="272">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:6px 10px;">
+        <div class="sk-label" style="color:rgba(255,255,255,0.35);">Motion Graphics</div>
+        <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
+          <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
+            <div style="text-align:center;"><div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);margin:0 auto 4px;display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.6);">▶</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.08em;text-transform:uppercase;">TV Quiz</div></div>
+            <div class="thumb-label">Love Story The Series</div>
+          </div>
+          <div class="thumb" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
+            <div style="text-align:center;"><div style="font-size:20px;color:rgba(255,255,255,.35);">◎</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;">Motion</div></div>
+            <div class="thumb-label">Buku Harian Seorang Istri</div>
+          </div>
+          <div class="thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
+            <div style="text-align:center;"><div style="font-size:20px;color:rgba(255,255,255,.35);">✦</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:4px;">Broadcast</div></div>
+            <div class="thumb-label">Samudra Cinta</div>
+          </div>
+          <div class="thumb-empty"><div style="font-size:14px;color:rgba(255,255,255,.12);">+</div></div>
+        </div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);line-height:1.6;">▶ Video on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(255,255,255,.6);font-weight:500;">email me</a></div>
       </div>
-      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add motion work</span></div>
-    </div>
-    <div style="font-size:10px;color:rgba(0,0,0,.45);line-height:1.6;">▶ Video files on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.65);font-weight:500;">email me</a></div>
-  </div>
+    </foreignObject>
+    <circle cx="406" cy="278" r="10" fill="rgba(255,255,255,0.06)"/>
+    <circle cx="418" cy="265" r="5" fill="rgba(255,255,255,0.04)"/>
+    <path d="M50,22 L53,14 L56,22 L64,26 L56,30 L53,38 L50,30 L42,26Z" fill="rgba(255,255,255,0.1)"/>
+  </svg>
+</div>
 
-  <div class="note pg-section" id="n-branding" data-category="branding">
-    <div class="note-label">Branding</div>
-    <div class="thumb-grid thumb-grid-3">
-      <div class="thumb" style="background:linear-gradient(135deg,#f5f0e8,#ede4d4);">
-        <div style="text-align:center;"><div style="font-size:22px;font-weight:600;letter-spacing:-2px;color:#8a7968;">SL</div><div style="font-size:7px;letter-spacing:.2em;text-transform:uppercase;color:#b0a090;margin-top:3px;">Srupa Labs</div></div>
-        <div class="thumb-label">Srupa Labs Identity</div>
+<!-- ── STICKER: BRANDING (chunky pill, peach/warm) ── -->
+<div class="sticker pg-section" id="s-branding" data-category="branding">
+  <svg width="400" height="240" viewBox="0 0 400 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M22,36 C10,12 38,2 70,4 C130,8 270,0 330,6 C372,10 396,28 398,64 C400,98 400,158 392,192 C382,222 358,238 320,238 C258,238 110,240 68,236 C28,232 2,212 2,180 C2,148 34,60 22,36Z" fill="#FFB347"/>
+    <foreignObject x="22" y="18" width="358" height="206">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:6px 10px;">
+        <div class="sk-label">Branding</div>
+        <div class="thumb-grid thumb-grid-3">
+          <div class="thumb" style="background:linear-gradient(135deg,#f5f0e8,#ede4d4);">
+            <div style="text-align:center;"><div style="font-size:18px;font-weight:700;letter-spacing:-1.5px;color:#8a7968;">SL</div><div style="font-size:6px;letter-spacing:.18em;text-transform:uppercase;color:#b0a090;margin-top:2px;">Srupa Labs</div></div>
+            <div class="thumb-label">Srupa Labs Identity</div>
+          </div>
+          <div class="thumb-empty"><div style="font-size:14px;color:rgba(0,0,0,.12);">+</div><span>Add</span></div>
+          <div class="thumb-empty"><div style="font-size:14px;color:rgba(0,0,0,.12);">+</div><span>Add</span></div>
+        </div>
       </div>
-      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add project</span></div>
-      <div class="thumb-empty"><div style="font-size:18px;color:rgba(0,0,0,.14);">+</div><span>Add project</span></div>
-    </div>
-  </div>
+    </foreignObject>
+    <circle cx="366" cy="20" r="10" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="376" cy="30" r="6" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="30" cy="210" r="7" fill="rgba(0,0,0,0.07)"/>
+  </svg>
+</div>
 
-  <div class="note pg-section" id="n-illus" data-category="illustration">
-    <div class="note-label">Illustration</div>
-    <div style="font-size:26px;color:rgba(0,0,0,.1);margin-bottom:10px;text-align:center;">✦ ✦ ✦</div>
-    <div style="font-size:12px;color:rgba(0,0,0,.42);line-height:1.7;text-align:center;margin-bottom:14px;">Illustration work<br>coming soon.</div>
-    <div class="thumb-grid thumb-grid-3">
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
-      <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:14px;color:rgba(0,0,0,.1);">✦</div></div>
-    </div>
-  </div>
-
-  <div class="note taped" id="n-quote">
-    <div class="note-label">Mantra</div>
-    <div class="quote-text">"Design is not just what it looks like. Design is how it works."</div>
-    <div class="quote-attr">— Steve Jobs</div>
-  </div>
-
-  <div class="note" id="n-ticker">
-    <div class="note-label">Skills &amp; Tools</div>
-    <div class="pill-row" style="margin-bottom:14px;">
-      <span class="pill">Graphic Design</span><span class="pill">Motion Graphics</span><span class="pill">Brand Identity</span>
-      <span class="pill">TV Broadcast</span><span class="pill">After Effects</span><span class="pill">Illustrator</span>
-      <span class="pill">Social Media</span><span class="pill">Print Design</span><span class="pill">Photoshop</span>
-    </div>
-    <div class="ticker-wrap">
-      <div class="ticker-track">
-        <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
-        <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
-        <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
-        <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
-        <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
-        <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
+<!-- ── STICKER: ILLUSTRATION (blob, soft purple) ── -->
+<div class="sticker pg-section" id="s-illus" data-category="illustration">
+  <svg width="340" height="240" viewBox="0 0 340 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20,38 C8,14 34,2 62,4 C110,8 228,0 280,6 C316,10 336,28 338,62 C340,96 338,154 330,186 C320,214 298,236 264,238 C214,240 92,240 52,236 C18,232 0,212 2,180 C4,148 32,62 20,38Z" fill="#C8A8E9"/>
+    <foreignObject x="20" y="18" width="302" height="206">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:6px 10px;">
+        <div class="sk-label">Illustration</div>
+        <div style="font-size:28px;color:rgba(0,0,0,.12);text-align:center;margin:12px 0 8px;letter-spacing:8px;">✦ ✦ ✦</div>
+        <div style="font-size:11px;color:rgba(0,0,0,.42);text-align:center;line-height:1.65;margin-bottom:12px;">Illustration work<br>coming soon.</div>
+        <div class="thumb-grid thumb-grid-3">
+          <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:12px;color:rgba(0,0,0,.1);">✦</div></div>
+          <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:12px;color:rgba(0,0,0,.1);">✦</div></div>
+          <div class="thumb-empty" style="aspect-ratio:1/1;"><div style="font-size:12px;color:rgba(0,0,0,.1);">✦</div></div>
+        </div>
       </div>
-    </div>
-  </div>
+    </foreignObject>
+    <path d="M298,20 L301,13 L304,20 L311,23 L304,26 L301,33 L298,26 L291,23Z" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="26" cy="206" r="7" fill="rgba(255,255,255,0.25)"/>
+  </svg>
+</div>
 
-  <div class="note taped" id="n-note">
-    <div class="note-label">Motion Work</div>
-    <div style="font-size:26px;margin-bottom:10px;">▶</div>
-    <div style="font-size:12px;font-weight:500;color:rgba(0,0,0,.7);margin-bottom:6px;">Video files on request</div>
-    <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.65;">TV broadcast animations shared directly. <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.68);font-weight:500;">Email me →</a></div>
-  </div>
+<!-- ── STICKER: QUOTE (small tall blob, mint) ── -->
+<div class="sticker" id="s-quote">
+  <svg width="280" height="220" viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16,36 C6,12 30,2 56,4 C98,8 192,0 236,6 C264,10 278,28 278,62 C278,98 280,148 272,178 C262,206 240,218 210,218 C166,218 72,220 40,216 C12,212 0,194 2,164 C4,134 26,60 16,36Z" fill="#7ED8C8"/>
+    <foreignObject x="20" y="20" width="242" height="182">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 8px;">
+        <div class="sk-label">Mantra</div>
+        <div style="font-size:32px;color:rgba(0,0,0,0.12);font-family:Georgia,serif;line-height:1;margin-bottom:6px;">"</div>
+        <div class="quote-text">Design is not just what it looks like. Design is how it works.</div>
+        <div class="quote-attr">— Steve Jobs</div>
+      </div>
+    </foreignObject>
+    <circle cx="252" cy="192" r="9" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="22" cy="26" r="5" fill="rgba(255,255,255,0.25)"/>
+  </svg>
+</div>
 
-  <div class="note taped" id="n-status">
-    <div class="note-label">Status</div>
-    <div class="pulse-row"><div class="pulse"></div><span style="font-size:12px;font-weight:500;color:rgba(0,0,0,.75);">Open to work</span></div>
-    <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.65;">Available for freelance projects &amp; collaborations</div>
-  </div>
+<!-- ── STICKER: SKILLS/TICKER (wide rounded rect, lilac) ── -->
+<div class="sticker" id="s-ticker">
+  <svg width="520" height="210" viewBox="0 0 520 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20,32 C10,10 36,2 66,4 C140,8 370,0 440,6 C488,10 516,28 518,62 C520,94 518,148 510,176 C500,202 478,208 446,208 C372,208 120,210 70,208 C30,206 4,188 4,158 C4,128 30,54 20,32Z" fill="#B8A9F8"/>
+    <foreignObject x="20" y="16" width="482" height="180">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 10px;">
+        <div class="sk-label">Skills &amp; Tools</div>
+        <div class="pill-row" style="margin-bottom:12px;">
+          <span class="pill">Graphic Design</span><span class="pill">Motion Graphics</span><span class="pill">Brand Identity</span>
+          <span class="pill">TV Broadcast</span><span class="pill">After Effects</span><span class="pill">Illustrator</span>
+          <span class="pill">Social Media</span><span class="pill">Print Design</span><span class="pill">Photoshop</span>
+        </div>
+        <div class="ticker-wrap">
+          <div class="ticker-track">
+            <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
+            <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
+            <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
+            <span class="ticker-i">Graphic Design</span><span class="ticker-i">Motion</span><span class="ticker-i">Branding</span>
+            <span class="ticker-i">Broadcast</span><span class="ticker-i">After Effects</span><span class="ticker-i">Illustrator</span>
+            <span class="ticker-i">Social Media</span><span class="ticker-i">Print</span>
+          </div>
+        </div>
+      </div>
+    </foreignObject>
+    <path d="M484,20 L487,12 L490,20 L498,24 L490,28 L487,36 L484,28 L476,24Z" fill="rgba(255,255,255,0.35)"/>
+    <circle cx="26" cy="180" r="8" fill="rgba(255,255,255,0.25)"/>
+  </svg>
+</div>
+
+<!-- ── STICKER: MOTION NOTE (small blob, warm yellow) ── -->
+<div class="sticker" id="s-note">
+  <svg width="290" height="210" viewBox="0 0 290 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18,34 C8,12 32,2 58,4 C102,8 208,0 248,6 C274,10 288,28 288,62 C288,96 288,148 280,176 C270,202 250,208 220,208 C174,208 76,210 44,208 C16,206 2,188 2,158 C2,128 28,56 18,34Z" fill="#FFD166"/>
+    <foreignObject x="20" y="18" width="252" height="174">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 8px;">
+        <div class="sk-label">Motion Work</div>
+        <div style="font-size:28px;margin-bottom:8px;">▶</div>
+        <div style="font-size:11px;font-weight:500;color:rgba(0,0,0,.7);margin-bottom:5px;">Video files on request</div>
+        <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.6;">TV broadcast animations shared directly.<br><a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.68);font-weight:500;">Email me →</a></div>
+      </div>
+    </foreignObject>
+    <circle cx="258" cy="22" r="7" fill="rgba(255,255,255,0.3)"/>
+    <path d="M22,180 L25,173 L28,180 L35,184 L28,188 L25,195 L22,188 L15,184Z" fill="rgba(0,0,0,0.08)"/>
+  </svg>
+</div>
+
+<!-- ── STICKER: STATUS (small rounded, green) ── -->
+<div class="sticker" id="s-status">
+  <svg width="240" height="185" viewBox="0 0 240 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16,28 C6,10 28,2 50,4 C88,8 172,0 206,6 C228,10 238,24 238,52 C238,80 238,128 230,154 C222,178 204,184 178,184 C138,184 60,184 32,182 C10,180 0,164 2,138 C4,112 26,46 16,28Z" fill="#A8E6CF"/>
+    <foreignObject x="18" y="16" width="206" height="155">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="padding:4px 8px;">
+        <div class="sk-label">Status</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+          <div class="pulse"></div>
+          <span style="font-size:12px;font-weight:500;color:rgba(0,0,0,.75);">Open to work</span>
+        </div>
+        <div style="font-size:10px;color:rgba(0,0,0,.48);line-height:1.65;">Available for freelance<br>projects &amp; collaborations</div>
+      </div>
+    </foreignObject>
+    <circle cx="210" cy="160" r="7" fill="rgba(255,255,255,0.3)"/>
+    <circle cx="22" cy="22" r="4" fill="rgba(255,255,255,0.25)"/>
+  </svg>
+</div>
 
 </div><!-- /world -->
 </div><!-- /viewport -->
 
-<!-- hint & minimap (desktop only) -->
 <div class="hint">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9l7-7 7 7M5 15l7 7 7-7"/></svg>
   <span class="hint-text-desktop">Drag to explore</span>
   <span class="hint-text-mobile">Swipe to explore</span>
 </div>
-<div id="minimap"><div class="mm-cards" id="mm-cards"></div><div id="mm-vp"></div></div>
-
-
-<!-- ═══════════════════════════════════════
-     MOBILE: scroll board
-════════════════════════════════════════ -->
-<div class="mobile-scroll">
-
-  <!-- mobile filter bar (sticky) -->
-  <div style="position:sticky;top:0;z-index:100;background:rgba(240,237,232,.95);backdrop-filter:blur(10px);padding:10px 0 12px;margin:-72px -16px 20px;padding-left:16px;padding-right:16px;padding-top:10px;border-bottom:0.5px solid rgba(0,0,0,.08);">
-    <div class="f-tags" id="mFilterTags">
-      <span class="f-tag active" data-filter="all">All</span>
-      <span class="f-tag" data-filter="graphic">Graphic</span>
-      <span class="f-tag" data-filter="motion">Motion</span>
-      <span class="f-tag" data-filter="branding">Branding</span>
-      <span class="f-tag" data-filter="illustration">Illustration</span>
-    </div>
-  </div>
-
-  <div class="mobile-board">
-
-    <div class="note taped" id="mn-intro">
-      <div class="note-label">Playground</div>
-      <div class="note-title">Creative<br><em>explorations</em></div>
-      <div class="note-body">Graphic design, motion, branding &amp; visual experiments.</div>
-    </div>
-
-    <div class="note taped" id="mn-status">
-      <div class="note-label">Status</div>
-      <div class="pulse-row"><div class="pulse"></div><span style="font-size:12px;font-weight:500;color:rgba(0,0,0,.75);">Open to work</span></div>
-      <div style="font-size:11px;color:rgba(0,0,0,.48);line-height:1.6;">Freelance &amp; collaborations welcome</div>
-    </div>
-
-    <div class="note mpg-section" id="mn-graphic" data-category="graphic">
-      <div class="note-label">Graphic Design</div>
-      <div class="thumb-grid thumb-grid-2">
-        <div class="thumb" style="background:linear-gradient(135deg,#f5dfc0,#fdf4ec);">
-          <div style="text-align:center;"><div style="font-size:18px;">✦</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Social</div></div>
-          <div class="thumb-label">Mekari Campaign</div>
-        </div>
-        <div class="thumb" style="background:linear-gradient(135deg,#e8f4e8,#f0f5ed);">
-          <div style="text-align:center;"><div style="font-size:18px;">◈</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Info</div></div>
-          <div class="thumb-label">Data Infographic</div>
-        </div>
-        <div class="thumb" style="background:linear-gradient(135deg,#dde8f5,#edf2f8);">
-          <div style="text-align:center;"><div style="font-size:18px;">⊞</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Banner</div></div>
-          <div class="thumb-label">Sirclo Banners</div>
-        </div>
-        <div class="thumb" style="background:linear-gradient(135deg,#f8f0ff,#ede4ff);">
-          <div style="text-align:center;"><div style="font-size:18px;">▦</div><div style="font-size:7px;color:rgba(0,0,0,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Print</div></div>
-          <div class="thumb-label">Srupa Labs Catalog</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="note mpg-section" id="mn-motion" data-category="motion">
-      <div class="note-label">Motion Graphics</div>
-      <div class="thumb-grid thumb-grid-2" style="margin-bottom:8px;">
-        <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);">
-          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.5);">▶</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">TV Quiz</div></div>
-          <div class="thumb-label">Love Story The Series</div>
-        </div>
-        <div class="thumb" style="background:linear-gradient(135deg,#0f2027,#2c5364);">
-          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.4);">◎</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Motion</div></div>
-          <div class="thumb-label">Buku Harian Seorang Istri</div>
-        </div>
-        <div class="thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e);">
-          <div style="text-align:center;"><div style="font-size:18px;color:rgba(255,255,255,.4);">✦</div><div style="font-size:7px;color:rgba(255,255,255,.3);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;">Broadcast</div></div>
-          <div class="thumb-label">Samudra Cinta</div>
-        </div>
-        <div class="thumb-empty"><div style="font-size:16px;color:rgba(0,0,0,.12);">+</div></div>
-      </div>
-      <div style="font-size:10px;color:rgba(0,0,0,.42);">▶ Video on request — <a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.62);font-weight:500;">email me</a></div>
-    </div>
-
-    <div class="note mpg-section" id="mn-branding" data-category="branding">
-      <div class="note-label">Branding</div>
-      <div class="thumb-grid thumb-grid-2">
-        <div class="thumb" style="background:linear-gradient(135deg,#f5f0e8,#ede4d4);">
-          <div style="text-align:center;"><div style="font-size:18px;font-weight:600;letter-spacing:-1.5px;color:#8a7968;">SL</div><div style="font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:#b0a090;margin-top:3px;">Srupa Labs</div></div>
-          <div class="thumb-label">Srupa Labs Identity</div>
-        </div>
-        <div class="thumb-empty"><div style="font-size:16px;color:rgba(0,0,0,.12);">+</div><span>Add project</span></div>
-      </div>
-    </div>
-
-    <div class="note mpg-section" id="mn-illus" data-category="illustration">
-      <div class="note-label">Illustration</div>
-      <div style="font-size:22px;color:rgba(0,0,0,.1);text-align:center;margin:8px 0;">✦ ✦ ✦</div>
-      <div style="font-size:11px;color:rgba(0,0,0,.4);text-align:center;line-height:1.6;">Coming soon</div>
-    </div>
-
-    <div class="note taped" id="mn-quote">
-      <div class="note-label">Mantra</div>
-      <div class="quote-text">"Design is not just what it looks like. Design is how it works."</div>
-      <div class="quote-attr">— Steve Jobs</div>
-    </div>
-
-    <div class="note" id="mn-ticker">
-      <div class="note-label">Skills</div>
-      <div class="pill-row">
-        <span class="pill">Graphic Design</span><span class="pill">Motion</span><span class="pill">Branding</span>
-        <span class="pill">TV Broadcast</span><span class="pill">After Effects</span><span class="pill">Illustrator</span>
-        <span class="pill">Social Media</span><span class="pill">Print</span><span class="pill">Photoshop</span>
-      </div>
-    </div>
-
-    <div class="note taped" id="mn-note">
-      <div class="note-label">Motion Work</div>
-      <div style="font-size:22px;margin-bottom:8px;">▶</div>
-      <div style="font-size:11px;font-weight:500;color:rgba(0,0,0,.7);margin-bottom:5px;">Video files on request</div>
-      <div style="font-size:11px;color:rgba(0,0,0,.45);line-height:1.6;"><a href="mailto:zackyhilmi.zh@gmail.com" style="color:rgba(0,0,0,.65);font-weight:500;">Email me →</a></div>
-    </div>
-
-  </div><!-- /mobile-board -->
-</div><!-- /mobile-scroll -->
-
+<div id="minimap"><div id="mm-cards"></div><div id="mm-vp"></div></div>
 
 <script>
-/* ── MOBILE NAV TOGGLE ── */
-// Mobile nav handled by interactions.js
-
-/* ── UNIFIED DRAG CANVAS (desktop + mobile) ── */
 (function() {
-  const vp      = document.getElementById('viewport');
-  const world   = document.getElementById('world');
-  const mmvp    = document.getElementById('mm-vp');
+  const vp    = document.getElementById('viewport');
+  const world = document.getElementById('world');
+  const mmvp  = document.getElementById('mm-vp');
   const mmCards = document.getElementById('mm-cards');
-
   const WORLD_W = 5200, WORLD_H = 3200, MM_W = 120, MM_H = 72;
   const isMobile = () => window.innerWidth <= 768;
-
-  /* start position — center the view on the notes cluster */
-  let tx = -40, ty = -40;
-  let isPanning = false, startX, startY, startTX, startTY;
+  let tx = -40, ty = -40, isPanning = false;
+  let startX, startY, startTX, startTY;
   let velX = 0, velY = 0, lastMX, lastMY, lastTime, rafId;
-
-  /* pinch-to-zoom state */
   let scale = 1, lastPinchDist = null;
   const MIN_SCALE = 0.4, MAX_SCALE = 2.0;
 
-  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-  function applyTransform() {
-    const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
-    const scaledW = WORLD_W * scale, scaledH = WORLD_H * scale;
-    /* allow panning so any part of world can be reached, but don't go beyond world edges */
-    const maxTX = Math.max(0, (vpW - scaledW) / 2 + vpW * 0.5);
-    const minTX = Math.min(0, vpW - scaledW) - maxTX;
-    const maxTY = Math.max(0, (vpH - scaledH) / 2 + vpH * 0.5);
-    const minTY = Math.min(0, vpH - scaledH) - maxTY;
-    tx = clamp(tx, minTX, maxTX);
-    ty = clamp(ty, minTY, maxTY);
-    world.style.transform = `translate(${tx}px,${ty}px) scale(${scale})`;
-
-    /* minimap (desktop only) */
-    if (!isMobile() && mmvp) {
-      const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
-      mmvp.style.cssText = `left:${(-tx/scale)*sx}px;top:${(-ty/scale)*sy}px;width:${(vpW/scale)*sx}px;height:${(vpH/scale)*sy}px;position:absolute;background:rgba(10,10,10,.07);border:.5px solid rgba(10,10,10,.2);border-radius:2px;pointer-events:none;`;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+  function applyTransform(){
+    const vpW=vp.offsetWidth,vpH=vp.offsetHeight;
+    const scaledW=WORLD_W*scale,scaledH=WORLD_H*scale;
+    const maxTX=Math.max(0,(vpW-scaledW)/2+vpW*0.5);
+    const minTX=Math.min(0,vpW-scaledW)-maxTX;
+    const maxTY=Math.max(0,(vpH-scaledH)/2+vpH*0.5);
+    const minTY=Math.min(0,vpH-scaledH)-maxTY;
+    tx=clamp(tx,minTX,maxTX); ty=clamp(ty,minTY,maxTY);
+    world.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;
+    if(!isMobile()&&mmvp){
+      const sx=MM_W/WORLD_W,sy=MM_H/WORLD_H;
+      mmvp.style.cssText=`left:${(-tx/scale)*sx}px;top:${(-ty/scale)*sy}px;width:${(vpW/scale)*sx}px;height:${(vpH/scale)*sy}px;position:absolute;background:rgba(10,10,10,.07);border:.5px solid rgba(10,10,10,.2);border-radius:2px;pointer-events:none;`;
     }
   }
-
-  function buildMinimap() {
-    if (isMobile() || !mmCards) return;
-    const sx = MM_W / WORLD_W, sy = MM_H / WORLD_H;
-    world.querySelectorAll('.note').forEach(n => {
-      const d = document.createElement('div');
-      d.className = 'mm-dot';
-      const l = parseInt(getComputedStyle(n).left), t = parseInt(getComputedStyle(n).top);
-      const bg = getComputedStyle(n).backgroundColor;
-      d.style.cssText = `left:${l*sx}px;top:${t*sy}px;width:${n.offsetWidth*sx}px;height:${n.offsetHeight*sy}px;background:${bg};opacity:.7;`;
+  function buildMinimap(){
+    if(isMobile()||!mmCards)return;
+    const sx=MM_W/WORLD_W,sy=MM_H/WORLD_H;
+    world.querySelectorAll('.sticker').forEach(n=>{
+      const d=document.createElement('div');
+      d.style.cssText=`position:absolute;left:${parseInt(n.style.left||getComputedStyle(n).left)*sx||0}px;top:${parseInt(n.style.top||getComputedStyle(n).top)*sx||0}px;width:12px;height:8px;background:rgba(0,0,0,0.15);border-radius:2px;`;
       mmCards.appendChild(d);
     });
   }
+  function pinchDist(t){const dx=t[0].clientX-t[1].clientX,dy=t[0].clientY-t[1].clientY;return Math.hypot(dx,dy);}
 
-  function pinchDist(touches) {
-    const dx = touches[0].clientX - touches[1].clientX;
-    const dy = touches[0].clientY - touches[1].clientY;
-    return Math.hypot(dx, dy);
-  }
-
-  /* ── MOUSE events ── */
-  vp.addEventListener('mousedown', e => {
-    if (e.button !== 0) return;
-    cancelAnimationFrame(rafId); isPanning = true;
-    startX = e.clientX; startY = e.clientY; startTX = tx; startTY = ty;
-    lastMX = e.clientX; lastMY = e.clientY; lastTime = performance.now();
-    velX = 0; velY = 0;
-    vp.classList.add('panning'); e.preventDefault();
+  vp.addEventListener('mousedown',e=>{
+    if(e.button!==0)return;
+    cancelAnimationFrame(rafId);isPanning=true;
+    startX=e.clientX;startY=e.clientY;startTX=tx;startTY=ty;
+    lastMX=e.clientX;lastMY=e.clientY;lastTime=performance.now();
+    velX=0;velY=0;vp.classList.add('panning');e.preventDefault();
   });
-  document.addEventListener('mousemove', e => {
-    if (!isPanning) return;
-    const now = performance.now(), dt = now - lastTime;
-    if (dt > 0) { velX = (e.clientX - lastMX) / dt * 16; velY = (e.clientY - lastMY) / dt * 16; }
-    lastMX = e.clientX; lastMY = e.clientY; lastTime = now;
-    tx = startTX + (e.clientX - startX); ty = startTY + (e.clientY - startY);
+  document.addEventListener('mousemove',e=>{
+    if(!isPanning)return;
+    const now=performance.now(),dt=now-lastTime;
+    if(dt>0){velX=(e.clientX-lastMX)/dt*16;velY=(e.clientY-lastMY)/dt*16;}
+    lastMX=e.clientX;lastMY=e.clientY;lastTime=now;
+    tx=startTX+(e.clientX-startX);ty=startTY+(e.clientY-startY);
     applyTransform();
   });
-  document.addEventListener('mouseup', () => {
-    if (!isPanning) return; isPanning = false;
-    vp.classList.remove('panning'); startMomentum();
+  document.addEventListener('mouseup',()=>{
+    if(!isPanning)return;isPanning=false;vp.classList.remove('panning');startMomentum();
   });
-
-  /* ── TOUCH events ── */
-  vp.addEventListener('touchstart', e => {
+  vp.addEventListener('touchstart',e=>{
     cancelAnimationFrame(rafId);
-
-    if (e.touches.length === 2) {
-      /* pinch start */
-      isPanning = false;
-      lastPinchDist = pinchDist(e.touches);
-      e.preventDefault();
-      return;
+    if(e.touches.length===2){isPanning=false;lastPinchDist=pinchDist(e.touches);e.preventDefault();return;}
+    if(e.touches.length!==1)return;
+    isPanning=true;startX=e.touches[0].clientX;startY=e.touches[0].clientY;
+    startTX=tx;startTY=ty;lastMX=startX;lastMY=startY;
+    lastTime=performance.now();velX=0;velY=0;e.preventDefault();
+  },{passive:false});
+  vp.addEventListener('touchmove',e=>{
+    if(e.touches.length===2&&lastPinchDist!==null){
+      const nd=pinchDist(e.touches),ratio=nd/lastPinchDist,prevScale=scale;
+      scale=clamp(scale*ratio,MIN_SCALE,MAX_SCALE);
+      const midX=(e.touches[0].clientX+e.touches[1].clientX)/2;
+      const midY=(e.touches[0].clientY+e.touches[1].clientY)/2;
+      tx=midX-(midX-tx)*(scale/prevScale);ty=midY-(midY-ty)*(scale/prevScale);
+      lastPinchDist=nd;applyTransform();e.preventDefault();return;
     }
-
-    if (e.touches.length !== 1) return;
-    isPanning = true;
-    startX = e.touches[0].clientX; startY = e.touches[0].clientY;
-    startTX = tx; startTY = ty;
-    lastMX = startX; lastMY = startY;
-    lastTime = performance.now(); velX = 0; velY = 0;
-    e.preventDefault();
-  }, { passive: false });
-
-  vp.addEventListener('touchmove', e => {
-    if (e.touches.length === 2 && lastPinchDist !== null) {
-      /* pinch zoom */
-      const newDist = pinchDist(e.touches);
-      const ratio = newDist / lastPinchDist;
-      const prevScale = scale;
-      scale = clamp(scale * ratio, MIN_SCALE, MAX_SCALE);
-
-      /* zoom toward pinch midpoint */
-      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-      tx = midX - (midX - tx) * (scale / prevScale);
-      ty = midY - (midY - ty) * (scale / prevScale);
-
-      lastPinchDist = newDist;
-      applyTransform();
-      e.preventDefault();
-      return;
-    }
-
-    if (!isPanning || e.touches.length !== 1) return;
-    const now = performance.now(), dt = now - lastTime;
-    const cx = e.touches[0].clientX, cy = e.touches[0].clientY;
-    if (dt > 0) { velX = (cx - lastMX) / dt * 16; velY = (cy - lastMY) / dt * 16; }
-    lastMX = cx; lastMY = cy; lastTime = now;
-    tx = startTX + (cx - startX); ty = startTY + (cy - startY);
-    applyTransform();
-    e.preventDefault();
-  }, { passive: false });
-
-  vp.addEventListener('touchend', e => {
-    lastPinchDist = null;
-    if (isPanning) { isPanning = false; startMomentum(); }
+    if(!isPanning||e.touches.length!==1)return;
+    const now=performance.now(),dt=now-lastTime;
+    const cx=e.touches[0].clientX,cy=e.touches[0].clientY;
+    if(dt>0){velX=(cx-lastMX)/dt*16;velY=(cy-lastMY)/dt*16;}
+    lastMX=cx;lastMY=cy;lastTime=now;
+    tx=startTX+(cx-startX);ty=startTY+(cy-startY);
+    applyTransform();e.preventDefault();
+  },{passive:false});
+  vp.addEventListener('touchend',e=>{
+    lastPinchDist=null;if(isPanning){isPanning=false;startMomentum();}
   });
-
-  /* ── MOMENTUM ── */
-  function startMomentum() {
-    const friction = 0.92;
-    function tick() {
-      velX *= friction; velY *= friction;
-      if (Math.abs(velX) < 0.3 && Math.abs(velY) < 0.3) return;
-      tx += velX; ty += velY; applyTransform();
-      rafId = requestAnimationFrame(tick);
+  function startMomentum(){
+    const friction=0.92;
+    function tick(){
+      velX*=friction;velY*=friction;
+      if(Math.abs(velX)<0.3&&Math.abs(velY)<0.3)return;
+      tx+=velX;ty+=velY;applyTransform();rafId=requestAnimationFrame(tick);
     }
-    rafId = requestAnimationFrame(tick);
+    rafId=requestAnimationFrame(tick);
   }
-
-  /* ── WHEEL zoom (desktop) ── */
-  vp.addEventListener('wheel', e => {
+  vp.addEventListener('wheel',e=>{
     e.preventDefault();
-    const zoomFactor = e.deltaY < 0 ? 1.08 : 0.93;
-    const prevScale = scale;
-    scale = clamp(scale * zoomFactor, MIN_SCALE, MAX_SCALE);
-    tx = e.clientX - (e.clientX - tx) * (scale / prevScale);
-    ty = e.clientY - (e.clientY - ty) * (scale / prevScale);
+    const zf=e.deltaY<0?1.08:0.93,prevScale=scale;
+    scale=clamp(scale*zf,MIN_SCALE,MAX_SCALE);
+    tx=e.clientX-(e.clientX-tx)*(scale/prevScale);
+    ty=e.clientY-(e.clientY-ty)*(scale/prevScale);
     applyTransform();
-  }, { passive: false });
+  },{passive:false});
 
-  /* ── FILTER (desktop canvas) ── */
-  document.querySelectorAll('#filterTags .f-tag').forEach(btn => {
-    btn.addEventListener('click', e => {
+  // Filter
+  document.querySelectorAll('#filterTags .f-tag').forEach(btn=>{
+    btn.addEventListener('click',e=>{
       e.stopPropagation();
-      document.querySelectorAll('#filterTags .f-tag').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#filterTags .f-tag').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      const f = btn.dataset.filter;
-      document.querySelectorAll('#world .pg-section').forEach(sec => {
-        const show = f === 'all' || sec.dataset.category === f;
-        sec.style.opacity = show ? '1' : '0.18';
-        sec.style.pointerEvents = show ? 'all' : 'none';
+      const f=btn.dataset.filter;
+      document.querySelectorAll('#world .pg-section').forEach(sec=>{
+        const show=f==='all'||sec.dataset.category===f;
+        sec.style.opacity=show?'1':'0.15';
+        sec.style.pointerEvents=show?'all':'none';
       });
     });
   });
 
-  /* ── INIT ── */
-  window.addEventListener('load', () => {
-    const vpW = vp.offsetWidth, vpH = vp.offsetHeight;
-
-    if (isMobile()) {
-      scale = 0.52;
-    }
-    /* center viewport on world center (where notes cluster is) */
-    tx = (vpW / 2) - (WORLD_W / 2) * scale;
-    ty = (vpH / 2) - (WORLD_H / 2) * scale;
-
+  window.addEventListener('load',()=>{
+    const vpW=vp.offsetWidth,vpH=vp.offsetHeight;
+    if(isMobile())scale=0.48;
+    tx=(vpW/2)-(WORLD_W/2)*scale;
+    ty=(vpH/2)-(WORLD_H/2)*scale;
     applyTransform();
-    setTimeout(buildMinimap, 150);
-    const hint = document.querySelector('.hint');
-    setTimeout(() => { if (hint) hint.style.opacity = '0'; }, 4000);
+    setTimeout(buildMinimap,200);
+    const hint=document.querySelector('.hint');
+    setTimeout(()=>{if(hint)hint.style.opacity='0';},4000);
   });
-
-  window.addEventListener('resize', applyTransform);
+  window.addEventListener('resize',applyTransform);
 })();
 </script>
 <script src="interactions.js" defer></script>
