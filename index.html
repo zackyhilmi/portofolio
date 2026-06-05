@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Only load weights actually used: 300, 400, 500 -->
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +19,7 @@
     --gray-600: #555555; --gray-800: #1e1e1e; --line: #e8e8e8;
     --hatch: #e9ecee; 
     --font: 'DM Sans', -apple-system, sans-serif;
-    --display: 'Syne', sans-serif;
+    --display: 'Playfair Display', Georgia, serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
@@ -98,8 +98,8 @@
   .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 5px 10px; border-radius: 20px; margin-bottom: 24px; background: var(--white); }
   .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse-dot 2s ease-in-out infinite; }
   @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4)} 50%{box-shadow:0 0 0 5px rgba(34,197,94,0)} }
-  .hero h1 { font-size: 52px; font-weight: 500; line-height: 1.1; letter-spacing: -0.03em; color: var(--black); margin-bottom: 20px; }
-  .hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .hero h1 { font-size: 58px; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; color: var(--black); margin-bottom: 20px; font-family: var(--display); }
+  .hero h1 em { font-style: italic; font-weight: 400; color: var(--gray-400); }
   .hero-desc { font-size: 16px; color: var(--gray-600); line-height: 1.7; margin-bottom: 36px; max-width: 420px; }
   .hero-actions { display: flex; gap: 12px; align-items: center; }
   .btn-primary {
@@ -144,8 +144,8 @@
 
   /* ── ABOUT ── */
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .about-heading { font-size: 38px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.2; color: var(--black); margin-bottom: 24px; }
-  .about-heading em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .about-heading { font-size: 42px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: var(--black); margin-bottom: 24px; font-family: var(--display); }
+  .about-heading em { font-style: italic; font-weight: 400; color: var(--gray-400); }
   .about-body { font-size: 15px; color: var(--gray-600); line-height: 1.8; margin-bottom: 16px; }
   .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 12px; overflow: hidden; margin-top: 40px; }
   .stat-box { padding: 24px; background: var(--white); transition: background 0.2s; }
@@ -221,8 +221,8 @@
   .cta-section { text-align: center; padding: 120px 40px; position: relative; overflow: hidden; background: var(--black) !important; }
   .cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 2; }
   .cta-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
-  .cta-heading { font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; color: var(--white); margin-bottom: 20px; }
-  .cta-heading em { font-style: italic; font-weight: 300; color: rgba(255,255,255,0.4); }
+  .cta-heading { font-size: 54px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; color: var(--white); margin-bottom: 20px; font-family: var(--display); }
+  .cta-heading em { font-style: italic; font-weight: 400; color: rgba(255,255,255,0.45); }
   .cta-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 36px; }
   .cta-btns { display: flex; gap: 12px; justify-content: center; align-items: center; }
   .cta-section .btn-primary { background: var(--white); color: var(--black); }
@@ -295,14 +295,14 @@
     .nav-menu-btn { display: flex !important; }
     .hero { padding: 80px 20px 48px; min-height: auto; }
     .hero-inner { grid-template-columns: 1fr; gap: 36px; }
-    .hero h1 { font-size: 38px; }
+    .hero h1 { font-size: 40px; }
     .hero-image-card { aspect-ratio: 3/2; max-width: 100%; }
     .hero-actions { flex-wrap: wrap; }
     section { padding: 64px 20px; }
     section + .section-divider { margin-top: -24px; }
     .section-divider + section { padding-top: 40px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-heading { font-size: 28px; }
+    .about-heading { font-size: 30px; }
     .about-stats { grid-template-columns: 1fr 1fr; }
     .work-grid { grid-template-columns: 1fr; }
     .work-card-large { grid-column: span 1; }
@@ -310,7 +310,7 @@
     .services-grid { grid-template-columns: 1fr; }
     .testimonials-grid { grid-template-columns: 1fr; }
     .cta-section { padding: 80px 20px; }
-    .cta-heading { font-size: 32px; }
+    .cta-heading { font-size: 36px; }
     .cta-btns { flex-direction: column; align-items: center; gap: 14px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
@@ -352,7 +352,7 @@
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-tag"><span class="dot"></span><span id="dyn-hero-status">Open to freelance work</span></div>
-      <h1>UI/UX <em>designer</em><br>& SaaS <em>specialist</em></h1>
+      <h1>Crafting interfaces<br>that <em>actually work</em></h1>
       <p class="hero-desc">4+ years designing SaaS and enterprise systems for public sector and large-scale operational environments. Specialized in dashboards, complex workflows, and data-driven interfaces.</p>
       <div class="hero-actions">
         <a href="work.html" class="btn-primary magnetic">View my work</a>
@@ -538,7 +538,7 @@
     <div class="section-label reveal">About me</div>
     <div class="about-grid">
       <div>
-        <h2 class="about-heading reveal">Designer, <em>problem solver</em>,<br>& SaaS enthusiast</h2>
+        <h2 class="about-heading reveal">Not just pixels —<br><em>systems that scale</em></h2>
         <p class="about-body reveal reveal-delay-1">I'm Zacky — a UI/UX designer based in Jakarta with 4+ years of experience designing SaaS and enterprise systems. I specialize in dashboard design, complex system workflows, and data-driven interfaces for public sector and large-scale operational environments.</p>
         <p class="about-body reveal reveal-delay-2">I own the full UX process — from requirement analysis and user flows through to high-fidelity design and developer handoff. I also build and maintain design systems that keep products consistent and scalable.</p>
         <div class="about-skills reveal reveal-delay-3">
@@ -704,7 +704,7 @@
   <div class="cta-glow"></div>
   <div class="cta-inner">
     <div class="cta-label reveal">Let's work together</div>
-    <h2 class="cta-heading reveal reveal-delay-1">Have a project <em>in mind?</em></h2>
+    <h2 class="cta-heading reveal reveal-delay-1">Got a problem<br><em>worth solving?</em></h2>
     <p class="cta-sub reveal reveal-delay-2">I'm open to freelance projects and collaborations. Let's build something great together.</p>
     <div class="cta-btns reveal reveal-delay-3">
       <a href="mailto:zackyhilmi.zh@gmail.com" class="btn-primary magnetic">Get in touch →</a>

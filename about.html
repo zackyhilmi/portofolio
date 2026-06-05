@@ -6,7 +6,7 @@
 <title>About — Zacky Hilmi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -15,7 +15,7 @@
     --gray-600: #555555; --gray-800: #1e1e1e; --line: #e8e8e8;
     --hatch: #e9ecee; 
     --font: 'DM Sans', -apple-system, sans-serif;
-    --display: 'Syne', sans-serif;
+    --display: 'Playfair Display', Georgia, serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
@@ -63,8 +63,8 @@
   .page-hero-inner { max-width: 1100px; margin: 0 auto; }
   .page-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
   .page-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
-  .page-hero h1 { font-size: 56px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 24px; }
-  .page-hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .page-hero h1 { font-size: 60px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 24px; font-family: var(--display); }
+  .page-hero h1 em { font-style: italic; font-weight: 400; color: var(--gray-400); }
   .page-hero-sub { font-size: 17px; color: var(--gray-600); line-height: 1.7; max-width: 560px; }
 
   section { padding: 80px 40px; }
@@ -141,7 +141,7 @@
   /* CTA */
   .cta-band { border-top: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); padding: 60px 40px; text-align: center; }
   .cta-band-inner { max-width: 560px; margin: 0 auto; }
-  .cta-band h2 { font-size: 36px; font-weight: 500; letter-spacing: -0.025em; margin-bottom: 16px; }
+  .cta-band h2 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 16px; font-family: var(--display); }
   .cta-band h2 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
   .cta-band p { font-size: 15px; color: var(--gray-600); margin-bottom: 28px; }
   .cta-btns { display: flex; gap: 12px; justify-content: center; align-items: center; }
@@ -201,7 +201,7 @@
     .nav-links, .nav-cta { display: none !important; }
     .nav-menu-btn { display: flex !important; }
     .page-hero { padding: 88px 20px 36px; }
-    .page-hero h1 { font-size: 34px; }
+    .page-hero h1 { font-size: 36px; }
     .page-hero-sub { font-size: 15px; }
     section { padding: 56px 20px; }
     .about-intro-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -217,7 +217,7 @@
     .timeline-item { grid-template-columns: 1fr; gap: 4px; padding: 24px 0; }
     .timeline-period { font-size: 11px; padding-top: 0; color: var(--gray-400); }
     .cta-band { padding: 48px 20px; }
-    .cta-band h2 { font-size: 26px; }
+    .cta-band h2 { font-size: 28px; }
     .cta-btns { flex-direction: column; align-items: center; gap: 14px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
@@ -270,7 +270,7 @@
 <div class="page-hero hatch-section">
   <div class="page-hero-inner">
     <div class="page-label">About me</div>
-    <h1>Designer, <em>thinker</em>,<br>& creative <em>builder</em></h1>
+    <h1>Four years in.<br><em>Still obsessed</em><br>with the details.</h1>
     <p class="page-hero-sub">A UI/UX designer from Jakarta with 4+ years shaping enterprise SaaS products, government digital systems, and creative visual work — driven by curiosity and a love for clarity.</p>
   </div>
 </div>
@@ -283,7 +283,7 @@
         <img id="dyn-photo" src="" style="display:none" alt="Profile"><div class="photo-initials" id="dyn-photo-ph">ZH</div>
       </div>
       <div class="about-text">
-        <h2 id="dyn-tagline">I design systems <em>people<br>actually want to use</em></h2>
+        <h2 id="dyn-tagline">Complexity is easy.<br><em>Clarity takes work.</em></h2>
         <p>
           <span id="dyn-name">Zacky Hilmi Imadudin Atthoriq</span> — a UI/UX designer and graphic designer based in Jakarta, Indonesia. I've spent the last 4+ years working on SaaS platforms, enterprise operational systems, and government digital products at PT. Datasintesa Teknologi Nusantara.
         </p>
@@ -548,7 +548,7 @@
 <div class="section-divider"></div>
 <div class="cta-band">
   <div class="cta-band-inner">
-    <h2>Let's build something <em>great</em></h2>
+    <h2>Your next project<br>deserves <em>better design.</em></h2>
     <p>Open to freelance projects, collaborations, and full-time opportunities. Jakarta-based, remote-friendly.</p>
     <div class="cta-btns">
       <a href="mailto:zackyhilmi.zh@gmail.com" class="btn-primary">Get in touch →</a>

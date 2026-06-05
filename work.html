@@ -6,7 +6,7 @@
 <title>Work — Zacky Hilmi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -15,7 +15,7 @@
     --gray-600: #555555; --gray-800: #1e1e1e; --line: #e8e8e8;
     --hatch: #e9ecee; 
     --font: 'DM Sans', -apple-system, sans-serif;
-    --display: 'Syne', sans-serif;
+    --display: 'Playfair Display', Georgia, serif;
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font); background: var(--white); color: var(--black); font-size: 15px; line-height: 1.6; overflow-x: hidden; }
@@ -58,8 +58,8 @@
   .page-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
   .page-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
   .page-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
-  .page-hero h1 { font-size: 56px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; }
-  .page-hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
+  .page-hero h1 { font-size: 60px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; font-family: var(--display); }
+  .page-hero h1 em { font-style: italic; font-weight: 400; color: var(--gray-400); }
   .hero-note { font-size: 14px; color: var(--gray-600); max-width: 260px; text-align: right; line-height: 1.6; flex-shrink: 0; }
 
   /* FILTER */
@@ -167,7 +167,7 @@
     .nav-menu-btn { display: flex !important; }
     .page-hero { padding: 88px 20px 36px; }
     .page-hero-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .page-hero h1 { font-size: 34px; }
+    .page-hero h1 { font-size: 36px; }
     .hero-note { text-align: left; max-width: 100%; font-size: 13px; }
     .filter-bar { padding: 12px 20px; top: 60px; }
     .filter-inner { gap: 6px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
@@ -236,7 +236,7 @@
   <div class="page-hero-inner">
     <div>
       <div class="page-label">Selected Work</div>
-      <h1>Projects & <em>case<br>studies</em></h1>
+      <h1>Work that<br><em>ships</em> &<br>sticks around.</h1>
     </div>
     <p class="hero-note">A selection of UI/UX and product design work — from enterprise dashboards to e-learning platforms.</p>
   </div>
