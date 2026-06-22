@@ -53,7 +53,9 @@ nav.scrolled { box-shadow: 0 1px 24px rgba(0,0,0,0.06); }
 .nav-logo:hover { opacity: 0.65; }
 .nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
 .nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+.nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+
+.nav-links a::before { content: attr(data-num); font-size: 12px; font-weight: 600; color: #6366f1; letter-spacing: 0.04em; }
 .nav-links a:hover { color: var(--black); }
 .nav-cta {
 font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none;
@@ -306,9 +308,9 @@ footer { padding: 24px 20px; }
 <nav id="main-nav">
 <a href="index.html" class="nav-logo"><svg class="nav-logo-svg" width="80" height="78" viewBox="0 0 150 146" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.589 55.7563L104.589 93.1074L97.6854 99.0081H94.1745L94.1745 55.7563C94.1745 31.18 74.2008 11.2358 49.654 11.2358C34.2828 11.2358 20.9768 20.1163 14.5451 33.0388L14.5156 33.0683C11.9193 38.2903 10.4442 44.191 10.4442 50.4162L10.4442 80.6866C10.4442 92.1043 19.7377 101.427 31.1555 101.427C33.1027 101.427 35.0204 101.191 36.8496 100.749C36.8791 100.749 36.8791 100.719 36.8791 100.719C44.6385 98.8606 50.9522 93.196 53.7255 85.8201V85.7906C54.7581 83.1353 55.3187 80.244 55.3187 77.2347C55.3187 69.2688 48.8279 62.7781 40.8621 62.7781H36.4366V52.3634H40.8621C54.5811 52.3634 65.7333 63.5157 65.7333 77.2347C65.7333 93.314 54.6991 106.885 39.7704 110.75C39.7409 110.75 39.7114 110.78 39.6524 110.78C39.6229 110.78 39.6229 110.78 39.6229 110.78C36.9086 111.458 34.0763 111.842 31.126 111.842C13.9846 111.842 0 97.887 0 80.7161L0 50.4162C0 23.0666 22.2455 0.821167 49.595 0.821167C79.9539 0.821167 104.589 25.4564 104.589 55.7563Z" fill="currentColor"/><path d="M85.8356 64.4648L85.8356 109.103L79.3744 114.62H75.4504L75.4504 64.4648C75.4504 46.7924 61.0823 32.3948 43.4099 32.3948C25.2653 32.3948 10.4842 47.1759 10.4842 65.3499L10.4842 80.6621C10.4842 92.0799 19.7777 101.403 31.1955 101.403H33.2017C34.4999 101.403 35.7685 101.167 36.9191 100.695C40.7841 99.1902 43.5279 95.4433 43.5279 91.0473V88.097C43.5279 84.2025 40.371 81.0457 36.4766 81.0457V70.631C45.3276 70.631 52.6444 77.2398 53.7655 85.7957C53.8835 86.5333 53.9425 87.3299 53.9425 88.097V91.0473C53.9425 100.193 48.0419 107.953 39.8105 110.726C39.781 110.726 39.7515 110.756 39.6925 110.756C37.6567 111.434 35.444 111.818 33.1722 111.818H31.166C14.0246 111.818 0.0400391 97.8626 0.0400391 80.6916L0.0400391 65.3794C0.0400391 52.5455 5.64566 41.0392 14.4966 33.0733C22.1675 26.1696 32.2871 22.0096 43.3804 22.0096C66.7765 22.0096 85.8356 41.0392 85.8356 64.4648Z" fill="currentColor"/><path d="M127.111 73.8666L118.526 81.1834L104.571 93.1027L97.6668 99.0034L85.8359 109.093L85.4524 109.418L73.2676 119.833L42.8792 145.766H26.8589L57.2473 119.833L69.4616 109.418L75.4213 104.314L85.8359 95.4335L94.1559 88.3232L104.571 79.4427L118.526 67.5234L120.355 65.9597L127.111 73.8666Z" fill="currentColor"/><path d="M102.687 119.835L72.2986 145.769H56.2783L86.6667 119.835H102.687Z" fill="currentColor"/><path d="M128.959 0L118.544 0L118.544 119.547H128.959V0Z" fill="currentColor"/><path d="M149.565 0.00222778L139.15 0.00222778V119.55H149.565V0.00222778Z" fill="currentColor"/></svg></a>
 <ul class="nav-links">
-<li><a href="work.html">Work</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="playground.html">Playground</a></li>
+<li><a href="work.html" data-num="02/">Work</a></li>
+<li><a href="about.html" data-num="03/">About</a></li>
+<li><a href="playground.html" data-num="04/">Playground</a></li>
 </ul>
 <a href="mailto:zackyhilmi.zh@gmail.com" id="dyn-email" class="nav-cta">Let's talk →</a>
 <button class="nav-menu-btn" id="mMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -316,9 +318,9 @@ footer { padding: 24px 20px; }
 
 <div id="mOverlay" class="mobile-nav-overlay"></div>
 <div id="mDrawer" class="mobile-nav-drawer" role="navigation" aria-label="Mobile menu">
-<a href="work.html">Work</a>
-<a href="about.html">About</a>
-<a href="playground.html">Playground</a>
+<a href="work.html" data-num="02/">Work</a>
+<a href="about.html" data-num="03/">About</a>
+<a href="playground.html" data-num="04/">Playground</a>
 <a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:14px;color:var(--gray-400);border-bottom:none;padding-top:24px;margin-top:auto;">zackyhilmi.zh@gmail.com</a>
 </div>
 
