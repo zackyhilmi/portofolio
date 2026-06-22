@@ -131,8 +131,11 @@ section + .section-divider { margin-top: -40px; }
 .section-divider + section { padding-top: 60px; }
 .section-divider + section[style*="padding-top: 0"] { padding-top: 0; }
 .section-inner { max-width: 1100px; margin: 0 auto; }
-.section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 48px; display: flex; align-items: center; gap: 10px; }
-.section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.section-counter { font-size: 12px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.04em; }
+.section-counter span { color: #6366f1; }
+.section-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); }
+.section-divider-dashed { width: 100%; border: none; border-top: 1.5px dashed var(--gray-200); margin-bottom: 40px; }
 /* ── SCROLL REVEAL ── */
 .reveal {
 opacity: 0; transform: translateY(20px);
@@ -390,6 +393,11 @@ footer { padding: 24px 20px; }
 <!-- CLIENTS -->
 <section class="clients-section">
 <div class="section-inner">
+<div class="section-header reveal">
+  <div class="section-counter">[ <span>01</span> / 05 ]</div>
+  <div class="section-tag">Clients</div>
+</div>
+<hr class="section-divider-dashed">
 <p class="clients-heading">Perusahaan yang pernah bekerja sama.</p>
 <div class="clients-grid">
 <div class="client-cell"></div>
@@ -403,7 +411,11 @@ footer { padding: 24px 20px; }
 <!-- WORK -->
 <section id="work">
 <div class="section-inner">
-<div class="section-label reveal">Selected Work</div>
+<div class="section-header reveal">
+  <div class="section-counter">[ <span>02</span> / 05 ]</div>
+  <div class="section-tag">Work</div>
+</div>
+<hr class="section-divider-dashed">
 <div class="work-grid">
 <a href="case-study.html?id=datasintesa" class="work-card work-card-large reveal">
 <div class="work-img">
@@ -514,7 +526,11 @@ footer { padding: 24px 20px; }
 <!-- ABOUT -->
 <section id="about">
 <div class="section-inner">
-<div class="section-label reveal">About me</div>
+<div class="section-header reveal">
+  <div class="section-counter">[ <span>03</span> / 05 ]</div>
+  <div class="section-tag">About</div>
+</div>
+<hr class="section-divider-dashed">
 <div class="about-grid">
 <div>
 <h2 class="about-heading reveal">Not just pixels —<br><em>systems that scale</em></h2>
@@ -578,7 +594,11 @@ footer { padding: 24px 20px; }
 <!-- SERVICES -->
 <section id="services">
 <div class="section-inner">
-<div class="section-label reveal">What I do</div>
+<div class="section-header reveal">
+  <div class="section-counter">[ <span>04</span> / 05 ]</div>
+  <div class="section-tag">Services</div>
+</div>
+<hr class="section-divider-dashed">
 <div class="services-grid">
 <div class="service-item reveal">
 <div class="service-icon">◈</div>
@@ -621,7 +641,11 @@ footer { padding: 24px 20px; }
 <section id="contact" class="cta-section">
 <div class="cta-glow"></div>
 <div class="cta-inner">
-<div class="cta-label reveal">Let's work together</div>
+<div class="section-header reveal" style="max-width:600px;margin:0 auto 16px;">
+  <div class="section-counter" style="color:rgba(255,255,255,0.3);">[ <span style="color:#a5b4fc;">05</span> / 05 ]</div>
+  <div class="section-tag" style="color:rgba(255,255,255,0.3);">Contact</div>
+</div>
+<hr class="section-divider-dashed" style="border-color:rgba(255,255,255,0.1);margin-bottom:32px;">
 <h2 class="cta-heading reveal reveal-delay-1">Got a problem<br><em>worth solving?</em></h2>
 <p class="cta-sub reveal reveal-delay-2">I'm open to freelance projects and collaborations. Let's build something great together.</p>
 <div class="cta-btns reveal reveal-delay-3">
