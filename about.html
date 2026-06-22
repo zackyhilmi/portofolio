@@ -72,6 +72,18 @@
   .section-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 40px; display: flex; align-items: center; gap: 10px; }
   .section-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
 
+  /* ── SECTION HEADER ── */
+
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+
+  .section-counter { font-size: 12px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.04em; }
+
+  .section-counter span { color: #6366f1; }
+
+  .section-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); }
+
+  .section-divider-dashed { width: 100%; border: none; border-top: 1.5px dashed var(--gray-200); margin-bottom: 40px; }
+
   /* ABOUT INTRO */
   .about-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .about-photo-placeholder {
@@ -328,7 +340,11 @@
 <div class="section-divider"></div>
 <section>
   <div class="section-inner">
-    <div class="section-label">How I work</div>
+    <div class="section-header reveal">
+      <div class="section-counter">[ <span>01</span> / 05 ]</div>
+      <div class="section-tag">How I Work</div>
+    </div>
+    <hr class="section-divider-dashed">
     <div class="traits-grid">
       <div class="trait-item">
         <div class="trait-num">01</div>
@@ -368,7 +384,11 @@
 <div class="section-divider"></div>
 <section>
   <div class="section-inner">
-    <div class="section-label">Skills</div>
+    <div class="section-header reveal">
+      <div class="section-counter">[ <span>02</span> / 05 ]</div>
+      <div class="section-tag">Skills</div>
+    </div>
+    <hr class="section-divider-dashed">
     <div class="skills-grid">
       <div class="skill-category">
         <div class="skill-cat-title">Core Design</div>
@@ -425,7 +445,11 @@
 <div class="section-divider"></div>
 <section style="padding-top:0;">
   <div class="section-inner">
-    <div class="section-label">Tools & Stack</div>
+    <div class="section-header reveal">
+      <div class="section-counter">[ <span>03</span> / 05 ]</div>
+      <div class="section-tag">Tools & Stack</div>
+    </div>
+    <hr class="section-divider-dashed">
     <div class="tools-row">
       <div class="tool-card">
         <div class="tool-icon" style="background:#e8f0ff;">✦</div>
@@ -463,7 +487,11 @@
 <div class="section-divider"></div>
 <section>
   <div class="section-inner">
-    <div class="section-label">Experience</div>
+    <div class="section-header reveal">
+      <div class="section-counter">[ <span>04</span> / 05 ]</div>
+      <div class="section-tag">Experience</div>
+    </div>
+    <hr class="section-divider-dashed">
     <div class="timeline" id="dyn-experience">
       <div class="timeline-item">
         <div class="timeline-period">July 2021 – Present<br>Jakarta</div>
@@ -518,7 +546,11 @@
 <div class="section-divider"></div>
 <section>
   <div class="section-inner">
-    <div class="section-label">Education</div>
+    <div class="section-header reveal">
+      <div class="section-counter">[ <span>05</span> / 05 ]</div>
+      <div class="section-tag">Education</div>
+    </div>
+    <hr class="section-divider-dashed">
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-period">2022 – 2023</div>
