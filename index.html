@@ -4,6 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zacky Hilmi — UI/UX Designer</title>
+  <meta name="description" content="Zacky Hilmi — UI/UX Designer with 5+ years specializing in dashboards, monitoring systems, and enterprise digital products.">
+  <meta property="og:title" content="Zacky Hilmi — UI/UX Designer">
+  <meta property="og:description" content="5+ years designing data-heavy interfaces for enterprise and government clients.">
+  <meta property="og:url" content="https://zackyhilmi.com/">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@zackyhilmi">
 <!-- Preconnect for font performance -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,6 +231,8 @@ transition: background 0.2s, color 0.2s, transform 0.2s;
 .cta-section .btn-primary:hover { box-shadow: 0 8px 24px rgba(255,255,255,0.2); }
 .cta-section .btn-secondary { color: rgba(255,255,255,0.5); }
 .cta-section .btn-secondary:hover { color: var(--white); }
+.cta-social-link { font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+.cta-social-link:hover { color: rgba(255,255,255,0.9); }
 /* Animated CTA bg circle */
 .cta-glow {
 position: absolute; width: 500px; height: 500px; border-radius: 50%;
@@ -230,7 +243,7 @@ pointer-events: none;
 }
 @keyframes cta-pulse { 0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.2)} }
 /* ── FOOTER ── */
-footer { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 28px 40px; display: flex; align-items: center; justify-content: center; background: var(--black); }
+footer { border-top: 0.5px solid rgba(255,255,255,0.12); padding: 28px 40px; display: flex; align-items: center; justify-content: center; background: var(--black); }
 .footer-copy { font-size: 13px; color: rgba(255,255,255,0.3); }
 /* ── MOCK SCREEN ── */
 .mock-screen { width: 70%; height: 75%; background: var(--white); border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; overflow: hidden; }
@@ -654,8 +667,8 @@ footer { padding: 24px 20px; }
 <a href="mailto:zackyhilmi.zh@gmail.com" class="btn-primary magnetic">Get in touch →</a>
 </div>
 <div style="margin-top:40px;display:flex;justify-content:center;gap:20px;" class="reveal reveal-delay-4">
-<a href="https://linkedin.com/in/zackyhilmi" id="dyn-linkedin" target="_blank" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">LinkedIn ↗</a>
-<a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:13px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">Email</a>
+<a href="https://linkedin.com/in/zackyhilmi" id="dyn-linkedin" target="_blank" class="cta-social-link">LinkedIn ↗</a>
+<a href="mailto:zackyhilmi.zh@gmail.com" class="cta-social-link">Email</a>
 </div>
 </div>
 </section>
