@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Case Study — Zacky Hilmi</title>
-  <meta name="description" content="Case study by Zacky Hilmi — UI/UX design process, research, and outcomes.">
-  <meta property="og:title" content="Case Study — Zacky Hilmi">
-  <meta property="og:description" content="In-depth UI/UX case study covering design process, decisions, and outcomes.">
-  <meta property="og:url" content="https://zackyhilmi.com/case-study.html">
-  <meta property="og:type" content="article">
+<title>Work — Zacky Hilmi</title>
+  <meta name="description" content="Selected UI/UX design work by Zacky Hilmi — enterprise dashboards, SaaS platforms, e-learning systems, and monitoring interfaces.">
+  <meta property="og:title" content="Work — Zacky Hilmi">
+  <meta property="og:description" content="Selected UI/UX design projects — from enterprise dashboards to government digital platforms.">
+  <meta property="og:url" content="https://zackyhilmi.com/work.html">
+  <meta property="og:type" content="website">
   <meta property="og:image" content="og-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -43,10 +43,23 @@
   .nav-logo:hover { opacity: 0.65; }
   .nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
   .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--black); }
-  .nav-back { font-size: 13px; color: var(--gray-600); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
-  .nav-back:hover { color: var(--black); }
+  .nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+
+.nav-links a::before { content: attr(data-num); font-size: 12px; font-weight: 600; color: #6366f1; letter-spacing: 0.04em; }
+  .nav-links a:hover, .nav-links a.active { color: var(--black); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none;
+    border: 1px solid var(--black); padding: 7px 16px; border-radius: 20px;
+    transition: color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .nav-cta::after {
+    content: ''; position: absolute; inset: 0; background: var(--black);
+    transform: translateY(101%); transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    z-index: -1;
+  }
+  .nav-cta:hover { color: var(--white); }
+  .nav-cta:hover::after { transform: translateY(0); }
 
   .hatch-section {
     background-image: radial-gradient(circle, #d0d0d0 1px, transparent 1px);
@@ -65,84 +78,68 @@
     border-bottom: 0.5px solid var(--line);
   }
 
-  /* HERO */
-  .cs-hero { padding: 100px 40px 0; border-bottom: 0.5px solid var(--line); }
-  .cs-hero-inner { max-width: 1100px; margin: 0 auto; }
-  .cs-breadcrumb { font-size: 12px; color: var(--gray-400); margin-bottom: 32px; display: flex; align-items: center; gap: 8px; }
-  .cs-breadcrumb a { color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
-  .cs-breadcrumb a:hover { color: var(--black); }
-  .cs-breadcrumb [aria-current="page"] { color: var(--black); font-weight: 500; }
-  .cs-hero-grid { display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start; padding-bottom: 60px; }
-  .cs-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; }
-  .cs-hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
-  .cs-hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
-  .cs-hero-desc { font-size: 16px; color: var(--gray-600); line-height: 1.8; }
+  .page-hero { padding: 120px 40px 60px; border-bottom: 0.5px solid var(--line); }
+  .page-hero-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+  .page-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+  .page-label::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
+  .page-hero h1 { font-size: 60px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; font-family: var(--display); }
+  .page-hero h1 em { font-style: italic; font-weight: 400; color: var(--gray-400); }
+  .hero-note { font-size: 14px; color: var(--gray-600); max-width: 260px; text-align: right; line-height: 1.6; flex-shrink: 0; }
 
-  /* Meta card */
-  .cs-meta-card { border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; }
-  .cs-meta-row { padding: 16px 20px; border-bottom: 0.5px solid var(--line); }
-  .cs-meta-row:last-child { border-bottom: none; }
-  .cs-meta-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 4px; }
-  .cs-meta-value { font-size: 14px; color: var(--black); }
-  .cs-meta-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-  .cs-meta-pill { font-size: 11px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 3px 8px; border-radius: 20px; background: var(--gray-50); }
+  /* FILTER */
+  .filter-bar { padding: 24px 40px; border-bottom: 0.5px solid var(--line); position: sticky; top: 60px; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); z-index: 50; }
+  .filter-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { font-size: 13px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 7px 16px; border-radius: 20px; background: var(--white); cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover { border-color: var(--black); color: var(--black); }
+  .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
 
-  /* COVER IMAGE */
-  .cs-cover { width: 100%; background: var(--gray-100); display: flex; align-items: center; justify-content: center; aspect-ratio: 21/9; border-bottom: 0.5px solid var(--line); }
+  /* WORK LIST */
+  .work-section { padding: 60px 40px; }
+  .work-section-inner { max-width: 1100px; margin: 0 auto; }
 
-  /* CONTENT */
-  .cs-content { max-width: 720px; margin: 0 auto; padding: 80px 40px; }
-  .cs-section { margin-bottom: 64px; }
-  .cs-section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-  .cs-section-label::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--gray-400); }
-  .cs-section h2 { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 16px; }
-  .cs-section h2 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
-  .cs-section p { font-size: 15px; color: var(--gray-600); line-height: 1.85; margin-bottom: 16px; }
-  .cs-section p:last-child { margin-bottom: 0; }
+  /* Featured — large horizontal card */
+  .work-featured { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 0.5px solid var(--line); border-radius: 20px; overflow: hidden; margin-bottom: 24px; cursor: pointer; transition: box-shadow 0.3s; text-decoration: none; color: inherit; }
+  .work-featured:hover { box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+  .work-featured-img { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .work-featured-info { padding: 48px 40px; display: flex; flex-direction: column; justify-content: space-between; border-left: 0.5px solid var(--line); }
+  .work-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px; }
+  .work-featured-title { font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 16px; }
+  .work-featured-desc { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 28px; }
+  .work-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 28px; }
+  .work-pill { font-size: 11px; color: var(--gray-600); border: 0.5px solid var(--line); padding: 4px 10px; border-radius: 20px; background: var(--gray-50); }
+  .work-link-arrow { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--black); }
+  .arrow-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--black); display: flex; align-items: center; justify-content: center; font-size: 14px; transition: background 0.2s, color 0.2s; }
+  .work-featured:hover .arrow-circle { background: var(--black); color: var(--white); }
 
-  /* Highlight box */
-  .cs-highlight { border-left: 2px solid var(--black); padding: 20px 24px; background: var(--gray-50); border-radius: 0 12px 12px 0; margin: 28px 0; }
-  .cs-highlight p { font-size: 16px; color: var(--black); font-weight: 400; line-height: 1.7; margin: 0; }
+  /* Grid cards */
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .work-card { border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; cursor: pointer; transition: box-shadow 0.25s; text-decoration: none; color: inherit; display: block; }
+  .work-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .work-card:focus-visible { outline: 2px solid var(--black); outline-offset: 3px; }
+  .work-card-img { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+  .work-card-meta { padding: 20px; border-top: 0.5px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .work-card-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 4px; }
+  .work-card-type { font-size: 12px; color: var(--gray-400); }
+  .mini-arrow { width: 28px; height: 28px; border-radius: 50%; border: 0.5px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray-600); flex-shrink: 0; transition: background 0.2s, color 0.2s; }
+  .work-card:hover .mini-arrow { background: var(--black); color: var(--white); }
 
-  /* Problem / Solution split */
-  .cs-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; margin: 28px 0; }
-  .cs-split-item { background: var(--white); padding: 28px; }
-  .cs-split-item h3 { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-400); margin-bottom: 12px; }
-  .cs-split-item p { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin: 0; }
+  /* Mock UI elements */
+  .mock-screen { background: white; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; overflow: hidden; }
+  .mock-bar { height: 24px; background: #f8f8f8; border-bottom: 1px solid #eee; display: flex; align-items: center; padding: 0 8px; gap: 4px; flex-shrink: 0; }
+  .mock-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .mock-body { flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 5px; overflow: hidden; }
+  .mock-line { height: 7px; background: #f0f0f0; border-radius: 4px; }
 
-  /* Process steps */
-  .cs-steps { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; margin: 28px 0; }
-  .cs-step { display: grid; grid-template-columns: 56px 1fr; gap: 0; border-bottom: 0.5px solid var(--line); }
-  .cs-step:last-child { border-bottom: none; }
-  .cs-step-num { border-right: 0.5px solid var(--line); display: flex; align-items: flex-start; justify-content: center; padding-top: 24px; font-size: 11px; color: var(--gray-400); font-weight: 500; }
-  .cs-step-body { padding: 20px 24px; }
-  .cs-step-body h3 { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; }
-  .cs-step-body p { font-size: 13px; color: var(--gray-600); line-height: 1.7; margin: 0; }
+  /* Hidden cards for filtering */
+  .work-card[data-cat], .work-featured[data-cat] { transition: opacity 0.2s, transform 0.2s; }
+  .work-card.hidden, .work-featured.hidden { display: none; }
 
-  /* Outcome stats */
-  .cs-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 0.5px solid var(--line); border-radius: 16px; overflow: hidden; margin: 28px 0; }
-  .cs-outcome { background: var(--white); padding: 24px; }
-  .cs-outcome-num { font-size: 36px; font-weight: 500; letter-spacing: -0.03em; color: var(--black); line-height: 1; margin-bottom: 6px; }
-  .cs-outcome-label { font-size: 12px; color: var(--gray-600); }
+  /* Section divider */
+  .work-divider { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+  .work-divider::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gray-400); }
 
-  /* Full-width image placeholder */
-  /* C4: breakout — lets elements exceed cs-content max-width for visual impact */
-  .cs-breakout { width: calc(100% + 160px); margin-left: -80px; }
-  @media (max-width: 900px) { .cs-breakout { width: calc(100% + 40px); margin-left: -20px; } }
-  @media (max-width: 640px) { .cs-breakout { width: 100%; margin-left: 0; } }
-  .cs-img-full { width: 100%; aspect-ratio: 16/9; background: var(--gray-100); border-radius: 16px; border: 0.5px solid var(--line); display: flex; align-items: center; justify-content: center; margin: 28px 0; }
-  .cs-img-full-label { font-size: 12px; color: var(--gray-400); }
-  .cs-img-half-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
-  .cs-img-half { aspect-ratio: 4/3; background: var(--gray-100); border-radius: 12px; border: 0.5px solid var(--line); display: flex; align-items: center; justify-content: center; }
-  .cs-img-half .cs-img-full-label { font-size: 11px; }
-
-  /* Nav next/prev */
-  .cs-nav { border-top: 0.5px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; }
-  .cs-nav-item { padding: 32px 40px; display: flex; flex-direction: column; gap: 4px; text-decoration: none; transition: background 0.2s; }
-  .cs-nav-item:hover { background: var(--gray-50); }
-  .cs-nav-item:first-child { border-right: 0.5px solid var(--line); }
-  .cs-nav-dir { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-400); }
-  .cs-nav-title { font-size: 16px; font-weight: 500; color: var(--black); }
+  .btn-primary { background: var(--black); color: var(--white); font-size: 14px; font-weight: 500; padding: 12px 24px; border-radius: 24px; text-decoration: none; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-primary:hover { opacity: 0.8; }
 
   footer { border-top: 0.5px solid var(--line); padding: 28px 40px; display: flex; align-items: center; justify-content: center; }
   .footer-name { font-size: 14px; font-weight: 500; color: var(--black); }
@@ -189,28 +186,37 @@
   }
   .mobile-nav-overlay.open { display: block; }
 
+  @media (max-width: 1024px) {
+    .hero-note { max-width: 200px; font-size: 13px; }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
-    .nav-links, .nav-back { display: none !important; }
+    .nav-links, .nav-cta { display: none !important; }
     .nav-menu-btn { display: flex !important; }
-    .cs-hero { padding: 80px 20px 0; }
-    .cs-hero-grid { grid-template-columns: 1fr; gap: 28px; padding-bottom: 40px; }
-    .cs-hero h1 { font-size: 28px; }
-    .cs-hero-desc { font-size: 14px; }
-    .cs-meta-card { font-size: 13px; }
-    .cs-content { padding: 48px 20px; }
-    .cs-section h2 { font-size: 22px; }
-    .cs-split { grid-template-columns: 1fr; }
-    .cs-outcomes { grid-template-columns: 1fr 1fr; }
-    .cs-img-half-grid { grid-template-columns: 1fr; }
-    .cs-nav { grid-template-columns: 1fr; }
-    .cs-nav-item { padding: 24px 20px; }
-    .cs-nav-item:first-child { border-right: none; border-bottom: 0.5px solid var(--line); }
+    .page-hero { padding: 88px 20px 36px; }
+    .page-hero-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .page-hero h1 { font-size: 36px; }
+    .hero-note { text-align: left; max-width: 100%; font-size: 13px; }
+    .filter-bar { padding: 12px 20px; top: 60px; }
+    .filter-inner { gap: 6px; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn { white-space: nowrap; flex-shrink: 0; font-size: 12px; padding: 6px 13px; }
+    .work-section { padding: 32px 20px; }
+    .work-featured { grid-template-columns: 1fr; border-radius: 16px; }
+    .work-featured-img { aspect-ratio: 16/9; }
+    .work-featured-info { border-left: none; border-top: 0.5px solid var(--line); padding: 24px 20px; }
+    .work-featured-title { font-size: 22px; }
+    .work-featured-desc { font-size: 13px; }
+    .work-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .work-card-meta { padding: 14px; }
+    .work-card-title { font-size: 12px; }
+    .work-card-type { font-size: 11px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px 20px; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
-  @media (max-width: 420px) {
-    .cs-outcomes { grid-template-columns: 1fr; }
+  @media (max-width: 480px) {
+    .work-grid { grid-template-columns: 1fr; }
   }
 
 
@@ -238,353 +244,345 @@
 <nav id="main-nav">
   <a href="index.html" class="nav-logo"><svg class="nav-logo-svg" width="80" height="78" viewBox="0 0 150 146" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.589 55.7563L104.589 93.1074L97.6854 99.0081H94.1745L94.1745 55.7563C94.1745 31.18 74.2008 11.2358 49.654 11.2358C34.2828 11.2358 20.9768 20.1163 14.5451 33.0388L14.5156 33.0683C11.9193 38.2903 10.4442 44.191 10.4442 50.4162L10.4442 80.6866C10.4442 92.1043 19.7377 101.427 31.1555 101.427C33.1027 101.427 35.0204 101.191 36.8496 100.749C36.8791 100.749 36.8791 100.719 36.8791 100.719C44.6385 98.8606 50.9522 93.196 53.7255 85.8201V85.7906C54.7581 83.1353 55.3187 80.244 55.3187 77.2347C55.3187 69.2688 48.8279 62.7781 40.8621 62.7781H36.4366V52.3634H40.8621C54.5811 52.3634 65.7333 63.5157 65.7333 77.2347C65.7333 93.314 54.6991 106.885 39.7704 110.75C39.7409 110.75 39.7114 110.78 39.6524 110.78C39.6229 110.78 39.6229 110.78 39.6229 110.78C36.9086 111.458 34.0763 111.842 31.126 111.842C13.9846 111.842 0 97.887 0 80.7161L0 50.4162C0 23.0666 22.2455 0.821167 49.595 0.821167C79.9539 0.821167 104.589 25.4564 104.589 55.7563Z" fill="currentColor"/><path d="M85.8356 64.4648L85.8356 109.103L79.3744 114.62H75.4504L75.4504 64.4648C75.4504 46.7924 61.0823 32.3948 43.4099 32.3948C25.2653 32.3948 10.4842 47.1759 10.4842 65.3499L10.4842 80.6621C10.4842 92.0799 19.7777 101.403 31.1955 101.403H33.2017C34.4999 101.403 35.7685 101.167 36.9191 100.695C40.7841 99.1902 43.5279 95.4433 43.5279 91.0473V88.097C43.5279 84.2025 40.371 81.0457 36.4766 81.0457V70.631C45.3276 70.631 52.6444 77.2398 53.7655 85.7957C53.8835 86.5333 53.9425 87.3299 53.9425 88.097V91.0473C53.9425 100.193 48.0419 107.953 39.8105 110.726C39.781 110.726 39.7515 110.756 39.6925 110.756C37.6567 111.434 35.444 111.818 33.1722 111.818H31.166C14.0246 111.818 0.0400391 97.8626 0.0400391 80.6916L0.0400391 65.3794C0.0400391 52.5455 5.64566 41.0392 14.4966 33.0733C22.1675 26.1696 32.2871 22.0096 43.3804 22.0096C66.7765 22.0096 85.8356 41.0392 85.8356 64.4648Z" fill="currentColor"/><path d="M127.111 73.8666L118.526 81.1834L104.571 93.1027L97.6668 99.0034L85.8359 109.093L85.4524 109.418L73.2676 119.833L42.8792 145.766H26.8589L57.2473 119.833L69.4616 109.418L75.4213 104.314L85.8359 95.4335L94.1559 88.3232L104.571 79.4427L118.526 67.5234L120.355 65.9597L127.111 73.8666Z" fill="currentColor"/><path d="M102.687 119.835L72.2986 145.769H56.2783L86.6667 119.835H102.687Z" fill="currentColor"/><path d="M128.959 0L118.544 0L118.544 119.547H128.959V0Z" fill="currentColor"/><path d="M149.565 0.00222778L139.15 0.00222778V119.55H149.565V0.00222778Z" fill="currentColor"/></svg></a>
   <ul class="nav-links">
-    <li><a href="work.html">Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="playground.html">Playground</a></li>
+    <li><a href="work.html" class="active">Work</a></li>
+    <li><a href="about.html" data-num="03/">About</a></li>
+    <li><a href="playground.html" data-num="04/">Playground</a></li>
   </ul>
-  <a href="work.html" class="nav-back">← Back to Work</a>
+  <a href="mailto:zackyhilmi.zh@gmail.com" class="nav-cta">Let's talk →</a>
   <button class="nav-menu-btn" id="mMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div id="mOverlay" class="mobile-nav-overlay"></div>
 <div id="mDrawer" class="mobile-nav-drawer" role="navigation" aria-label="Mobile menu">
     <a href="work.html" class="active">Work</a>
-    <a href="about.html">About</a>
-    <a href="playground.html">Playground</a>
+    <a href="about.html" data-num="03/">About</a>
+    <a href="playground.html" data-num="04/">Playground</a>
     <a href="mailto:zackyhilmi.zh@gmail.com" style="font-size:14px;color:var(--gray-400);border-bottom:none;padding-top:24px;margin-top:auto;">zackyhilmi.zh@gmail.com</a>
 </div>
 
-<!-- Content injected by JS based on ?id= param -->
-<div id="cs-root"></div>
+<div class="page-hero hatch-section">
+  <div class="page-hero-inner">
+    <div>
+      <div class="page-label">Selected Work</div>
+      <h1>Work that<br><em>ships</em> &<br>sticks around.</h1>
+    </div>
+    <p class="hero-note">A selection of UI/UX and product design work — from enterprise dashboards to e-learning platforms.</p>
+  </div>
+</div>
 
-<!-- FOOTER -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="uiux">UI/UX Design</button>
+    <button class="filter-btn" data-filter="dashboard">Dashboard</button>
+    <button class="filter-btn" data-filter="graphic">Graphic Design</button>
+    <button class="filter-btn" data-filter="system">Design System</button>
+  </div>
+</div>
+
+<div class="work-section">
+  <div class="work-section-inner">
+
+    <!-- FEATURED 1 -->
+    <div class="work-divider">Featured</div>
+    <a href="case-study.html?id=datasintesa" class="work-featured" data-cat="uiux dashboard system">
+      <div class="work-featured-img" style="background:#edf2f8;">
+        <div class="mock-screen" style="width:75%;height:75%;">
+          <div class="mock-bar">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#ffbd2e;"></div>
+            <div class="mock-dot" style="background:#28ca42;"></div>
+          </div>
+          <div class="mock-body" style="background:#f8fafc;">
+            <div style="display:flex;gap:6px;align-items:center;margin-bottom:4px;">
+              <div style="width:24px;height:24px;border-radius:5px;background:#dde8f5;flex-shrink:0;"></div>
+              <div class="mock-line" style="width:100px;background:#e2ecf8;"></div>
+              <div style="margin-left:auto;display:flex;gap:3px;">
+                <div style="width:40px;height:16px;background:#dde8f5;border-radius:3px;"></div>
+                <div style="width:40px;height:16px;background:#e8f0fa;border-radius:3px;"></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:4px;">
+              <div style="height:40px;background:#dde8f5;border-radius:5px;display:flex;align-items:flex-end;padding:4px;"><div style="height:55%;width:100%;background:#c5d8f0;border-radius:2px;"></div></div>
+              <div style="height:40px;background:#e8f0fa;border-radius:5px;display:flex;align-items:flex-end;padding:4px;"><div style="height:80%;width:100%;background:#c5d8f0;border-radius:2px;"></div></div>
+              <div style="height:40px;background:#dde8f5;border-radius:5px;display:flex;align-items:flex-end;padding:4px;"><div style="height:40%;width:100%;background:#c5d8f0;border-radius:2px;"></div></div>
+              <div style="height:40px;background:#e8f0fa;border-radius:5px;display:flex;align-items:flex-end;padding:4px;"><div style="height:65%;width:100%;background:#c5d8f0;border-radius:2px;"></div></div>
+            </div>
+            <div class="mock-line" style="width:100%;background:#e2ecf8;"></div>
+            <div class="mock-line" style="width:70%;background:#edf3fb;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="work-featured-info">
+        <div>
+          <div class="work-tag">UI/UX · Design System · Enterprise</div>
+          <div class="work-featured-title">SaaS Operational Dashboard — PT. Datasintesa</div>
+          <p class="work-featured-desc">End-to-end design of a multi-module SaaS platform for government and enterprise clients. Covers service request management, SLA monitoring dashboards, and recovery performance tracking.</p>
+          <div class="work-pills">
+            <span class="work-pill">Figma</span>
+            <span class="work-pill">Design System</span>
+            <span class="work-pill">Dashboard</span>
+            <span class="work-pill">Enterprise</span>
+            <span class="work-pill">Government</span>
+          </div>
+        </div>
+        <div class="work-link-arrow">View case study <div class="arrow-circle">→</div></div>
+      </div>
+    </a>
+
+    <!-- FEATURED 2 -->
+    <a href="case-study.html?id=mis-elearning" class="work-featured" data-cat="uiux" style="margin-bottom:48px;">
+      <div class="work-featured-img" style="background:#f0f5ed;">
+        <div class="mock-screen" style="width:65%;height:70%;">
+          <div class="mock-bar" style="background:#eef4eb;">
+            <div class="mock-dot" style="background:#ff5f57;"></div>
+            <div class="mock-dot" style="background:#ffbd2e;"></div>
+            <div class="mock-dot" style="background:#28ca42;"></div>
+          </div>
+          <div class="mock-body" style="background:#f6faf4;">
+            <div style="height:20px;background:#d8ecda;border-radius:5px;margin-bottom:3px;"></div>
+            <div class="mock-line" style="width:100%;background:#deeede;"></div>
+            <div class="mock-line" style="width:65%;background:#e8f4e8;"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px;">
+              <div style="height:30px;background:#d8ecda;border-radius:4px;"></div>
+              <div style="height:30px;background:#e4f0e4;border-radius:4px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="work-featured-info">
+        <div>
+          <div class="work-tag">UI/UX Design · Web & Mobile</div>
+          <div class="work-featured-title">MIS — E-Learning Platform</div>
+          <p class="work-featured-desc">Designed an e-learning platform for a management information system, covering course management, student dashboards, and instructor interfaces for both web and mobile.</p>
+          <div class="work-pills">
+            <span class="work-pill">Figma</span>
+            <span class="work-pill">Mobile App</span>
+            <span class="work-pill">Web App</span>
+            <span class="work-pill">E-Learning</span>
+          </div>
+        </div>
+        <div class="work-link-arrow">View case study <div class="arrow-circle">→</div></div>
+      </div>
+    </a>
+
+    <!-- GRID -->
+    <div class="work-divider">More Projects</div>
+    <div class="work-grid" id="work-dynamic-grid">
+
+      <a href="case-study.html?id=sirclo" class="work-card" data-cat="graphic">
+        <div class="work-card-img" style="background:#fdf4ec;">
+          <div class="mock-screen" style="width:60%;height:65%;">
+            <div class="mock-bar" style="background:#faeee0;">
+              <div class="mock-dot" style="background:#ff5f57;"></div>
+              <div class="mock-dot" style="background:#ffbd2e;"></div>
+              <div class="mock-dot" style="background:#28ca42;"></div>
+            </div>
+            <div class="mock-body" style="background:#fdf8f2;">
+              <div style="height:18px;background:#f5dfc0;border-radius:4px;margin-bottom:3px;"></div>
+              <div class="mock-line" style="width:100%;background:#f5e5cc;"></div>
+              <div class="mock-line" style="width:75%;background:#faecd8;"></div>
+              <div style="height:36px;background:#f5dfc0;border-radius:5px;margin-top:4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="work-card-meta">
+          <div>
+            <div class="work-card-title">Marketplace Content — Sirclo Commerce</div>
+            <div class="work-card-type">Graphic Design · Brand · Campaign</div>
+          </div>
+          <div class="mini-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="case-study.html?id=mekari" class="work-card" data-cat="graphic">
+        <div class="work-card-img" style="background:#f0eeff;">
+          <div class="mock-screen" style="width:60%;height:65%;">
+            <div class="mock-bar" style="background:#e8e4ff;">
+              <div class="mock-dot" style="background:#ff5f57;"></div>
+              <div class="mock-dot" style="background:#ffbd2e;"></div>
+              <div class="mock-dot" style="background:#28ca42;"></div>
+            </div>
+            <div class="mock-body" style="background:#f7f5ff;">
+              <div style="height:18px;background:#d4caff;border-radius:4px;margin-bottom:3px;"></div>
+              <div class="mock-line" style="width:100%;background:#ddd6ff;"></div>
+              <div class="mock-line" style="width:60%;background:#e8e4ff;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:4px;">
+                <div style="height:24px;background:#d4caff;border-radius:3px;"></div>
+                <div style="height:24px;background:#ddd6ff;border-radius:3px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-card-meta">
+          <div>
+            <div class="work-card-title">Social Media & Infographics — Mekari</div>
+            <div class="work-card-type">Graphic Design · Social Media</div>
+          </div>
+          <div class="mini-arrow">→</div>
+        </div>
+      </a>
+
+      <a href="case-study.html?id=mahitala" class="work-card" data-cat="uiux">
+        <div class="work-card-img" style="background:#eef8f4;">
+          <div class="mock-screen" style="width:60%;height:65%;">
+            <div class="mock-bar" style="background:#e0f2ec;">
+              <div class="mock-dot" style="background:#ff5f57;"></div>
+              <div class="mock-dot" style="background:#ffbd2e;"></div>
+              <div class="mock-dot" style="background:#28ca42;"></div>
+            </div>
+            <div class="mock-body" style="background:#f3fbf8;">
+              <div style="height:18px;background:#b6dece;border-radius:4px;margin-bottom:3px;"></div>
+              <div class="mock-line" style="width:100%;background:#c6e8d8;"></div>
+              <div class="mock-line" style="width:80%;background:#d6f0e4;"></div>
+              <div style="height:30px;background:#b6dece;border-radius:5px;margin-top:4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="work-card-meta">
+          <div>
+            <div class="work-card-title">Web Product Design — Mahitala Digital</div>
+            <div class="work-card-type">UI/UX Design · Prototype</div>
+          </div>
+          <div class="mini-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- W1: Filter empty state -->
+    <div id="work-empty-state" style="display:none; padding:80px 0; text-align:center; flex-direction:column; align-items:center; gap:10px;">
+      <span style="font-size:20px; color:var(--gray-400);">◎</span>
+      <p style="font-size:14px; color:var(--gray-400); margin:0;">No projects in this category yet.</p>
+    </div>
+
+    <div style="text-align:center;margin-top:48px;">
+      <a href="https://bit.ly/ZackyHilmi" target="_blank" class="btn-primary">See full portfolio on Figma ↗</a>
+    </div>
+  </div>
+</div>
+
 <footer>
 <div class="footer-copy">Jakarta, Indonesia ✦</div>
 </footer>
 
-<script>
-const CASES = {
-  'datasintesa': {
-    tag: 'UI/UX Design · Design System · Enterprise · Government',
-    title: 'SaaS Operational Dashboard',
-    subtitle: 'PT. Datasintesa <em>Teknologi Nusantara</em>',
-    desc: 'End-to-end design of a multi-module SaaS platform supporting government and enterprise operations — from service request intake to real-time SLA monitoring.',
-    coverBg: '#edf2f8',
-    meta: {
-      Client: 'PT. Datasintesa Teknologi Nusantara',
-      Role: 'UI/UX Designer (Lead)',
-      Timeline: 'July 2021 – Present',
-      Tools: ['Figma', 'FigJam', 'Notion'],
-      Type: ['Enterprise SaaS', 'Government', 'Dashboard'],
-    },
-    sections: [
-      {
-        label: 'Overview',
-        heading: 'A platform built for <em>government-scale</em> complexity',
-        body: `PT. Datasintesa operates a SaaS platform used by government agencies and enterprise clients to manage IT service operations. The platform handles everything from initial service tickets to SLA breach detection and recovery performance reporting — across multiple user roles and departments.`,
-        highlight: 'My role was to translate dense operational workflows into clear, role-based interfaces — making the system usable for field technicians, operations managers, and C-level stakeholders alike.',
-      },
-      {
-        label: 'Problem',
-        heading: 'Disconnected flows, <em>no unified view</em>',
-        split: {
-          problem: 'Users across multiple roles had no unified interface. Service requests, SLA tracking, and performance data lived in separate systems — creating manual reconciliation and poor visibility for decision-makers.',
-          solution: 'A modular SaaS dashboard with role-based views, a real-time SLA monitoring panel, and a service recovery tracking module — all built from a single scalable design system.',
+<script type="module">
+  import { initDB, fetchCollection } from './portfolio-data.js';
+
+  // Nav scroll shadow
+  const nav = document.querySelector('nav');
+  // nav scroll handled by interactions.js;
+
+  // Filter logic (works for both static + dynamic cards)
+  function bindFilter() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('[data-cat]').forEach(item => {
+          if (filter === 'all' || item.dataset.cat.includes(filter)) item.classList.remove('hidden');
+          else item.classList.add('hidden');
+        });
+        // Empty state
+        const emptyState = document.getElementById('work-empty-state');
+        if (emptyState) {
+          const visible = document.querySelectorAll('[data-cat]:not(.hidden)').length;
+          emptyState.style.display = visible === 0 ? 'flex' : 'none';
         }
-      },
-      {
-        label: 'Process',
-        heading: 'From requirements <em>to handoff</em>',
-        steps: [
-          { title: 'Requirement intake & stakeholder alignment', body: 'Facilitated requirement sessions with product managers and government client representatives to map user roles, pain points, and critical workflows.' },
-          { title: 'User flow & information architecture', body: 'Defined navigation structures and data hierarchies for three distinct user roles: field technician, operations admin, and executive dashboard viewer.' },
-          { title: 'Wireframing & low-fi iteration', body: 'Rapid wireframing in FigJam and Figma to validate flows with the team before investing in high-fidelity screens.' },
-          { title: 'High-fidelity UI & design system', body: 'Built a component-based design system in Figma — covering table components, status badges, data cards, and filter patterns — enabling consistent output at scale.' },
-          { title: 'Developer handoff', body: 'Delivered annotated specs, responsive behavior notes, and component documentation in Figma for seamless engineering handoff.' },
-        ]
-      },
-      {
-        label: 'Outcomes',
-        heading: 'Impact across <em>modules & teams</em>',
-        outcomes: [
-          { num: '4+', label: 'Years of continuous design contribution' },
-          { num: '10+', label: 'Modules designed end-to-end' },
-          { num: '1', label: 'Unified design system maintained' },
-        ],
-        body: 'The platform is actively used by government agency clients. The design system has reduced design-to-dev cycle time significantly, and the unified dashboard view has eliminated manual reporting reconciliation for operations teams.',
-      }
-    ],
-    prev: { href: 'work.html', title: '← All Work' },
-    next: { href: 'case-study.html?id=mis-elearning', title: 'MIS E-Learning Platform →' },
-  },
+      });
+    });
+  }
+  bindFilter();
 
-  'mis-elearning': {
-    tag: 'UI/UX Design · Web & Mobile App',
-    title: 'MIS — E-Learning Platform',
-    subtitle: 'Management Information System <em>for Education</em>',
-    desc: 'Designed a comprehensive e-learning platform with interfaces for students, instructors, and administrators — across both web and mobile.',
-    coverBg: '#f0f5ed',
-    meta: {
-      Client: 'PT. Mahitala Bramanta Digital',
-      Role: 'UI/UX Designer',
-      Timeline: 'June 2022 – November 2022',
-      Tools: ['Figma', 'FigJam'],
-      Type: ['Web App', 'Mobile App', 'E-Learning'],
-    },
-    sections: [
-      {
-        label: 'Overview',
-        heading: 'E-learning for <em>multiple user roles</em>',
-        body: `Designed an e-learning management platform for an education client. The system serves three distinct user roles — students, instructors, and administrators — each requiring their own information architecture and interaction patterns.`,
-        highlight: 'The key challenge was designing a consistent visual language that worked equally well on desktop for instructors managing course content, and on mobile for students consuming lessons.',
-      },
-      {
-        label: 'Problem',
-        heading: 'One platform, <em>three very different users</em>',
-        split: {
-          problem: 'A single codebase needed to serve administrators managing curriculum, instructors uploading and grading content, and students tracking progress and consuming materials — all with different mental models.',
-          solution: 'A role-based interface architecture with a shared design system. Each role has a tailored navigation structure and dashboard, built on the same component library for visual consistency.',
-        }
-      },
-      {
-        label: 'Process',
-        heading: 'Research to <em>high-fidelity</em>',
-        steps: [
-          { title: 'User role mapping', body: 'Defined three distinct user journeys: student learning flow, instructor content management, and admin system oversight.' },
-          { title: 'Mobile-first wireframing', body: 'Started wireframes from mobile constraints, then expanded to desktop — ensuring the core experience worked on the most restricted screen first.' },
-          { title: 'Component-driven UI', body: 'Built a shared component library covering cards, progress indicators, course thumbnails, and form patterns, reused across all three interfaces.' },
-          { title: 'Interactive prototype', body: 'Delivered a high-fidelity interactive Figma prototype for stakeholder review and user testing before final handoff.' },
-        ]
-      },
-      {
-        label: 'Outcomes',
-        heading: 'Delivered across <em>web & mobile</em>',
-        outcomes: [
-          { num: '3', label: 'Distinct user role interfaces designed' },
-          { num: '2', label: 'Platforms — web & mobile' },
-          { num: '1', label: 'Shared design system' },
-        ],
-        body: 'Completed full design delivery including high-fidelity screens for all three user roles across web and mobile, plus an interactive Figma prototype for developer handoff.',
-      }
-    ],
-    prev: { href: 'case-study.html?id=datasintesa', title: '← Datasintesa Dashboard' },
-    next: { href: 'work.html', title: 'All Work →' },
-  },
-
-  'sirclo': {
-    tag: 'Graphic Design · Brand · Campaign',
-    title: 'Marketplace Content — Sirclo Commerce',
-    subtitle: 'Campaign & <em>promotional design</em>',
-    desc: 'Handled promotional designs, campaigns, and content layouts for official marketplace stores during an internship with Sirclo Commerce.',
-    coverBg: '#fdf4ec',
-    meta: {
-      Client: 'PT. Koneksi Niaga Solusindo — Sirclo Commerce',
-      Role: 'Creative Designer (Intern)',
-      Timeline: 'January 2021 – July 2021',
-      Tools: ['Adobe Illustrator', 'Adobe Photoshop'],
-      Type: ['Graphic Design', 'Marketplace', 'Campaign'],
-    },
-    sections: [
-      {
-        label: 'Overview',
-        heading: 'Visual content for <em>marketplace brands</em>',
-        body: `During my internship at Sirclo Commerce, I produced promotional design assets for official brand stores on Tokopedia, Shopee, and other Indonesian marketplace platforms. Work included campaign banners, product thumbnails, and promotional graphics aligned to each brand's visual guidelines.`,
-        highlight: 'The fast-paced production environment developed my ability to work at volume without sacrificing quality — producing multiple brand-aligned assets daily while coordinating with the creative production team.',
-      },
-    ],
-    prev: { href: 'work.html', title: '← All Work' },
-    next: { href: 'case-study.html?id=mekari', title: 'Mekari Graphics →' },
-  },
-
-  'mekari': {
-    tag: 'Graphic Design · Social Media',
-    title: 'Social Media & Infographics — Mekari',
-    subtitle: 'Talenta · Klikpajak · <em>Expense · Qontak</em>',
-    desc: 'Designed social media graphics and infographics for four Mekari products, collaborating with product teams to maintain brand consistency.',
-    coverBg: '#f0eeff',
-    meta: {
-      Client: 'PT Mid Solusi Nusantara (Mekari)',
-      Role: 'Graphic Designer (Freelance)',
-      Timeline: 'July 2024 – August 2024',
-      Tools: ['Adobe Illustrator', 'Adobe Photoshop', 'Figma'],
-      Type: ['Graphic Design', 'Social Media', 'Infographic'],
-    },
-    sections: [
-      {
-        label: 'Overview',
-        heading: 'Multi-product visual content <em>at scale</em>',
-        body: `Freelance engagement with Mekari's design team to produce social media graphics and infographics for four distinct products — Talenta (HR), Klikpajak (Tax), Expense, and Qontak (CRM). Each product had its own established brand guidelines requiring careful visual differentiation while maintaining the overall Mekari family aesthetic.`,
-        highlight: 'Managing four different brand voices simultaneously, I developed a rapid quality-check process to ensure each piece matched its product identity without cross-contamination.',
-      },
-    ],
-    prev: { href: 'case-study.html?id=sirclo', title: '← Sirclo Commerce' },
-    next: { href: 'work.html', title: 'All Work →' },
-  },
-};
-
-function renderMockCover(bg) {
-  return `<div class="cs-cover hatch-section" style="background:${bg};">
-    <div style="font-size:13px;color:var(--gray-400);">[ Project visuals — replace with actual screenshots ]</div>
-  </div>`;
-}
-
-function renderSection(s) {
-  let html = `<div class="cs-section">`;
-  if (s.label) html += `<div class="cs-section-label">${s.label}</div>`;
-  if (s.heading) html += `<h2>${s.heading}</h2>`;
-  if (s.body) html += `<p>${s.body}</p>`;
-  if (s.highlight) html += `<div class="cs-highlight"><p>${s.highlight}</p></div>`;
-  if (s.split) {
-    html += `<div class="cs-split">
-      <div class="cs-split-item"><h3>Problem</h3><p>${s.split.problem}</p></div>
-      <div class="cs-split-item"><h3>Solution</h3><p>${s.split.solution}</p></div>
+  // ── Dynamic project injection from Firebase ──
+  function mockBg(color) {
+    return `<div style="width:60%;height:65%;background:white;border-radius:8px;border:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="height:24px;background:${color}20;border-bottom:1px solid ${color}30;display:flex;align-items:center;padding:0 8px;gap:4px;flex-shrink:0;">
+        <div style="width:6px;height:6px;border-radius:50%;background:#ff5f57;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#ffbd2e;"></div>
+        <div style="width:6px;height:6px;border-radius:50%;background:#28ca42;"></div>
+      </div>
+      <div style="flex:1;padding:10px;display:flex;flex-direction:column;gap:5px;background:#fafafa;">
+        <div style="height:12px;background:${color}40;border-radius:4px;"></div>
+        <div style="height:8px;background:${color}25;border-radius:4px;width:80%;"></div>
+        <div style="height:8px;background:${color}15;border-radius:4px;width:60%;"></div>
+      </div>
     </div>`;
   }
-  if (s.steps) {
-    html += `<div class="cs-steps">`;
-    s.steps.forEach((step, i) => {
-      html += `<div class="cs-step">
-        <div class="cs-step-num">0${i+1}</div>
-        <div class="cs-step-body"><h3>${step.title}</h3><p>${step.body}</p></div>
-      </div>`;
-    });
-    html += `</div>`;
-  }
-  if (s.outcomes) {
-    html += `<div class="cs-outcomes cs-breakout">`;
-    s.outcomes.forEach(o => {
-      html += `<div class="cs-outcome"><div class="cs-outcome-num">${o.num}</div><div class="cs-outcome-label">${o.label}</div></div>`;
-    });
-    html += `</div>`;
-  }
-  html += `</div>`;
-  return html;
-}
 
-// ── Render from static CASES data ──
-function updateMeta(title, desc) {
-  document.title = `${title} — Zacky Hilmi`;
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  const ogDesc = document.querySelector('meta[property="og:description"]');
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (ogTitle) ogTitle.setAttribute('content', `${title} — Zacky Hilmi`);
-  if (ogDesc && desc) ogDesc.setAttribute('content', desc);
-  if (metaDesc && desc) metaDesc.setAttribute('content', desc);
-}
-
-function renderStatic(id) {
-  const data = CASES[id];
-  const root = document.getElementById('cs-root');
-  if (!data) { renderNotFound(root); return; }
-  updateMeta(data.title, data.desc);
-  const toolPills = data.meta.Tools.map(t => `<span class="cs-meta-pill">${t}</span>`).join('');
-  const typePills = data.meta.Type.map(t => `<span class="cs-meta-pill">${t}</span>`).join('');
-  root.innerHTML = buildHTML({
-    tag: data.tag, title: data.title,
-    subtitle: data.subtitle, desc: data.desc,
-    metaRows: `
-      <div class="cs-meta-row"><div class="cs-meta-label">Client</div><div class="cs-meta-value">${data.meta.Client}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Role</div><div class="cs-meta-value">${data.meta.Role}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Timeline</div><div class="cs-meta-value">${data.meta.Timeline}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Tools</div><div class="cs-meta-pills">${toolPills}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Type</div><div class="cs-meta-pills">${typePills}</div></div>`,
-    coverBg: data.coverBg, coverUrl: null,
-    content: data.sections.map(renderSection).join(''),
-    prev: data.prev, next: data.next
-  });
-}
-
-// ── Render from Firebase data ──
-function renderFirebase(item, allItems) {
-  const root = document.getElementById('cs-root');
-  updateMeta(item.title, item.desc);
-  const toolPills = (item.tools||'').split(',').map(t => `<span class="cs-meta-pill">${t.trim()}</span>`).join('');
-  // Build prev/next from list
-  const idx = allItems.findIndex(i => i.slug === item.slug || i.id === item.id);
-  const prev = allItems[idx - 1];
-  const next = allItems[idx + 1];
-  // Build content sections from flat fields
-  const sections = [];
-  if (item.overview) sections.push({ label: 'Overview', heading: item.title, body: item.overview });
-  if (item.solution) sections.push({ label: 'Process & Solution', heading: 'Approach & execution', body: item.solution });
-  if (item.outcome) sections.push({ label: 'Outcome', heading: 'Results & impact', body: item.outcome });
-
-  root.innerHTML = buildHTML({
-    tag: item.tag || '', title: item.title,
-    subtitle: item.client || '', desc: item.desc || '',
-    metaRows: `
-      <div class="cs-meta-row"><div class="cs-meta-label">Client</div><div class="cs-meta-value">${item.client||'—'}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Role</div><div class="cs-meta-value">${item.role||'—'}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Timeline</div><div class="cs-meta-value">${item.timeline||'—'}</div></div>
-      <div class="cs-meta-row"><div class="cs-meta-label">Tools</div><div class="cs-meta-pills">${toolPills}</div></div>`,
-    coverBg: '#edf2f8', coverUrl: item.coverUrl || null,
-    content: sections.map(renderSection).join(''),
-    prev: prev ? { href: `case-study.html?id=${prev.slug||prev.id}`, title: `← ${prev.title}` } : { href: 'work.html', title: '← All Work' },
-    next: next ? { href: `case-study.html?id=${next.slug||next.id}`, title: `${next.title} →` } : { href: 'work.html', title: 'All Work →' }
-  });
-}
-
-function buildHTML({ tag, title, subtitle, desc, metaRows, coverBg, coverUrl, content, prev, next }) {
-  const coverHtml = coverUrl
-    ? `<div class="cs-cover cs-breakout" style="padding:0;"><img src="${coverUrl}" style="width:100%;height:100%;object-fit:cover;"></div>`
-    : `<div class="cs-cover hatch-section cs-breakout" style="background:${coverBg};"><div style="font-size:13px;color:var(--gray-400);">[ Tambahkan screenshot project di CMS ]</div></div>`;
-  return `
-    <div class="cs-hero hatch-section">
-      <div class="cs-hero-inner">
-        <nav class="cs-breadcrumb" aria-label="Breadcrumb"><a href="work.html">Work</a> <span aria-hidden="true">›</span> <span aria-current="page">${title}</span></nav>
-        <div class="cs-hero-grid">
+  function renderFeaturedCard(p) {
+    const imgContent = p.imgUrl
+      ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : mockBg(p.bg || '#a0a0a0');
+    const tags = (p.tags || '').split(',').filter(Boolean).map(t =>
+      `<span class="work-pill">${t.trim()}</span>`).join('');
+    return `
+      <a href="case-study.html?id=${p.csSlug || p.id}" class="work-featured" data-cat="${p.cat || 'uiux'}" style="text-decoration:none;color:inherit;">
+        <div class="work-featured-img" style="background:${p.bg || '#edf2f8'};">${imgContent}</div>
+        <div class="work-featured-info">
           <div>
-            <div class="cs-tag">${tag}</div>
-            <h1>${title}<br><em style="font-style:italic;font-weight:300;color:var(--gray-400);">${subtitle}</em></h1>
-            <p class="cs-hero-desc">${desc}</p>
+            <div class="work-tag">${p.type || 'UI/UX Design'}</div>
+            <div class="work-featured-title">${p.title}</div>
+            <p class="work-featured-desc">${p.desc || ''}</p>
+            <div class="work-pills">${tags}</div>
           </div>
-          <div class="cs-meta-card">${metaRows}</div>
+          <div class="work-link-arrow">View case study <div class="arrow-circle">→</div></div>
         </div>
-      </div>
-    </div>
-    ${coverHtml}
-    <div class="cs-content">
-      ${content}
-      <div style="text-align:center;padding-top:16px;border-top:0.5px solid var(--line);">
-        <p style="font-size:13px;color:var(--gray-400);margin-bottom:16px;">Want to see the full Figma file for this project?</p>
-        <a href="mailto:zackyhilmi.zh@gmail.com" style="background:var(--black);color:var(--white);font-size:13px;font-weight:500;padding:10px 20px;border-radius:20px;text-decoration:none;">Request access →</a>
-      </div>
-    </div>
-    <div class="cs-nav">
-      <a href="${prev.href}" class="cs-nav-item"><div class="cs-nav-dir">Previous</div><div class="cs-nav-title">${prev.title}</div></a>
-      <a href="${next.href}" class="cs-nav-item" style="text-align:right;"><div class="cs-nav-dir">Next</div><div class="cs-nav-title">${next.title}</div></a>
-    </div>`;
-}
+      </a>`;
+  }
 
-function renderNotFound(root) {
-  root.innerHTML = `<div style="padding:160px 40px;text-align:center;">
-    <div style="font-size:14px;color:var(--gray-400);">Case study tidak ditemukan.</div>
-    <a href="work.html" style="color:var(--black);font-size:14px;margin-top:16px;display:inline-block;">← Kembali ke Work</a>
-  </div>`;
-}
+  function renderGridCard(p) {
+    const imgContent = p.imgUrl
+      ? `<img src="${p.imgUrl}" style="width:100%;height:100%;object-fit:cover;">`
+      : mockBg(p.bg || '#ccc');
+    return `
+      <a href="case-study.html?id=${p.csSlug || p.id}" class="work-card" data-cat="${p.cat || 'uiux'}" style="text-decoration:none;color:inherit;">
+        <div class="work-card-img" style="background:${p.bg || '#f5f5f5'};">${imgContent}</div>
+        <div class="work-card-meta">
+          <div>
+            <div class="work-card-title">${p.title}</div>
+            <div class="work-card-type">${p.type || ''}</div>
+          </div>
+          <div class="mini-arrow">→</div>
+        </div>
+      </a>`;
+  }
 
-// ── Bootstrap ──
-const nav = document.querySelector('nav');
-// nav scroll handled by interactions.js;
-
-const params = new URLSearchParams(window.location.search);
-const pageId = params.get('id') || 'datasintesa';
-
-// Try Firebase first, fallback to static
-(async () => {
-  try {
-    const { initDB, fetchCollection } = await import('./portfolio-data.js');
+  async function loadDynamicProjects() {
     const db = await initDB();
-    if (db) {
-      const items = await fetchCollection('casestudies');
-      if (items && items.length) {
-        const item = items.find(c => c.slug === pageId || c.id === pageId);
-        if (item) { renderFirebase(item, items); return; }
-      }
+    if (!db) return; // no Firebase config — keep static cards
+
+    const projects = await fetchCollection('projects');
+    if (!projects || !projects.length) return;
+
+    // Sort: featured first
+    const featured = projects.filter(p => p.featured === 'yes');
+    const grid = projects.filter(p => p.featured !== 'yes');
+
+    if (featured.length) {
+      const featuredSection = document.querySelector('.work-section-inner');
+      const existingFeatured = featuredSection.querySelectorAll('.work-featured');
+      existingFeatured.forEach(el => el.remove());
+      const divider = featuredSection.querySelector('.work-divider');
+      featured.forEach(p => {
+        featuredSection.insertBefore(
+          Object.assign(document.createElement('div'), { innerHTML: renderFeaturedCard(p) }).firstElementChild,
+          divider
+        );
+      });
     }
-  } catch(e) { /* Firebase not available */ }
-  // Static fallback
-  renderStatic(pageId);
-})();
+
+    if (grid.length) {
+      const gridEl = document.getElementById('work-dynamic-grid');
+      if (gridEl) gridEl.innerHTML = grid.map(renderGridCard).join('');
+    }
+
+    // Re-bind filter after injection
+    bindFilter();
+  }
+
+  loadDynamicProjects();
 </script>
 
 <script src="interactions.js" defer></script>
