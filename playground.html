@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Playground — Zacky Hilmi</title>
+  <meta name="description" content="Playground — visual experiments, micro-interactions, and design explorations by Zacky Hilmi.">
+  <meta property="og:title" content="Playground — Zacky Hilmi">
+  <meta property="og:description" content="Visual experiments, micro-interactions, and design explorations.">
+  <meta property="og:url" content="https://zackyhilmi.com/playground.html">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -42,10 +51,23 @@ nav {
 .nav-logo:hover { opacity: 0.65; }
 .nav-logo-svg { display: block; height: 30px; width: auto; color: var(--black); }
 .nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; }
+.nav-links a { font-size: 14px; color: var(--gray-600); text-decoration: none; transition: color 0.2s; position: relative; }
+.nav-links a[data-num]::before { content: attr(data-num); font-size: 10px; font-weight: 500; color: var(--gray-400); position: absolute; top: -8px; left: 0; letter-spacing: 0.04em; transition: color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color: var(--black); }
-.nav-cta { font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none; border: 1px solid var(--black); padding: 7px 16px; border-radius: 20px; transition: background 0.2s, color 0.2s; }
-.nav-cta:hover { background: var(--black); color: var(--white); }
+.nav-links a:hover::before, .nav-links a.active::before { color: var(--black); }
+.nav-cta {
+  font-size: 13px; font-weight: 500; color: var(--black); text-decoration: none;
+  border: 1px solid var(--black); padding: 7px 16px; border-radius: 20px;
+  transition: color 0.2s;
+  position: relative; overflow: hidden;
+}
+.nav-cta::after {
+  content: ''; position: absolute; inset: 0; background: var(--black);
+  transform: translateY(101%); transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+  z-index: -1;
+}
+.nav-cta:hover { color: var(--white); }
+.nav-cta:hover::after { transform: translateY(0); }
 
 /* mobile nav */
 .nav-menu-btn {
@@ -233,9 +255,9 @@ footer { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 28px 40px; dis
 <nav>
   <a href="index.html" class="nav-logo"><svg class="nav-logo-svg" width="80" height="78" viewBox="0 0 150 146" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M104.589 55.7563L104.589 93.1074L97.6854 99.0081H94.1745L94.1745 55.7563C94.1745 31.18 74.2008 11.2358 49.654 11.2358C34.2828 11.2358 20.9768 20.1163 14.5451 33.0388L14.5156 33.0683C11.9193 38.2903 10.4442 44.191 10.4442 50.4162L10.4442 80.6866C10.4442 92.1043 19.7377 101.427 31.1555 101.427C33.1027 101.427 35.0204 101.191 36.8496 100.749C36.8791 100.749 36.8791 100.719 36.8791 100.719C44.6385 98.8606 50.9522 93.196 53.7255 85.8201V85.7906C54.7581 83.1353 55.3187 80.244 55.3187 77.2347C55.3187 69.2688 48.8279 62.7781 40.8621 62.7781H36.4366V52.3634H40.8621C54.5811 52.3634 65.7333 63.5157 65.7333 77.2347C65.7333 93.314 54.6991 106.885 39.7704 110.75C39.7409 110.75 39.7114 110.78 39.6524 110.78C39.6229 110.78 39.6229 110.78 39.6229 110.78C36.9086 111.458 34.0763 111.842 31.126 111.842C13.9846 111.842 0 97.887 0 80.7161L0 50.4162C0 23.0666 22.2455 0.821167 49.595 0.821167C79.9539 0.821167 104.589 25.4564 104.589 55.7563Z" fill="currentColor"/><path d="M85.8356 64.4648L85.8356 109.103L79.3744 114.62H75.4504L75.4504 64.4648C75.4504 46.7924 61.0823 32.3948 43.4099 32.3948C25.2653 32.3948 10.4842 47.1759 10.4842 65.3499L10.4842 80.6621C10.4842 92.0799 19.7777 101.403 31.1955 101.403H33.2017C34.4999 101.403 35.7685 101.167 36.9191 100.695C40.7841 99.1902 43.5279 95.4433 43.5279 91.0473V88.097C43.5279 84.2025 40.371 81.0457 36.4766 81.0457V70.631C45.3276 70.631 52.6444 77.2398 53.7655 85.7957C53.8835 86.5333 53.9425 87.3299 53.9425 88.097V91.0473C53.9425 100.193 48.0419 107.953 39.8105 110.726C39.781 110.726 39.7515 110.756 39.6925 110.756C37.6567 111.434 35.444 111.818 33.1722 111.818H31.166C14.0246 111.818 0.0400391 97.8626 0.0400391 80.6916L0.0400391 65.3794C0.0400391 52.5455 5.64566 41.0392 14.4966 33.0733C22.1675 26.1696 32.2871 22.0096 43.3804 22.0096C66.7765 22.0096 85.8356 41.0392 85.8356 64.4648Z" fill="currentColor"/><path d="M127.111 73.8666L118.526 81.1834L104.571 93.1027L97.6668 99.0034L85.8359 109.093L85.4524 109.418L73.2676 119.833L42.8792 145.766H26.8589L57.2473 119.833L69.4616 109.418L75.4213 104.314L85.8359 95.4335L94.1559 88.3232L104.571 79.4427L118.526 67.5234L120.355 65.9597L127.111 73.8666Z" fill="currentColor"/><path d="M102.687 119.835L72.2986 145.769H56.2783L86.6667 119.835H102.687Z" fill="currentColor"/><path d="M128.959 0L118.544 0L118.544 119.547H128.959V0Z" fill="currentColor"/><path d="M149.565 0.00222778L139.15 0.00222778V119.55H149.565V0.00222778Z" fill="currentColor"/></svg></a>
   <ul class="nav-links">
-    <li><a href="work.html">Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="playground.html" class="active">Playground</a></li>
+    <li><a href="work.html" data-num="01">Work</a></li>
+    <li><a href="about.html" data-num="02">About</a></li>
+    <li><a href="playground.html" data-num="03" class="active">Playground</a></li>
   </ul>
   <a href="mailto:zackyhilmi.zh@gmail.com" class="nav-cta">Let's talk →</a>
   <button class="nav-menu-btn" id="mMenuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -487,12 +509,12 @@ footer { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 28px 40px; dis
 </div><!-- /world -->
 </div><!-- /viewport -->
 
-<div class="hint">
+<div class="hint" role="status" aria-live="polite">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9l7-7 7 7M5 15l7 7 7-7"/></svg>
-  <span class="hint-text-desktop">Drag to explore</span>
-  <span class="hint-text-mobile">Swipe to explore</span>
+  <span class="hint-text-desktop">Scroll to zoom · Drag to explore</span>
+  <span class="hint-text-mobile">Pinch to zoom · Swipe to explore</span>
 </div>
-<div id="minimap"><div id="mm-cards"></div><div id="mm-vp"></div></div>
+<div id="minimap" role="img" aria-label="Canvas minimap navigator"><div id="mm-cards"></div><div id="mm-vp"></div></div>
 
 <script>
 (function() {
@@ -621,7 +643,16 @@ footer { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 28px 40px; dis
     applyTransform();
     setTimeout(buildMinimap,200);
     const hint=document.querySelector('.hint');
-    setTimeout(()=>{if(hint)hint.style.opacity='0';},4000);
+    if (hint) {
+      if (!localStorage.getItem('playground_visited')) {
+        setTimeout(() => {
+          hint.style.opacity = '0';
+          localStorage.setItem('playground_visited', '1');
+        }, 4000);
+      } else {
+        hint.style.display = 'none';
+      }
+    }
   });
   window.addEventListener('resize',applyTransform);
 })();
