@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Case Study — Zacky Hilmi</title>
+  <meta name="description" content="Case study by Zacky Hilmi — UI/UX design process, research, and outcomes.">
+  <meta property="og:title" content="Case Study — Zacky Hilmi">
+  <meta property="og:description" content="In-depth UI/UX case study covering design process, decisions, and outcomes.">
+  <meta property="og:url" content="https://zackyhilmi.com/case-study.html">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -60,11 +69,12 @@
   .cs-hero { padding: 100px 40px 0; border-bottom: 0.5px solid var(--line); }
   .cs-hero-inner { max-width: 1100px; margin: 0 auto; }
   .cs-breadcrumb { font-size: 12px; color: var(--gray-400); margin-bottom: 32px; display: flex; align-items: center; gap: 8px; }
-  .cs-breadcrumb a { color: var(--gray-400); text-decoration: none; }
+  .cs-breadcrumb a { color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
   .cs-breadcrumb a:hover { color: var(--black); }
+  .cs-breadcrumb [aria-current="page"] { color: var(--black); font-weight: 500; }
   .cs-hero-grid { display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start; padding-bottom: 60px; }
   .cs-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 20px; }
-  .cs-hero h1 { font-size: 48px; font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+  .cs-hero h1 { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
   .cs-hero h1 em { font-style: italic; font-weight: 300; color: var(--gray-400); }
   .cs-hero-desc { font-size: 16px; color: var(--gray-600); line-height: 1.8; }
 
@@ -116,6 +126,10 @@
   .cs-outcome-label { font-size: 12px; color: var(--gray-600); }
 
   /* Full-width image placeholder */
+  /* C4: breakout — lets elements exceed cs-content max-width for visual impact */
+  .cs-breakout { width: calc(100% + 160px); margin-left: -80px; }
+  @media (max-width: 900px) { .cs-breakout { width: calc(100% + 40px); margin-left: -20px; } }
+  @media (max-width: 640px) { .cs-breakout { width: 100%; margin-left: 0; } }
   .cs-img-full { width: 100%; aspect-ratio: 16/9; background: var(--gray-100); border-radius: 16px; border: 0.5px solid var(--line); display: flex; align-items: center; justify-content: center; margin: 28px 0; }
   .cs-img-full-label { font-size: 12px; color: var(--gray-400); }
   .cs-img-half-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
@@ -130,7 +144,7 @@
   .cs-nav-dir { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-400); }
   .cs-nav-title { font-size: 16px; font-weight: 500; color: var(--black); }
 
-  footer { border-top: 0.5px solid rgba(255,255,255,0.08); padding: 28px 40px; display: flex; align-items: center; justify-content: center; }
+  footer { border-top: 0.5px solid var(--line); padding: 28px 40px; display: flex; align-items: center; justify-content: center; }
   .footer-name { font-size: 14px; font-weight: 500; color: var(--black); }
   .footer-copy { font-size: 13px; color: var(--gray-400); }
   .footer-links { display: flex; gap: 24px; list-style: none; }
@@ -436,7 +450,7 @@ function renderSection(s) {
     html += `</div>`;
   }
   if (s.outcomes) {
-    html += `<div class="cs-outcomes">`;
+    html += `<div class="cs-outcomes cs-breakout">`;
     s.outcomes.forEach(o => {
       html += `<div class="cs-outcome"><div class="cs-outcome-num">${o.num}</div><div class="cs-outcome-label">${o.label}</div></div>`;
     });
@@ -447,11 +461,21 @@ function renderSection(s) {
 }
 
 // ── Render from static CASES data ──
+function updateMeta(title, desc) {
+  document.title = `${title} — Zacky Hilmi`;
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (ogTitle) ogTitle.setAttribute('content', `${title} — Zacky Hilmi`);
+  if (ogDesc && desc) ogDesc.setAttribute('content', desc);
+  if (metaDesc && desc) metaDesc.setAttribute('content', desc);
+}
+
 function renderStatic(id) {
   const data = CASES[id];
   const root = document.getElementById('cs-root');
   if (!data) { renderNotFound(root); return; }
-  document.title = `${data.title} — Zacky Hilmi`;
+  updateMeta(data.title, data.desc);
   const toolPills = data.meta.Tools.map(t => `<span class="cs-meta-pill">${t}</span>`).join('');
   const typePills = data.meta.Type.map(t => `<span class="cs-meta-pill">${t}</span>`).join('');
   root.innerHTML = buildHTML({
@@ -472,7 +496,7 @@ function renderStatic(id) {
 // ── Render from Firebase data ──
 function renderFirebase(item, allItems) {
   const root = document.getElementById('cs-root');
-  document.title = `${item.title} — Zacky Hilmi`;
+  updateMeta(item.title, item.desc);
   const toolPills = (item.tools||'').split(',').map(t => `<span class="cs-meta-pill">${t.trim()}</span>`).join('');
   // Build prev/next from list
   const idx = allItems.findIndex(i => i.slug === item.slug || i.id === item.id);
@@ -501,12 +525,12 @@ function renderFirebase(item, allItems) {
 
 function buildHTML({ tag, title, subtitle, desc, metaRows, coverBg, coverUrl, content, prev, next }) {
   const coverHtml = coverUrl
-    ? `<div class="cs-cover" style="padding:0;"><img src="${coverUrl}" style="width:100%;height:100%;object-fit:cover;"></div>`
-    : `<div class="cs-cover hatch-section" style="background:${coverBg};"><div style="font-size:13px;color:var(--gray-400);">[ Tambahkan screenshot project di CMS ]</div></div>`;
+    ? `<div class="cs-cover cs-breakout" style="padding:0;"><img src="${coverUrl}" style="width:100%;height:100%;object-fit:cover;"></div>`
+    : `<div class="cs-cover hatch-section cs-breakout" style="background:${coverBg};"><div style="font-size:13px;color:var(--gray-400);">[ Tambahkan screenshot project di CMS ]</div></div>`;
   return `
     <div class="cs-hero hatch-section">
       <div class="cs-hero-inner">
-        <div class="cs-breadcrumb"><a href="work.html">Work</a> › ${title}</div>
+        <nav class="cs-breadcrumb" aria-label="Breadcrumb"><a href="work.html">Work</a> <span aria-hidden="true">›</span> <span aria-current="page">${title}</span></nav>
         <div class="cs-hero-grid">
           <div>
             <div class="cs-tag">${tag}</div>
